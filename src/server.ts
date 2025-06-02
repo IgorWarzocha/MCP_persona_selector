@@ -54,7 +54,7 @@ console.error("Loading server.ts for MCP_persona_selector");
 
 export const server = new Server(
     {
-        name: "desktop-commander", // Or consider "mcp-persona-selector" if this is its primary new role
+        name: "mcp_persona_selector", // Or consider "mcp-persona-selector" if this is its primary new role
         version: VERSION,
     },
     {
