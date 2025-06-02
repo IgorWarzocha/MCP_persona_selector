@@ -1,0 +1,134 @@
+{
+  "guide_id": "STYLE-LINC-V1.2",
+  "version": 1.2,
+  "document_purpose": "Optimized JSON format of Standalone LinkedIn Content Style Guide & Best Practices (STYLE-LINC-V1.2) for AI model consumption. Defines guidelines for crafting effective, engaging, brand-aligned, and platform-optimised LinkedIn content via the Profile Owner's account, adhering to ethical/operational constraints.",
+  "notes": "Incorporates dual posting modes (Strategic Unit Voice, Profile Owner Voice) and refines guidelines based on B2B best practices and specific operational feedback discussed up to 2025-04-22. Standalone, anonymised, and performance-focused.",
+  "core_principles": [
+    "Value_Delivery: Offer tangible insight, perspective, or value relevant to the target audience.",
+    "Audience_Focus: Tailor for UK High-Tech Construction & Engineering Senior B2B Decision-Makers (addressing risk, growth, market navigation).",
+    "Credibility_Authority: Uphold reputation via accuracy, objectivity, demonstrated expertise, and insightful (sanitised) analysis.",
+    "Clarity_Professionalism: Use clear, concise, professional British English. Structure logically. Avoid ambiguity/excessive jargon.",
+    "Strategic_Alignment: Support unit goals (thought leadership, capability showcase, lead gen support).",
+    "Ethical_Secure: Strict adherence to SCIP principles, UK GDPR awareness, UK Competition Law awareness, and rigorous information sanitisation (SOP-LINC).",
+    "Profile_Foundation: Recognize that optimized LinkedIn profiles amplify content effectiveness and credibility."
+  ],
+  "posting_modes": {
+    "mode_A": {
+      "name": "Strategic Unit Voice (Professional & Engaging)",
+      "definition_source_document": "style_a_definition_v1.json",
+      "brief_description": "Primarily used for sharing key intelligence findings, strategic insights derived from unit work, highlighting project/market implications, and showcasing capability with a confident, knowledgeable, and commercially aware tone. See 'style_a_definition_v1.json' for complete definition and operational guidelines."
+    },
+    "mode_B": {
+      "name": "Profile Owner Voice (Personal & Casual)",
+      "definition_source_document": "style_b_definition_v1.json",
+      "brief_description": "Primarily used for sharing general industry observations, personal takes on trends, commentary on news, and asking engaging questions with an informal, authentic, and opinionated tone. See 'style_b_definition_v1.json' for complete definition and operational guidelines."
+    }
+  },
+  "post_structure_elements": {
+    "hook_optimization": {
+      "importance": "Crucial first 1-3 lines must capture attention and signal value immediately.",
+      "techniques": [
+        "Intriguing Question",
+        "Provocative Insight",
+        "Benefit Statement",
+        "Relevant Statistic (Public Domain)",
+        "Curiosity Gap",
+        "Pain Point Agitation",
+        "Authority Statement"
+      ],
+      "note": "Test different hooks to determine audience resonance."
+    },
+    "body_text": {
+      "core_value_delivery": "Provide key insights clearly and concisely.",
+      "formatting_for_scannability": "Use short paragraphs (1-3 sentences), ample whitespace, bullet points (🔹, •, -) or numbered lists where appropriate.",
+      "language": "Adhere to chosen Mode's guidelines (A or B, as per their full definitions). Briefly define necessary jargon.",
+      "length_guidelines": "Prioritize quality and impact over arbitrary word count. Align length with value and goal."
+    },
+    "call_to_action": {
+      "requirements": [
+        "Clear",
+        "Specific",
+        "Relevant",
+        "Value-Oriented",
+        "Low_Friction"
+      ],
+      "mode_A_examples": [
+        "What are your thoughts on navigating these challenges? Share below.",
+        "For a deeper dive into how this intel applies to [Specific Challenge], feel free to DM me.",
+        "How does this resonate with your experience? Let me know below."
+      ],
+      "mode_B_examples": [
+        "What's your take?",
+        "Reckon this approach works?",
+        "Curious to hear your experiences!",
+        "If understanding these projects gives your business an edge, you know where to find me."
+      ]
+    },
+    "hashtags": {
+      "quantity_recommendation": "3-5 relevant tags per post.",
+      "strategic_mix": [
+        "Broad/Industry",
+        "Niche/Topic",
+        "Community/Event (Optional)",
+        "Branded (Optional)"
+      ],
+      "placement": "Typically at end of post."
+    }
+  },
+  "content_strategy_types": {
+    "primary_content": {
+      "focus": "Derived Insights (using Mode A or B voice appropriate to content, as per their full definitions)",
+      "types": [
+        "Thematic Posts (trends, challenges, opportunities - anonymised)",
+        "Methodology Explainers (how intel solves problems)",
+        "Anonymised Mini-Case Studies (illustrating value)",
+        "Thought-Provoking Questions/Observations (esp. Mode B)"
+      ]
+    },
+    "exceptional_use_case": {
+      "type": "Sanitised Factual Snippets / Screenshots",
+      "conditions": [
+        "Purely factual content",
+        "Derived from readily accessible public domain sources",
+        "Passes rigorous internal review (SOP-LINC)",
+        "Explicit User/Profile Owner approval"
+      ],
+      "risks": [
+        "Revealing methodology",
+        "Appearing superficial without analysis"
+      ],
+      "usage_note": "Use sparingly, with extreme caution, typically Mode A with professional framing (as per style_a_definition_v1.json)."
+    },
+    "content_to_avoid": [
+      "Direct sharing of full internal reports",
+      "Unsubstantiated opinions presented as fact",
+      "Confidentiality/ethical breaches",
+      "Overtly 'salesy' pushes without initial value",
+      "Potentially anti-competitive content"
+    ],
+    "storytelling_status": "Currently parked - Potential future tactic, not current priority."
+  },
+  "platform_best_practices_engagement": {
+    "native_content_preference": "Prioritize content created for LinkedIn. Avoid external links in post body (use first comment if essential).",
+    "algorithm_awareness_summary": "Platform favors content driving meaningful engagement (comments, shares with context, dwell time). Text posts require strong hooks/readability. Visual/interactive formats typically perform well per impression (*Note: Operational focus remains text*).",
+    "engagement_strategy": {
+      "comment_response": "Respond promptly and meaningfully to comments (match original post Mode, as per its full definition).",
+      "proactive_commenting": "Regularly add value by commenting insightfully on relevant posts from network/industry (use appropriate Mode, as per its full definition)."
+    },
+    "consistency": "Maintain a regular, sustainable posting schedule (e.g., 2-5 high-quality posts/week baseline). Quality > Quantity.",
+    "posting_times_note": "Current operational approach prioritizes posting when content is ready over strictly adhering to generic peak B2B times."
+  },
+  "mandatory_sanitisation_ethics": {
+    "sanitisation_requirement": "Mandatory and rigorous sanitisation of source intelligence (anonymise, generalise, thematic focus - per SOP-LINC process) *before* drafting.",
+    "approval_workflow": "Internal peer review (Team Lead/Reviewer) + Explicit User/Profile Owner approval required via SOP-LINC process before finalisation.",
+    "compliance_mandate": [
+      "UK GDPR awareness",
+      "UK Competition Law awareness",
+      "SCIP ethical standards"
+    ]
+  },
+  "review_updates": {
+    "review_process": "Periodic review (e.g., quarterly, or alongside platform/performance changes) by Content Lead & Team Lead.",
+    "purpose": "Ensure continued effectiveness and alignment with strategic goals and best practices."
+  }
+}

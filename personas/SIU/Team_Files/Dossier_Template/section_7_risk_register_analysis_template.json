@@ -1,0 +1,137 @@
+{
+  // ... (Assuming metadata, ai_processing_hints, output_instructions, Sections 1-6 are as previously defined) ...
+  "sections": [
+    // ... (Sections 1-6 as previously defined) ...
+    {
+      "section_number": 7,
+      "section_title": "RISK REGISTER & ANALYSIS: {{#if project_name_metadata}}{{project_name_metadata}}{{else}}{{company_name_metadata}} - {{initiative_name_metadata}}{{/if}}", // Dynamically populated
+      "section_objective": "To identify, assess, and present key strategic and operational risks associated with the project/initiative from an OSINT perspective, enabling informed decision-making and risk consideration by an engaging third party.",
+      "note": "This section requires dedicated risk assessment based on all preceding intelligence. Focus is on risks relevant to a general engaging third party.",
+      "points": [
+        {
+          "point_id": "7.1",
+          "point_title_final": "Overview of Risk Assessment Methodology",
+          "ai_generation_goal": "To provide transparency on how risks were identified, categorized, and assessed within this OSINT-based dossier, building confidence in the subsequent risk register.",
+          "key_intelligence_questions_to_address": [
+            "What is the purpose of this specific risk assessment within the dossier?",
+            "What is the scope of risk identification (e.g., OSINT-based, strategic & operational focus)?",
+            "What categories of risk have been considered?",
+            "What approach was used to assess likelihood and potential impact? From whose perspective is impact assessed?",
+            "What were the primary information sources for risk identification?",
+            "What are the key assumptions and limitations of this OSINT-based risk assessment?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "This point describes methodology, not direct OSINT findings. Sources refer to those used for risk identification in 7.2."
+          ],
+          "structuring_the_output_content_guide": "Use sub-headings: 'Purpose'; 'Scope'; 'Risk Categories Considered'; 'Risk Assessment Approach'; 'Primary Information Sources'; 'Key Assumptions & Limitations.'",
+          "handling_kigs_and_confidence_levels": "Methodology should be presented clearly. Limitations section is key for managing expectations of an OSINT-based assessment.",
+          "value_framing_for_external_client": "Builds credibility and allows clients to understand the context and boundaries of the risk information provided.",
+          "content_placeholder_detailed_prompt": "Purpose of this Risk Assessment: {{purpose_of_risk_assessment_7_1}}\nScope of Risk Identification & Analysis: {{scope_of_risk_identification_7_1}}\nRisk Categories Considered: {{risk_categories_considered_7_1}}\nRisk Assessment Approach (Likelihood & Potential Impact): {{risk_assessment_approach_7_1}}\nPrimary Information Sources for Risk Identification: {{primary_info_sources_risk_id_7_1}}\nKey Assumptions & Limitations of this Assessment: {{assumptions_limitations_risk_assessment_7_1}}",
+          "placeholder_fields": [
+            {
+              "name": "purpose_of_risk_assessment_7_1",
+              "description": "The purpose of this risk assessment within the dossier.",
+              "example_value": "To identify and highlight key strategic and operational risks associated with the {{#if project_name_metadata}}{{project_name_metadata}} project{{else}}{{company_name_metadata}}'s {{initiative_name_metadata}} initiative{{/if}}, from the perspective of a general third-party organisation considering engagement. This enables more informed decision-making and proactive risk consideration by such an organisation.",
+              "source_hint": "Standard methodology text, adapted for project/initiative context."
+            },
+            {
+              "name": "scope_of_risk_identification_7_1",
+              "description": "The scope of risk identification and analysis.",
+              "example_value": "This assessment focuses on risks identifiable primarily through Open Source Intelligence (OSINT) as of {{dossier_publication_date}}. It is intended to provide a strategic overview of potential risks and is not a comprehensive, formal due diligence risk assessment. Risks are considered from strategic, operational, technical, commercial, and external environmental perspectives.",
+              "source_hint": "Standard methodology text."
+            },
+            {
+              "name": "risk_categories_considered_7_1",
+              "description": "List of risk categories used in point 7.2. This acts as a controlled vocabulary.",
+              "example_value": "Technical & Design; Construction & Operational; Commercial & Contractual; Financial (of project/key entities); Programme & Schedule; Stakeholder & Reputational; Political & Regulatory; Environmental, Social & Governance (ESG); Market & Competitive; Force Majeure/Unforeseen Events.",
+              "source_hint": "Standard risk breakdown structure."
+            },
+            {
+              "name": "risk_assessment_approach_7_1",
+              "description": "Approach used to assess likelihood and potential impact.",
+              "example_value": "Risks are assessed qualitatively using High/Medium/Low scales for both Likelihood (probability of occurrence based on available evidence) and Potential Impact (severity of consequences from the perspective of a typical engaging third party if the risk materializes). An indicative overall risk rating (e.g., Critical, High, Moderate, Low) may be inferred based on a standard likelihood/impact matrix, though not explicitly calculated for each risk in this OSINT summary.",
+              "source_hint": "Standard methodology text."
+            },
+            {
+              "name": "primary_info_sources_risk_id_7_1",
+              "description": "Primary types of information sources used for risk identification.",
+              "example_value": "Publicly available project documents (planning applications, EIAs, design statements), financial filings of key entities, tender portals and procurement documents (where available), reputable press & industry publications, market analysis reports, relevant legislation and policy documents, and benchmarking data from comparable projects.",
+              "source_hint": "Standard methodology text."
+            },
+            {
+              "name": "assumptions_limitations_risk_assessment_7_1",
+              "description": "Key assumptions and limitations of this OSINT-based risk assessment.",
+              "example_value": "Intelligence is current as of {{dossier_publication_date}}. The assessment is indicative and intended for strategic guidance; it does not replace an engaging organisation's own detailed risk management processes and due diligence. Some risks, particularly internal operational risks of the Project Lead or those dependent on confidential information, may not be identifiable through OSINT. Likelihood and impact assessments are based on available information and analytical judgment and may change as more information becomes available.",
+              "source_hint": "Standard methodology text, including dossier publication date."
+            }
+          ]
+        },
+        {
+          "point_id": "7.2",
+          "point_title_final": "Detailed Risk Register",
+          "ai_generation_goal": "To provide a structured list of identified key risks (top 5-10 strategic risks relevant to a general engaging party), detailing their description, potential impact on such an engager, assessed likelihood and impact, potential mitigation measures (from an engager's perspective or that they should be aware of), and any further intelligence needed.",
+          "key_intelligence_questions_to_address": [
+            "For each of the top 5-10 strategic risks relevant to a general engaging party: category, description, potential impact on engager, assessed likelihood, assessed impact magnitude (on engager)?",
+            "Potential mitigation measures an engager could contribute to or should be aware of?",
+            "Further intelligence needed to clarify/manage this risk?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "This section synthesizes risks identified throughout the entire OSINT research process across all previous dossier sections."
+          ],
+          "structuring_the_output_content_guide": "Focus on 5-10 most significant risks for a general engaging third party. For each risk: ID, Category, Description, Potential Impact on Engager, Assessed Likelihood, Assessed Impact Magnitude, Overall Risk Rating (Optional), Potential Mitigation Measures (for engager), Further Intelligence Required. Emphasize OSINT basis.",
+          "handling_kigs_and_confidence_levels": "Likelihood and impact are OSINT-based analytical judgments. KIGs related to specific risk parameters noted under 'Further Intelligence Required'. If fewer than 5 strategic risks are clearly identifiable for an engager, list what is found and note the limited number. Use KIG marker for missing critical elements within a risk description.",
+          "value_framing_for_external_client": "Provides a structured and prioritized view of key risks, enabling clients to factor these into decision-making, bid pricing, engagement strategy, and identify where they might offer risk mitigation solutions.",
+          "content_placeholder_detailed_prompt": "The following are the most significant risks identified from an OSINT perspective, relevant to a general third-party organisation considering engagement with {{#if project_name_metadata}}{{project_name_metadata}}{{else}}{{company_name_metadata}}'s {{initiative_name_metadata}}{{/if}}:\n\n{{#each detailed_risk_register_7_2}}\nRisk ID: {{this.risk_id}}\nRisk Category: {{this.risk_category}}\nRisk Description: {{this.risk_description}}\nPotential Impact on an Engaging Organisation: {{this.potential_impact_on_engager}}\nAssessed Likelihood: {{this.assessed_likelihood}}\nAssessed Impact Magnitude (on an Engaging Organisation): {{this.assessed_impact_magnitude}}\n{{#if this.overall_risk_rating}}Overall Risk Rating (Indicative): {{this.overall_risk_rating}}{{/if}}\nPotential Mitigation Measures (for consideration by an Engaging Organisation, or that they could offer/support): {{this.potential_mitigation_measures}}\nFurther Intelligence Required (to clarify/reduce this risk): {{this.further_intelligence_required}}\n\n{{/each}}\n{{#if (eq detailed_risk_register_7_2.length 0)}}[KIG: Insufficient specific strategic risks relevant to a general engaging third party were clearly identifiable from OSINT at this stage. General project development risks apply, but are not detailed here without more specific context. - Implication: Risk profile for engagement is less defined.]{{/if}}",
+          "placeholder_fields": [
+            {
+              "name": "detailed_risk_register_7_2",
+              "description": "Array of 5-10 risk objects detailing key strategic risks.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "risk_id": {"type": "string", "example_value": "R01"},
+                  "risk_category": {"type": "string", "example_value": "Programme & Schedule", "enum_source_ref": "risk_categories_considered_7_1"},
+                  "risk_description": {"type": "string", "example_value": "Significant delays in securing timely grid connection approval and physical power infrastructure upgrades from the Distribution Network Operator (DNO), impacting overall project energisation and operational readiness timelines."},
+                  "potential_impact_on_engager": {"type": "string", "example_value": "For a main contractor: potential for standing time, demobilisation/remobilisation costs, liquidated damages if project completion is delayed. For specialist M&E/commissioning firms: disrupted work schedules, inability to complete commissioning activities, deferred revenue."},
+                  "assessed_likelihood": {"type": "enum", "enum_values": ["High", "Medium", "Low"], "example_value": "High"},
+                  "assessed_impact_magnitude": {"type": "enum", "enum_values": ["High", "Medium", "Low"], "example_value": "High"},
+                  "overall_risk_rating": {"type": "enum", "enum_values": ["Critical", "High", "Moderate", "Low"], "is_optional": true, "example_value": "Critical"},
+                  "potential_mitigation_measures": {"type": "string", "example_value": "Engaging organisation should: Verify Project Lead's DNO engagement strategy and current status. Propose early DNO liaison support if within their capability. Build flexibility into their own delivery programmes. Price for potential DNO-related delays if allowed by contract. Offer solutions for temporary power or phased energisation."},
+                  "further_intelligence_required": {"type": "string", "example_value": "Confirmed DNO application submission date and current DNO indicative timeline for connection. Details of any existing wayleave or substation land acquisition issues. Project Lead's contingency plan for DNO delays."}
+                }
+              },
+              "example_value": [
+                // Example R01 (Grid Connection) is embedded in properties above.
+                {
+                  "risk_id": "R02",
+                  "risk_category": "Commercial & Contractual",
+                  "risk_description": "Risk of scope creep and unrecoverable costs due to the Project Lead Organisation's (based on past project patterns) tendency to issue incomplete design information at tender stage for specialist packages, leading to extensive post-contract variations and potential disputes.",
+                  "potential_impact_on_engager": "Significant pressure on profit margins, diversion of management time to manage changes and claims, potential for disputes impacting client relationship, difficulty in resource planning.",
+                  "assessed_likelihood": "Medium",
+                  "assessed_impact_magnitude": "High",
+                  "overall_risk_rating": "High",
+                  "potential_mitigation_measures": "Engaging organisation should: Conduct thorough scrutiny of tender scope documents, raise extensive clarifications. Price for anticipated level of scope development/risk if contract allows. Propose a collaborative workshop approach with Project Lead post-award to finalize scope before committing to detailed design/manufacture. Offer enhanced scope management and ECI services. Maintain meticulous records of all changes.",
+                  "further_intelligence_required": "Specific examples of how {{project_lead_org_name_from_3_1}} has managed scope variations and claims on 2-3 recent comparable projects. Clarity on the contractual mechanism for valuing variations for this specific project."
+                },
+                {
+                  "risk_id": "R03",
+                  "risk_category": "Financial (of project/key entities)",
+                  "risk_description": "Project funding for later phases (e.g., Phase 2 and beyond, if applicable) is not yet fully secured or is contingent on achieving specific milestones (e.g., pre-let targets, successful Phase 1 delivery), leading to uncertainty over long-term project continuity. [KIG: Precise details of funding tranches and conditions for drawdown for later phases. - Implication: Full financial security of entire initiative unknown.]",
+                  "potential_impact_on_engager": "Risk of project stalling or cancellation after initial commitment, leading to wasted bid costs, demobilisation costs, and loss of anticipated revenue for firms engaged on early phases or those relying on the full project scope. Uncertainty impacting long-term resource planning and supply chain commitments.",
+                  "assessed_likelihood": "Medium", // Dependent on specific KIGs from Sec 2.5
+                  "assessed_impact_magnitude": "High",
+                  "overall_risk_rating": "High",
+                  "potential_mitigation_measures": "Engaging organisation should: Seek clarity on phased funding security during commercial negotiations. Structure contracts with clear break clauses or milestone-based commitments if possible. Diversify own project portfolio to mitigate reliance on this single initiative. Monitor project lead's financial announcements and milestone achievements closely.",
+                  "further_intelligence_required": "Detailed funding structure for all project phases, including sources, conditions precedent for drawdowns, and any parent company guarantees. Confirmation of achievement of key financial or commercial milestones required for next funding tranches."
+                }
+              ],
+              "source_hint": "Synthesize from all previous sections. AI should select 5-10 most relevant risks for a general engager."
+            }
+          ]
+        }
+      ]
+    }
+    // ... (Sections 8-9, appendices, footer would follow) ...
+  ]
+}

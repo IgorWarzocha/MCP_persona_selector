@@ -1,0 +1,110 @@
+{
+  "knowledge_base_version": 1.0,
+  "document_purpose": "Provides foundational, shared knowledge referenced by all AI personas within the Strategic Intelligence Unit.",
+  "ai_optimization_notes": "JSON format for machine parsing.",
+  "1_Introduction": {
+    "purpose": "Establish common baseline understanding of the operating context, intelligence fundamentals, and mandatory ethical guidelines for consistent AI team performance."
+  },
+  "2_UK_Construction_Engineering_Context": {
+    "section_purpose": "Basic understanding of the UK industry environment.",
+    "2.1_Basic_Project_Lifecycle_RIBA_Stages_Overview": {
+      "description": "The Royal Institute of British Architects (RIBA) Plan of Work provides a common framework for UK projects. Key stages include:",
+      "stages": [
+        "Stage_0_Strategic_Definition",
+        "Stage_1_Preparation_and_Brief",
+        "Stage_2_Concept_Design",
+        "Stage_3_Spatial_Coordination",
+        "Stage_4_Technical_Design",
+        "Stage_5_Construction",
+        "Stage_6_Handover",
+        "Stage_7_In_Use"
+      ],
+      "relevance": "Understanding project phases aids contextualization of intelligence needs, particularly the importance of pre-construction stages (0-3) for strategic input."
+    },
+    "2.2_Common_Industry_Roles_Brief_Definitions": {
+      "description": "Typical entities involved in project delivery include:",
+      "roles": [
+        {"role": "Client_End_User", "definition": "The entity commissioning/using the built asset."},
+        {"role": "Developer_Funder", "definition": "Entity managing/financing the development process."},
+        {"role": "Tier_1_Contractor", "definition": "Main contractor responsible for overall construction delivery."},
+        {"role": "EPCM_PMC", "definition": "Engineering, Procurement, Construction Management / Project Management Consultancy providing oversight."},
+        {"role": "Specialist_Subcontractors_Tier2_3", "definition": "Firms delivering specific work packages (e.g., M&E, groundwork, facades)."},
+        {"role": "Tier_1_Consultants", "definition": "Primary design/cost advisors (Architect, M&E Eng, Structural Eng, Cost Consultant)."},
+        {"role": "Specialist_Consultants", "definition": "Experts in specific areas (Environmental, Fire, Security, Regulatory etc.)."}
+      ]
+    },
+    "2.3_Core_High_Tech_Sectors_Acronyms_Descriptors": {
+      "description": "High-level awareness of the unit's focus sectors:",
+      "sectors": [
+        {"sector": "Life_Sciences_LS", "descriptor": "Involves pharmaceutical labs, often requiring GMP (Good Manufacturing Practice) compliant environments."},
+        {"sector": "Data_Centres_DC", "descriptor": "Facilities housing IT infrastructure, often rated by reliability Tiers (e.g., Tier III, Tier IV). Focus on PUE (Power Usage Effectiveness)."},
+        {"sector": "Nuclear", "descriptor": "Highly regulated environments under the ONR (Office for Nuclear Regulation), requiring extreme safety/security protocols."},
+        {"sector": "Battery_Technology", "descriptor": "Large-scale manufacturing facilities (Gigafactories) for battery production, involving chemical processes and controlled environments."},
+        {"sector": "Aerospace", "descriptor": "Often involves precision manufacturing environments with stringent quality control."},
+        {"sector": "Advanced_Manufacturing", "descriptor": "Utilises automation, robotics (A&R), and data analytics; requires specialised facilities."}
+      ]
+    },
+    "2.4_Key_Market_Drivers_Commercial_Basics": {
+      "description": "Fundamental commercial realities influencing the UK construction sector:",
+      "drivers": [
+        "Margins: Often tight, driving focus on cost control and efficiency.",
+        "Risk: Significant focus on identifying, allocating, and mitigating diverse project risks.",
+        "Cash_Flow: Critical for project viability and company solvency.",
+        "UK_Contracts: Prevalence of specific forms like NEC and JCT dictates commercial interactions."
+      ]
+    }
+  },
+  "3_Strategic_Intelligence_Fundamentals": {
+    "section_purpose": "Core concepts underpinning the unit's intelligence work.",
+    "3.1_The_Intelligence_Cycle_Stages": {
+      "description": "A structured process for developing intelligence:",
+      "stages": [
+        "1_Requirements_Direction_Planning",
+        "2_Collection",
+        "3_Processing_Exploitation",
+        "4_Analysis_Production",
+        "5_Dissemination",
+        "6_Feedback"
+      ]
+    },
+    "3.2_OSINT_Definition_Key_UK_Public_Sources": {
+      "definition": "OSINT (Open Source Intelligence) is derived from publicly available information.",
+      "key_uk_sources": [
+        {"source": "Companies_House", "description": "UK company registration, director info, basic financials."},
+        {"source": "Planning_Portals", "description": "Local Authority websites detailing planning applications and documents."},
+        {"source": "FTS_Find_a_Tender_Service", "description": "UK platform for public sector procurement opportunities."}
+      ]
+    },
+    "3.3_Basic_Analytical_Concepts_Definitions": {
+      "description": "Awareness of common analytical frameworks.",
+      "frameworks": [
+        {"framework": "SWOT", "definition": "Analysis of Strengths, Weaknesses, Opportunities, Threats."},
+        {"framework": "PESTLE", "definition": "Analysis of Political, Economic, Social, Technological, Legal, Environmental factors."}
+      ]
+    },
+    "3.4_Core_Information_Handling_Principles": {
+      "description": "Foundational principles for credible intelligence.",
+      "principles": [
+        "Source_Validation: Assessing source reliability.",
+        "Triangulation: Corroborating findings via multiple sources.",
+        "Objectivity: Minimizing bias in analysis.",
+        "Timeliness: Ensuring relevance to decision-making."
+      ]
+    }
+  },
+  "4_Mandatory_Ethical_Legal_Framework_UK_Focus": {
+    "section_purpose": "Non-negotiable rules governing all AI team activities and outputs.",
+    "4.1_SCIP_Code_of_Ethics_Core_Principles": {
+      "description": "Adherence to principles including legality, honesty, diligence, avoiding conflicts of interest, protecting confidential sources/data."
+    },
+    "4.2_UK_GDPR_Key_Principles_for_Data_Handling": {
+      "description": "Compliance required. Key principles: lawfulness/fairness/transparency, purpose limitation, data minimisation, accuracy, storage limitation, integrity/confidentiality, accountability. Public content avoids personal data unless clearly public domain and relevant."
+    },
+    "4.3_UK_Competition_Law_Awareness": {
+      "description": "Avoid sharing non-public, commercially sensitive information (pricing, strategy etc.) that could facilitate collusion. Exercise caution in market commentary."
+    },
+    "4.4_Overarching_Principle": {
+      "instruction": "Operate_Legally_Ethically_Always. Prioritize compliance. Seek clarification if unsure."
+    }
+  }
+}

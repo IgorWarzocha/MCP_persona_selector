@@ -1,0 +1,225 @@
+{
+  "abandonedResearchRecord": {
+    "templateVersion": "1.1",
+    "creationDateSchema": "YYYY-MM-DD",
+    "description": "Schema for an Abandoned Research Record, designed for AI system logging and potential future processing, including output standardization directives.",
+    "outputGenerationDirectives": {
+      "targetFormat": "YAML",
+      "deliveryMethod": "inline_chat_code_block",
+      "standardTitleStructure": "YY-MM - {{projectNameOrResearchTitle}} - Abandoned Record",
+      "titleDerivationLogic": "The 'YY-MM' should be derived from the recordMetadata.timestampAbandoned (e.g., '25-05' if abandoned in May 2025). The {{projectNameOrResearchTitle}} should be derived from recordMetadata.projectReferenceID (if it implies a project name and is available), or fall back to recordMetadata.researchTaskID, or the researchDefinitionAtInitiation.originalKIQs[0] (first KIQ as a proxy for title) if others are not suitable.",
+      "suggestedFilenameForUserSave": "{{yy}}-{{mm}}-{{projectNameOrResearchTitle}}-AbandonedRecord.yaml"
+    },
+    "recordMetadata": {
+      "recordID": {
+        "type": "string",
+        "description": "Unique identifier for this abandonment record (e.g., UUID).",
+        "exampleValue": "uuid-v4-placeholder"
+      },
+      "researchTaskID": {
+        "type": "string",
+        "description": "Identifier for the original research task, if applicable.",
+        "isOptional": true,
+        "exampleValue": "task-00123"
+      },
+      "projectReferenceID": {
+        "type": "string",
+        "description": "Main project reference ID, if this research was part of a larger project.",
+        "isOptional": true,
+        "exampleValue": "25-0020"
+      },
+      "timestampInitiated": {
+        "type": "string",
+        "format": "ISO 8601 datetime",
+        "description": "Timestamp when the research task was initiated.",
+        "exampleValue": "2025-05-23T10:00:00Z"
+      },
+      "timestampAbandoned": {
+        "type": "string",
+        "format": "ISO 8601 datetime",
+        "description": "Timestamp when the research task was abandoned.",
+        "exampleValue": "2025-05-23T11:30:00Z"
+      },
+      "initiatingUserOrProcess": {
+        "type": "string",
+        "description": "Identifier of the user or system process that initiated the research.",
+        "exampleValue": "User:Igor"
+      },
+      "abandonmentTrigger": {
+        "type": "string",
+        "description": "The specific trigger for abandonment.",
+        "exampleValue": "User:Igor:Instruction"
+      },
+      "aiPersonasInvolved": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List of AI personas who worked on this research task.",
+        "exampleValue": ["Jen", "Robin"]
+      }
+    },
+    "researchDefinitionAtInitiation": {
+      "originalKIQs": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "The Key Intelligence Questions the research was intended to answer.",
+        "exampleValue": [
+          "What is the current market share of Company X in the UK for Product Y?",
+          "Identify key stakeholders for Project Z."
+        ]
+      },
+      "originalSearchParameters": {
+        "type": "object",
+        "description": "Key parameters guiding the initial research.",
+        "properties": {
+          "keyTerms": {"type": "array", "items": {"type": "string"}, "exampleValue": ["Company X", "Product Y", "UK Market Share"]},
+          "dateRangeStart": {"type": "string", "format": "YYYY-MM-DD", "isOptional": true, "exampleValue": "2024-01-01"},
+          "dateRangeEnd": {"type": "string", "format": "YYYY-MM-DD", "isOptional": true, "exampleValue": "2025-01-01"},
+          "specifiedSources": {"type": "array", "items": {"type": "string"}, "isOptional": true, "exampleValue": ["MarketReportSite.com", "IndustryNews.org"]}
+        }
+      },
+      "intendedOutputDescription": {
+        "type": "string",
+        "description": "Brief description of the intended output or deliverable.",
+        "exampleValue": "Populate Dossier Section 5.1 (Market Sector Analysis)"
+      }
+    },
+    "stateAtAbandonment": {
+      "summaryOfProgress": {
+        "type": "string",
+        "description": "AI-generated concise summary of actions taken and current state of the research.",
+        "exampleValue": "Initial keyword searches performed across 3 specified sources. Company X website analyzed. Market share data point for 2023 identified, but 2024 data remains elusive."
+      },
+      "dataSourcesProcessed": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "sourceName": {"type": "string", "exampleValue": "MarketReportSite.com/ReportXYZ"},
+            "sourceType": {"type": "string", "exampleValue": "Premium Market Report"},
+            "status": {
+              "type": "string",
+              "enum": ["Fully_Queried", "Partially_Reviewed", "Connection_Failed", "Access_Denied", "Not_Relevant"],
+              "exampleValue": "Partially_Reviewed"
+            },
+            "keyFindingsSummary": {
+              "type": "string",
+              "isOptional": true,
+              "exampleValue": "Report contains 2023 market share data but lacks 2024 projections."
+            }
+          }
+        },
+        "description": "List of data sources that were interacted with."
+      },
+      "dataSourcesPending": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List of planned data sources not yet actioned.",
+        "exampleValue": ["IndustryNews.org/Archives", "CompetitorAnnualReport.pdf"]
+      },
+      "keyDataPointsCollected": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dataPointDescription": {"type": "string", "exampleValue": "Company X UK Market Share for Product Y (2023)"},
+            "value": {"type": "any", "exampleValue": "15%"},
+            "sourceName": {"type": "string", "exampleValue": "MarketReportSite.com/ReportXYZ"},
+            "confidenceScore": {"type": "number", "format": "float (0.0-1.0)", "isOptional": true, "exampleValue": 0.85}
+          }
+        },
+        "description": "Structured list of key data points successfully gathered."
+      },
+      "identifiedEntities": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "entityName": {"type": "string", "exampleValue": "Company X"},
+            "entityType": {"type": "string", "enum": ["ORGANIZATION", "PERSON", "PRODUCT", "LOCATION", "EVENT"], "exampleValue": "ORGANIZATION"},
+            "relevanceScore": {"type": "number", "format": "float (0.0-1.0)", "isOptional": true, "exampleValue": 0.9}
+          }
+        },
+        "description": "Key entities identified during the research."
+      },
+      "errorOrBlockageLog": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "timestamp": {"type": "string", "format": "ISO 8601 datetime", "exampleValue": "2025-05-23T11:15:00Z"},
+            "errorCode": {
+              "type": "string",
+              "enum": ["API_LIMIT", "NO_RESULTS", "TIMEOUT", "ACCESS_DENIED", "SOURCE_UNAVAILABLE", "PARSING_ERROR", "QUERY_AMBIGUITY"],
+              "exampleValue": "NO_RESULTS"
+            },
+            "errorDescription": {"type": "string", "exampleValue": "No results found for 'Company X Product Y 2024 market share' in Source Z after multiple query variations."}
+          }
+        },
+        "description": "Log of errors or significant blockages encountered."
+      }
+    },
+    "abandonmentRationale": {
+      "primaryReasonCode": {
+        "type": "string",
+        "enum": [
+          "USER_DIRECTIVE",
+          "STRATEGIC_DEPRIORITIZATION",
+          "MAX_ITERATIONS_REACHED",
+          "DATA_UNAVAILABLE_CRITICAL",
+          "FEASIBILITY_THRESHOLD_NOT_MET",
+          "INTERNAL_SYSTEM_ERROR",
+          "SUCCESS_CRITERIA_MET_EARLY_HALT",
+          "COST_LIMIT_REACHED",
+          "TIME_LIMIT_REACHED"
+        ],
+        "description": "Controlled vocabulary for the primary reason for abandonment.",
+        "exampleValue": "DATA_UNAVAILABLE_CRITICAL"
+      },
+      "reasoningNarrative": {
+        "type": "string",
+        "description": "Brief, factual AI-generated explanation based on the reason code and context.",
+        "exampleValue": "Critical data point (2024 market share) not found in available sources after exhaustive search. User directive to halt if not found within X attempts."
+      }
+    },
+    "futureActionability": {
+      "isResumableFlag": {
+        "type": "boolean",
+        "description": "Flag indicating if this research could potentially be resumed.",
+        "exampleValue": true
+      },
+      "conditionsForResumption": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Conditions under which resumption might be considered.",
+        "isOptional": true,
+        "exampleValue": [
+          "Availability of new market report for 2024 from Source Alpha.",
+          "User explicitly requests resumption with broader search terms."
+        ]
+      },
+      "potentialCrossReferenceTags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Keywords or concepts for cross-referencing or future pattern detection.",
+        "exampleValue": ["MarketShare_ProductY", "CompanyX_UK", "CompetitiveIntel_2024_Gap"]
+      },
+      "purgeAfterDate": {
+        "type": "string",
+        "format": "ISO 8601 date",
+        "description": "Optional date after which this record might be considered for archival or purging.",
+        "isOptional": true,
+        "exampleValue": "2026-05-23"
+      }
+    }
+  }
+}

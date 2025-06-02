@@ -1,0 +1,212 @@
+{
+  "projectAudioSummary": {
+    "templateVersion": "1.4",
+    "creationDateSchema": "YYYY-MM-DD",
+    "description": "JSON template to structure key factual information for generating a self-contained YAML Project Audio Overview. Content to be populated from the main SIU Intelligence Dossier. This version includes an intelligence update framework.",
+    "outputGenerationDirectives": {
+      "targetFormat": "YAML",
+      "deliveryMethod": "inline_chat_code_block",
+      "standardTitleStructure": "YY-MM - {{projectName}} - Project Audio Overview",
+      "titleDerivationLogic": "YY-MM to be derived from projectAudioSummary.metadata.dossierPublicationDate (e.g., '25-05'). {{projectName}} to be derived from projectAudioSummary.metadata.projectName.",
+      "suggestedFilenameForUserSave": "{{yy}}-{{mm}}-{{projectName}}-ProjectAudioOverview.yaml",
+      "yamlPreambleComment": "# This Project Audio Overview is a self-contained summary.\n# The information herein is factually derived from the SIU's comprehensive analysis.",
+      "referenceNoteForAudioScript": "The audio script should state: 'This overview for {{projectName}} is based on detailed intelligence compiled in its Full Intelligence Dossier, supported by LLM analysis reports and the project's HTML Snapshot where applicable.'"
+    },
+    "metadata": {
+      "projectReferenceID": {
+        "type": "string",
+        "description": "Internal system identifier for the project, not typically for direct audio narration.",
+        "sourceFromDossierMetadata": "internal_ref_id",
+        "exampleValue": "25-0123"
+      },
+      "projectName": {
+        "type": "string",
+        "description": "The core name of the project or initiative, used for audio narration.",
+        "sourceFromDossierMetadata": "base_project_name_metadata",
+        "exampleValue": "Project Atlas"
+      },
+      "dossierPublicationDate": {
+        "type": "string",
+        "format": "YYYY-MM-DD",
+        "description": "Publication date of the source Intelligence Dossier.",
+        "sourceFromDossierMetadata": "dossier_publication_date",
+        "exampleValue": "2025-05-24"
+      },
+      "audioSummaryVersion": {
+        "type": "string",
+        "description": "Version of this audio summary data structure.",
+        "exampleValue": "1.4"
+      },
+      "generationPurpose": {
+        "type": "string",
+        "fixedValue": "For factual audio overview generation, ensuring adherence to confirmed information from the SIU Intelligence Dossier. Output as self-contained YAML."
+      }
+    },
+    "projectDescription": {
+      "briefSynopsis": {
+        "type": "string",
+        "description": "A 1-2 sentence concise definition of the project/initiative.",
+        "sourceDossierSection": "section_1_executive_summary_template.json",
+        "sourceDossierDataPoint": "point 1.1 (Project Synopsis)",
+        "exampleValue": "Project Atlas is a major urban regeneration scheme in Central City, focusing on mixed-use development and sustainable infrastructure."
+      },
+      "keyStrategicIntent": {
+        "type": "string",
+        "description": "The primary strategic goal or driver for the project.",
+        "sourceDossierSection": "section_1_executive_summary_template.json / section_2_deep_dive_template.json",
+        "sourceDossierDataPoint": "point 1.1 (Key Opportunity/Challenge) or Section 2.1 (Objectives)",
+        "exampleValue": "To revitalize the waterfront district, attract new businesses, and create 5,000 new jobs by 2030."
+      }
+    },
+    "keyStakeholders": {
+      "description": "Confirmed key entities involved in the project. These are the primary organizations or roles to mention.",
+      "items": {
+        "type": "array",
+        "itemSchema": {
+          "type": "object",
+          "properties": {
+            "stakeholderName": {
+              "type": "string",
+              "description": "Name of the stakeholder entity or key individual.",
+              "exampleValue": "City Regeneration Authority"
+            },
+            "stakeholderRoleInProject": {
+              "type": "string",
+              "description": "Their primary role in relation to the project (e.g., Project Lead, Primary Funder, Key Delivery Partner).",
+              "exampleValue": "Project Lead & Primary Funder"
+            },
+            "sourceDossierSectionReference": {
+              "type": "string",
+              "description": "Specific section in the dossier confirming this stakeholder and role (e.g., '3.1', '3.3').",
+              "exampleValue": "3.1"
+            }
+          }
+        },
+        "exampleValue": [
+          {
+            "stakeholderName": "Global Development Corp",
+            "stakeholderRoleInProject": "Developer",
+            "sourceDossierSectionReference": "3.1"
+          },
+          {
+            "stakeholderName": "Construct PLC",
+            "stakeholderRoleInProject": "Key Delivery Partner (Anticipated Main Contractor)",
+            "sourceDossierSectionReference": "3.2"
+          }
+        ]
+      }
+    },
+    "keyTimeline": {
+      "description": "Key chronological milestones and phases of the project. Focus on confirmed or reliably reported events for factual audio.",
+      "timelineAuthorityNote": {
+        "type": "string",
+        "fixedValue": "The following timeline is based on the best available Open Source Intelligence as of the source dossier's publication date. All future dates are indicative unless explicitly stated as confirmed."
+      },
+      "events": {
+        "type": "array",
+        "itemSchema": {
+          "type": "object",
+          "properties": {
+            "eventDescription": {
+              "type": "string",
+              "description": "Brief description of the timeline event or phase.",
+              "exampleValue": "Full Planning Permission Granted"
+            },
+            "eventDateOrPhase": {
+              "type": "string",
+              "description": "Specific date (YYYY-MM-DD), quarter (Q_YYYY), year (YYYY), or phase description.",
+              "exampleValue": "2025-03-15"
+            },
+            "status": {
+              "type": "string",
+              "enum": ["Completed", "In Progress", "Anticipated", "Targeted", "Delayed"],
+              "description": "Status of this event.",
+              "exampleValue": "Completed"
+            },
+            "sourceDossierSectionReference": {
+              "type": "string",
+              "description": "Specific section in the dossier confirming this timeline event (e.g., '2.4', '6.2').",
+              "exampleValue": "2.4"
+            }
+          }
+        },
+        "exampleValue": [
+          {
+            "eventDescription": "Main Contractor Procurement Initiated",
+            "eventDateOrPhase": "Q2 2025",
+            "status": "Anticipated",
+            "sourceDossierSectionReference": "6.2"
+          },
+          {
+            "eventDescription": "Construction Start (Mobilisation)",
+            "eventDateOrPhase": "Q4 2025",
+            "status": "Targeted",
+            "sourceDossierSectionReference": "2.4"
+          }
+        ]
+      }
+    },
+    "supportingDocumentAttribution": {
+      "description": "Standard statement to be included in the YAML output, attributing the source documents.",
+      "statementFormat": "This Project Audio Overview for {{projectName}} is a self-contained summary. The information herein is factually derived from the SIU's comprehensive analysis, primarily supported by the following intelligence products:",
+      "documentsToCite": [
+        {
+          "documentType": "Full Intelligence Dossier for {{projectName}}"
+        },
+        {
+          "documentType": "LLM Analysis Report(s) for {{projectName}}",
+          "statusNote": "(Details to be added if applicable for this project)"
+        },
+        {
+          "documentType": "HTML Snapshot Minisite for {{projectName}}",
+          "statusNote": "(Details to be added if applicable for this project)"
+        }
+      ]
+    },
+    "audioGenerationNotes": {
+      "type": "object",
+      "properties": {
+        "dataSourcingPrinciple": {
+          "type": "string",
+          "fixedValue": "All data for this summary is to be factually derived from the referenced SIU Intelligence Dossier sections. The YAML output should clearly present the timelineAuthorityNote and the supportingDocumentAttribution section."
+        },
+        "pronunciationGuide": {
+          "type": "array",
+          "isOptional": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "term": {"type": "string"},
+              "phoneticSpelling": {"type": "string"}
+            }
+          },
+          "description": "Optional guide for any complex names or acronyms for correct audio pronunciation.",
+          "exampleValue": [
+            {"term": "BREEAM", "phoneticSpelling": "BREEM"}
+          ]
+        }
+      }
+    },
+    "intelligenceUpdateFramework": {
+      "description": "Provides a dossier-derived suggestion for when a strategic check-in for updates on this project would be most beneficial.",
+      "recommendedCheckIn": {
+        "timingSuggestion": {
+          "type": "string",
+          "description": "A suggested timeframe or trigger for when an update to this project summary/dossier would be most valuable. This is an intelligence-driven suggestion, not a fixed schedule.",
+          "sourceDossierSectionReferencesForDerivation": ["2.4", "6.2", "9.3"],
+          "exampleValue": "Prior to Main Contractor Award (Anticipated Q4 2025)"
+        },
+        "derivationRationale": {
+          "type": "string",
+          "description": "Brief explanation of why this timing is recommended, based on key upcoming project events, decisions, or resolution of critical intelligence gaps from the full dossier.",
+          "sourceDossierSectionReferencesForDerivation": ["2.4", "6.2", "9.3"],
+          "exampleValue": "Several key procurement milestones and potential funding clarifications are anticipated in the lead-up to the Main Contractor Award. An update prior to this would capture critical new information."
+        }
+      },
+      "standardReviewCycleNote": {
+          "type": "string",
+          "fixedValue": "This project-specific check-in recommendation is independent of the SIU's standard internal intelligence refresh cycle for active dossiers."
+      }
+    }
+  }
+}

@@ -1,0 +1,426 @@
+{
+  "snapshotMinisite": {
+    "templateVersion": "1.0",
+    "creationDate": "2025-05-23",
+    "description": "JSON template for AI-driven generation of an HTML Snapshot Minisite, based on 'HTML Snapshot Minisite: Detailed Plaintext Outline'.",
+    "persistentElements": {
+      "mainHeader": {
+        "projectTitle": {
+          "placeholderName": "snapshot_project_title",
+          "sourceFromDossierMetadata": "base_project_name_metadata",
+          "comment": "e.g., 'BioNTech UK Expansion'"
+        },
+        "subtitle": {
+          "placeholderName": "snapshot_subtitle",
+          "sourceFromDossierMetadata": null,
+          "fixedValue": "Interactive Strategic Intelligence Snapshot"
+        },
+        "referenceId": {
+          "placeholderName": "snapshot_reference_id",
+          "sourceFromDossierMetadata": "internal_ref_id"
+        },
+        "publicationDate": {
+          "placeholderName": "snapshot_publication_date",
+          "sourceFromDossierMetadata": "dossier_publication_date"
+        },
+        "classification": {
+          "placeholderName": "snapshot_classification",
+          "sourceFromDossierMetadata": null,
+          "fixedValue": "Commercial: Client Confidential"
+        }
+      },
+      "soundcloudEmbed": {
+        "placeholderName": "snapshot_soundcloud_embed_code",
+        "sourceAsset": "External (User Provided)",
+        "comment": "Placeholder for SoundCloud embed code."
+      }
+    },
+    "tabs": [
+      {
+        "tabId": "tab1_overview",
+        "tabTitle": "Overview",
+        "purpose": "To provide an immediate, high-impact understanding of the project/initiative, its strategic importance, and a brief guide to the minisite.",
+        "contentBlocks": [
+          {
+            "blockTitle": "Project Summary (Direct & Concise)",
+            "elements": [
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "overview_core_synopsis",
+                "sourceDossierSection": "section_1_executive_summary_template.json",
+                "sourceDossierDataPoint": "point 1.1 (Project Synopsis)",
+                "isOptional": false
+              },
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "overview_key_strategic_thrust",
+                "sourceDossierSection": "section_1_executive_summary_template.json",
+                "sourceDossierDataPoint": "point 1.1 (Key Opportunity/Challenge)",
+                "isOptional": false
+              },
+              {
+                "elementType": "list_item",
+                "contentPlaceholder": "overview_top_line_objectives",
+                "sourceDossierSection": "section_2_deep_dive_template.json",
+                "sourceDossierDataPoint": "Section 2.1 (condensed)",
+                "isOptional": true,
+                "comment": "Expect 1-2 critical project objectives."
+              }
+            ]
+          },
+          {
+            "blockTitle": "Key Data Infographics / Visual Callouts",
+            "uxHint": "Infographic Opportunity. Expect 3-5 visually distinct callouts/charts.",
+            "elements": [
+              {
+                "elementType": "infographic_placeholder",
+                "contentPlaceholder": "overview_infographic_1",
+                "sourceDossierSection": "Varies (e.g., section_2_deep_dive_template.json, section_5_market_competitive_landscape_template.json)",
+                "sourceDossierDataPoint": "Distilled from Sections 2.1, 2.5, 5",
+                "isOptional": false,
+                "comment": "Example source: Project Scale or Investment Figure"
+              },
+              {
+                "elementType": "infographic_placeholder",
+                "contentPlaceholder": "overview_infographic_2",
+                "sourceDossierSection": "Varies",
+                "sourceDossierDataPoint": "Distilled data",
+                "isOptional": false,
+                "comment": "Example source: Market Growth Stat"
+              },
+              {
+                "elementType": "infographic_placeholder",
+                "contentPlaceholder": "overview_infographic_3",
+                "sourceDossierSection": "Varies",
+                "sourceDossierDataPoint": "Distilled data",
+                "isOptional": true,
+                "comment": "Example source: Key Timeline Milestone"
+              }
+            ]
+          },
+          {
+            "blockTitle": "Concise Conclusion / Strategic Outlook",
+            "elements": [
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "overview_conclusion_outlook",
+                "sourceDossierSection": "section_1_executive_summary_template.json",
+                "sourceDossierDataPoint": "points 1.4 (Strategic Assessment) and 1.6 (Concluding Recommendation)",
+                "isOptional": false,
+                "comment": "Expect 2-3 sentences."
+              }
+            ]
+          },
+          {
+            "blockTitle": "Navigation Guide (Outline of Other Tabs)",
+            "elements": [
+              {
+                "elementType": "navigation_summary_item",
+                "contentPlaceholder": "overview_nav_tab2_scope",
+                "fixedValue": "Tab 2: Key Scope - The 'what' and 'where' of the project."
+              },
+              {
+                "elementType": "navigation_summary_item",
+                "contentPlaceholder": "overview_nav_tab3_status",
+                "fixedValue": "Tab 3: Status & Milestones - Progress, timeline, and financial commitment."
+              },
+              {
+                "elementType": "navigation_summary_item",
+                "contentPlaceholder": "overview_nav_tab4_analysis",
+                "fixedValue": "Tab 4: Strategic Analysis & Insights - Critical analytical takeaways."
+              },
+              {
+                "elementType": "navigation_summary_item",
+                "contentPlaceholder": "overview_nav_tab5_report",
+                "fixedValue": "Tab 5: Full Report - Accessing the comprehensive intelligence dossier."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tabId": "tab2_scope",
+        "tabTitle": "Key Scope",
+        "purpose": "To clearly define the 'what' (nature, scale, main components) and 'where' (key locations) of the project or initiative.",
+        "contentBlocks": [
+          {
+            "blockTitle": "Nature & Primary Function",
+            "elements": [
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "scope_nature_primary_function",
+                "sourceDossierSection": "section_2_deep_dive_template.json",
+                "sourceDossierDataPoint": "Section 2.1 (project_type_function_2_1_sp or initiative_overview_2_1_ci)",
+                "isOptional": false
+              }
+            ]
+          },
+          {
+            "blockTitle": "Overall Scale & Key Metrics",
+            "uxHint": "Infographic Opportunity",
+            "elements": [
+              {
+                "elementType": "infographic_placeholder",
+                "contentPlaceholder": "scope_scale_key_metrics",
+                "sourceDossierSection": "section_2_deep_dive_template.json",
+                "sourceDossierDataPoint": "Sections 2.1 and 2.5 (physical_characteristics_scale_2_1_sp, overall_investment_value_2_5_sp or initiative_scale_timeline_2_1_ci, overall_initiative_scope_strategy_2_2_ci)",
+                "isOptional": false,
+                "comment": "e.g., GIA, MW, number of facilities, headline investment"
+              }
+            ]
+          },
+          {
+            "blockTitle": "Key Locations & Site(s) Overview",
+            "uxHint": "Infographic Opportunity - e.g., map or cards",
+            "elements": [
+              {
+                "elementType": "conditional_content",
+                "contentPlaceholder": "scope_locations_overview_single_project",
+                "condition": "dossier_primary_focus == 'Single Project Investigation'",
+                "sourceDossierSection": "section_2_deep_dive_template.json",
+                "sourceDossierDataPoint": "points 2.1_SP and 2.3_SP",
+                "isOptional": false,
+                "comment": "Precise location and brief site context."
+              },
+              {
+                "elementType": "conditional_content",
+                "contentPlaceholder": "scope_locations_overview_multi_site",
+                "condition": "dossier_primary_focus == 'Company Strategic Initiative Investigation'",
+                "sourceDossierSection": "section_2_deep_dive_template.json",
+                "sourceDossierDataPoint": "points 2.2_CI and 2.3_CI",
+                "isOptional": false,
+                "comment": "Summary of key geographical areas or list/cards for primary sites."
+              }
+            ]
+          },
+          {
+            "blockTitle": "Primary Scope Elements / Key Deliverables",
+            "elements": [
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "scope_primary_elements_deliverables",
+                "sourceDossierSection": "section_2_deep_dive_template.json",
+                "sourceDossierDataPoint": "point 2.2_SP (Confirmed Scope of Works) or descriptions in 2.2_CI",
+                "isOptional": false,
+                "comment": "Concise summary of main components or work packages."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tabId": "tab3_status",
+        "tabTitle": "Status & Milestones",
+        "purpose": "To provide a clear picture of the project's/initiative's current progress, anticipated timeline, key waypoints, and the high-level financial commitment.",
+        "contentBlocks": [
+          {
+            "blockTitle": "Overall Current Status",
+            "elements": [
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "status_overall_current_status",
+                "sourceDossierSection": "section_2_deep_dive_template.json",
+                "sourceDossierDataPoint": "Section 2.4 (Phasing & Programme Analysis) or relevant status fields in 2.2_CI/2.4_CI",
+                "isOptional": false
+              }
+            ]
+          },
+          {
+            "blockTitle": "Key Milestones & Projected Timeline",
+            "uxHint": "Infographic Opportunity - e.g., timeline graphic",
+            "elements": [
+              {
+                "elementType": "timeline_placeholder",
+                "contentPlaceholder": "status_milestones_timeline_graphic",
+                "sourceDossierSection": "section_2_deep_dive_template.json",
+                "sourceDossierDataPoint": "Section 2.4 (Phasing & Programme Analysis or Overall Initiative Timeline & Phasing)",
+                "isOptional": false,
+                "comment": "Expect 3-5 key past, current, and future milestones."
+              }
+            ]
+          },
+          {
+            "blockTitle": "Investment & Funding Overview",
+            "uxHint": "Infographic Opportunity - e.g., callouts/chart",
+            "elements": [
+              {
+                "elementType": "infographic_placeholder",
+                "contentPlaceholder": "status_investment_funding_graphic",
+                "sourceDossierSection": "section_2_deep_dive_template.json",
+                "sourceDossierDataPoint": "Section 2.5 (Budget & Funding Analysis or Overall Initiative Investment & Funding Strategy) and potentially 2.1_CI",
+                "isOptional": false,
+                "comment": "Headline investment figure(s) and primary funding sources summary."
+              }
+            ]
+          },
+          {
+            "blockTitle": "Key Programme Influencers (Brief Note)",
+            "elements": [
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "status_key_programme_influencers",
+                "sourceDossierSection": "section_2_deep_dive_template.json",
+                "sourceDossierDataPoint": "Known Programme Accelerators/Risks in Section 2.4",
+                "isOptional": true,
+                "comment": "1-2 significant factors heavily influencing the timeline."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tabId": "tab4_analysis",
+        "tabTitle": "Strategic Analysis & Insights",
+        "purpose": "To present critical analytical takeaways and synthesised intelligence across key strategic dimensions.",
+        "uxHint": "Suited for an accordion-style presentation.",
+        "contentBlocks": [
+          {
+            "blockTitle": "Stakeholder Dynamics",
+            "isAccordionItem": true,
+            "elements": [
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "analysis_stakeholder_dynamics",
+                "sourceDossierSection": "section_1_executive_summary_template.json",
+                "sourceDossierDataPoint": "Exec Summary 1.2 (Stakeholder) & main Dossier Section 3",
+                "isOptional": false
+              }
+            ]
+          },
+          {
+            "blockTitle": "Technical & Operational Considerations",
+            "isAccordionItem": true,
+            "elements": [
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "analysis_technical_operational",
+                "sourceDossierSection": "section_1_executive_summary_template.json",
+                "sourceDossierDataPoint": "Exec Summary 1.2 (Technical) & main Dossier Section 4",
+                "isOptional": false
+              }
+            ]
+          },
+          {
+            "blockTitle": "Commercial & Procurement Landscape",
+            "isAccordionItem": true,
+            "elements": [
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "analysis_commercial_procurement",
+                "sourceDossierSection": "section_1_executive_summary_template.json",
+                "sourceDossierDataPoint": "Exec Summary 1.2 (Commercial) & main Dossier Section 6",
+                "isOptional": false
+              }
+            ]
+          },
+          {
+            "blockTitle": "Market & Competitive Environment",
+            "isAccordionItem": true,
+            "elements": [
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "analysis_market_competitive",
+                "sourceDossierSection": "section_1_executive_summary_template.json",
+                "sourceDossierDataPoint": "Exec Summary 1.2 (Competitive) & main Dossier Section 5",
+                "isOptional": false
+              }
+            ]
+          },
+          {
+            "blockTitle": "Principal Risks Outlook",
+            "isAccordionItem": true,
+            "elements": [
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "analysis_principal_risks",
+                "sourceDossierSection": "section_1_executive_summary_template.json",
+                "sourceDossierDataPoint": "Exec Summary 1.3 & main Dossier Section 7",
+                "isOptional": false,
+                "comment": "Summary of 1-2 overarching strategic risks."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tabId": "tab5_full_report",
+        "tabTitle": "Full Report",
+        "purpose": "To serve as the primary call to action, differentiating the snapshot from the full dossier and encouraging users to engage for more comprehensive intelligence.",
+        "contentBlocks": [
+          {
+            "blockTitle": "Unlock the Full Picture: From Snapshot to Comprehensive Dossier",
+            "isHeader": true,
+            "elements": [
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "fullreport_intro_para1",
+                "fixedValue": "This {{snapshot_project_title}} Snapshot has provided you with the essential strategic headlines – key insights for rapid orientation and pinpointing areas of immediate interest."
+              },
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "fullreport_intro_para2",
+                "fixedValue": "It's your high-level briefing. For the critical decisions, the comprehensive data, and the granular analysis that forge a true competitive edge, the Full {{snapshot_project_title}} Intelligence Dossier is your next step."
+              },
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "fullreport_intro_para3",
+                "fixedValue": "This is where in-depth, evidence-backed intelligence translates directly into actionable strategy, moving far beyond the headlines to deliver the complete intelligence picture."
+              },
+              {
+                "elementType": "callout_text_pair",
+                "contentPlaceholder": "fullreport_differentiation",
+                "pair": [
+                  {"label": "Snapshot", "text": "The strategic headlines."},
+                  {"label": "Full Dossier", "text": "The complete intelligence picture for decisive action."}
+                ]
+              },
+              {
+                "elementType": "paragraph_cta",
+                "contentPlaceholder": "fullreport_cta_contact_text",
+                "fixedValue": "Ready to equip your team with decisive insights? Contact Igor Warzocha to discuss accessing the complete {{snapshot_project_title}} Intelligence Dossier and empower your strategic planning."
+              },
+              {
+                "elementType": "email_link",
+                "contentPlaceholder": "fullreport_cta_email",
+                "fixedValue": "igorwarzocha@gmail.com"
+              },
+              {
+                "elementType": "reference_text",
+                "contentPlaceholder": "fullreport_cta_reference",
+                "fixedValue": "{{snapshot_project_title}} Snapshot (Ref: {{snapshot_reference_id}})"
+              }
+            ]
+          },
+          {
+            "blockTitle": "Inside the Full Dossier: {{snapshot_project_title}} Table of Contents",
+            "isHeader": true,
+            "elements": [
+              {
+                "elementType": "paragraph",
+                "contentPlaceholder": "fullreport_toc_intro",
+                "fixedValue": "Here’s a preview of the comprehensive intelligence awaiting you in the full dossier:"
+              },
+              {
+                "elementType": "toc_list",
+                "contentPlaceholder": "fullreport_table_of_contents",
+                "items": [
+                  {"sectionNumber": "Section 1", "sectionTitle": "EXECUTIVE SUMMARY"},
+                  {"sectionNumber": "Section 2", "sectionTitle": "PROJECT DEEP DIVE: {{snapshot_project_title_dynamic_part}}", "coversDescription": "(Covers: Detailed Project Description & Objectives, Confirmed Scope of Works, Detailed Location Analysis, Phasing & Programme Analysis, Budget & Funding Analysis)"},
+                  {"sectionNumber": "Section 3", "sectionTitle": "PROJECT LEAD & KEY PARTNER ANALYSIS: {{snapshot_project_title_dynamic_part}}", "coversDescription": "(Covers: Profile of Project Lead Organisation, Key Delivery Partner, Key Personnel, Decision-Making Unit, Key Relationship Mapping)"},
+                  {"sectionNumber": "Section 4", "sectionTitle": "TECHNICAL & OPERATIONAL ASSESSMENT: {{snapshot_project_title_dynamic_part}}", "coversDescription": "(Covers: Design Principles & Key Specifications, Site Conditions & Constraints, Buildability & Constructability, Innovation & Tech Adoption, ESG/HSQE, Site Operations & Logistics)"},
+                  {"sectionNumber": "Section 5", "sectionTitle": "MARKET & COMPETITIVE LANDSCAPE: {{snapshot_project_title_dynamic_part}}", "coversDescription": "(Covers: Market Sector Analysis, Key Competitor Profiles, Specialist Subcontractor Landscape, Competitor Strategy & Vulnerability, Project Benchmarking)"},
+                  {"sectionNumber": "Section 6", "sectionTitle": "PROCUREMENT STRATEGY & COMMERCIALS: {{snapshot_project_title_dynamic_part}}", "coversDescription": "(Covers: Procurement Route, Timeline, Evaluation Criteria, Contract Form & Terms, Financial Health of Key Entities)"},
+                  {"sectionNumber": "Section 7", "sectionTitle": "RISK REGISTER & ANALYSIS: {{snapshot_project_title_dynamic_part}}", "coversDescription": "(Covers: Risk Assessment Methodology, Detailed Risk Register)"},
+                  {"sectionNumber": "Section 8", "sectionTitle": "STRATEGIC IMPLICATIONS & ENGAGEMENT OUTLOOK: {{snapshot_project_title_dynamic_part}}", "coversDescription": "(Covers: Overall Attractiveness, Ecosystem Strengths/Vulnerabilities, Critical Success Factors, Opportunities/Challenges, Concluding Strategic Considerations)"},
+                  {"sectionNumber": "Section 9", "sectionTitle": "INTELLIGENCE GAPS & RECOMMENDED ACTIONS: {{snapshot_project_title_dynamic_part}}", "coversDescription": "(Covers: Consolidated KIGs & Implications, Recommended Actions, Triggers for Re-evaluation)"},
+                  {"sectionNumber": "APPENDICES", "sectionTitle": "", "coversDescription": "(Includes: Top Key Information Sources, Relevant Benchmarking Data, etc., as applicable)"}
+                ],
+                "comment": "snapshot_project_title_dynamic_part will be the 'base_project_name_metadata' or 'company_name_metadata - initiative_name_metadata' based on dossier focus."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,648 @@
+{
+  // ... (Assuming metadata, ai_processing_hints, output_instructions, Section 1 are as previously defined) ...
+  "sections": [
+    // ... (Section 1 as previously defined) ...
+    {
+      "section_number": 2,
+      "section_title_note": "This section's title and structure adapt based on the primary focus of the dossier. Analyst must select the appropriate path. AI will populate based on 'dossier_primary_focus' metadata.",
+      "dossier_focus_options": [
+        {
+          "focus_type": "Single Project Investigation",
+          "section_title_final": "PROJECT DEEP DIVE: {{project_name_metadata}}", // Populated from metadata.project_name
+          "points": [
+            {
+              "point_id": "2.1_SP", // SP for Single Project
+              "point_title_final": "Detailed Project Description & Objectives",
+              "ai_generation_goal": "To provide a comprehensive understanding of what the specific project entails, its primary functions, scale, and the stated/inferred goals of the Project Lead.",
+              "key_intelligence_questions_to_address": [
+                "What is the official name and precise location of the project?",
+                "What is the primary type of facility/development (e.g., data centre, lab, manufacturing)?",
+                "What are its key physical characteristics (size, GIA, capacity metrics)?",
+                "What are the core activities or processes it will house?",
+                "What are the stated or clearly inferred strategic objectives of the Project Lead for this specific project (e.g., market entry, capacity expansion, specific performance targets like BREEAM rating)?"
+              ],
+              "osint_focus_and_potential_sources": [
+                "Planning application documents (Design & Access Statements, site plans, elevations, planning statements)",
+                "Developer/End-User project websites or press releases",
+                "Environmental Impact Assessments (EIAs)",
+                "Relevant industry news and publications detailing the project"
+              ],
+              "structuring_the_output_content_guide": "Structure with clear sub-headings. 'Project Type & Primary Function: [Details]'; 'Key Physical Characteristics/Scale: [Details with units]'; 'Core Activities/Processes to be Housed: [Brief description]'; 'Stated/Inferred Objectives of [Project Lead Entity] for this Project: [Bullet list of 2-4 key objectives].'",
+              "handling_kigs_and_confidence_levels": "Clearly state if objectives are 'stated' (with source) or 'inferred' (with rationale). If key details like scale or precise function are KIGs, explicitly note this using the KIG marker.",
+              "value_framing_for_external_client": "Provide a clear, factual foundation that allows any client to quickly understand the project's fundamental nature and intent.",
+              "content_placeholder_detailed_prompt": "Project Type & Primary Function: {{project_type_function_2_1_sp}}\nKey Physical Characteristics/Scale: {{physical_characteristics_scale_2_1_sp}}\nCore Activities/Processes to be Housed: {{core_activities_processes_2_1_sp}}\nStated/Inferred Objectives of {{project_lead_entity_name_2_1_sp}} for this Project:\n{{#each objectives_2_1_sp}}\n- {{this.objective_description}} {{#if this.source}}(Source: {{this.source}}){{/if}}\n{{/each}}\n{{#if (eq objectives_2_1_sp.length 0)}}[KIG: Specific objectives for the project lead entity are not clearly stated or inferable from available OSINT. - Implication: Difficulty in aligning engagement strategy with project lead's specific goals.]{{/if}}",
+              "placeholder_fields": [
+                {
+                  "name": "project_type_function_2_1_sp",
+                  "description": "Primary type of facility/development and its main function.",
+                  "example_value": "Tier IV Data Centre designed for hyperscale colocation services.",
+                  "source_hint": "Planning documents, project websites."
+                },
+                {
+                  "name": "physical_characteristics_scale_2_1_sp",
+                  "description": "Key physical characteristics like GIA, capacity, with units.",
+                  "example_value": "Approx. 25,000 m2 GIA across two main data halls and ancillary office/plant space. Target 40MW IT load capacity.",
+                  "source_hint": "Planning documents, EIAs, project specifications."
+                },
+                {
+                  "name": "core_activities_processes_2_1_sp",
+                  "description": "Core activities or processes the facility will house.",
+                  "example_value": "High-density data storage and processing for cloud service providers.",
+                  "source_hint": "Project descriptions, end-user statements."
+                },
+                {
+                  "name": "project_lead_entity_name_2_1_sp",
+                  "description": "Name of the Project Lead Entity for this project.",
+                  "example_value": "Global Data Holdings PLC",
+                  "source_hint": "Identify from Section 3.1 or project announcements."
+                },
+                {
+                  "name": "objectives_2_1_sp",
+                  "description": "An array of 2-4 objective objects for the project.",
+                  "data_type": "array",
+                  "array_item_schema": {
+                    "type": "object",
+                    "properties": {
+                      "objective_description": {"type": "string", "example_value": "Achieve PUE of <1.2 and BREEAM 'Excellent' rating."},
+                      "source": {"type": "string", "is_optional": true, "example_value": "Sustainability Report 2024"}
+                    }
+                  },
+                  "example_value": [
+                    {"objective_description": "Become the leading colocation provider in the London North region by 2027."},
+                    {"objective_description": "Attract at least two major international cloud service providers as anchor tenants before operational launch."}
+                  ],
+                  "source_hint": "Project lead statements, strategic documents, planning submissions."
+                }
+              ]
+            },
+            {
+              "point_id": "2.2_SP",
+              "point_title_final": "Confirmed Scope of Works (Elemental Breakdown)",
+              "ai_generation_goal": "To detail the specific construction and fit-out elements involved in the project, helping clients identify where their services or products align, including source and confidence level.",
+              "key_intelligence_questions_to_address": [
+                "What is the overall summary of main deliverables?",
+                "What is the source and assessed confidence level for the scope information?",
+                "What are the key work packages (e.g., Civils, Structural, M&E, Facade, Fit-out, Specialist Systems)?",
+                "Are there any known major exclusions from the anticipated scope?"
+              ],
+              "osint_focus_and_potential_sources": [
+                "Planning documents (scope of works sections, architects' plans if detailed enough), tender pre-information if available, industry articles discussing similar projects by the same developer/end-user."
+              ],
+              "structuring_the_output_content_guide": "Start with 'Overall Scope Summary: [Narrative]'. Then: 'Source of Scope Information: [e.g., Planning Application X, Document Y] – Confidence Level: [High/Medium/Low]'. Follow with 'Key Elemental Breakdown:' using sub-headings. Conclude with 'Known Exclusions from Stated Scope (if any): [Details]'.",
+              "handling_kigs_and_confidence_levels": "Clearly state if scope elements are 'confirmed' from documents or 'inferred/anticipated'. Detail KIGs for specific packages if information is lacking, using the KIG marker.",
+              "value_framing_for_external_client": "Enable clients to quickly map their offerings against specific project components and understand the breadth of opportunity.",
+              "content_placeholder_detailed_prompt": "Overall Scope Summary: {{overall_scope_summary_2_2_sp}}\nSource of Scope Information: {{source_of_scope_info_2_2_sp}} – Confidence Level: {{scope_info_confidence_2_2_sp}}\n\nKey Elemental Breakdown:\n- Civils & Structural: {{civils_structural_scope_2_2_sp}}\n- Mechanical, Electrical & Plumbing (M&E): {{mep_scope_2_2_sp}}\n- Facade & Envelope: {{facade_envelope_scope_2_2_sp}}\n- Internal Fit-Out: {{internal_fit_out_scope_2_2_sp}}\n- Specialist Packages: {{specialist_packages_scope_2_2_sp}}\n\nKnown Exclusions from Stated Scope (if any): {{known_exclusions_2_2_sp}}",
+              "placeholder_fields": [
+                {
+                  "name": "overall_scope_summary_2_2_sp",
+                  "description": "Narrative summary of the main project deliverables.",
+                  "example_value": "The project entails the full design, construction, and commissioning of a new build data centre facility, including all associated site infrastructure, external works, and landscaping.",
+                  "source_hint": "Planning documents, project briefs."
+                },
+                {
+                  "name": "source_of_scope_info_2_2_sp",
+                  "description": "Origin of the scope information.",
+                  "example_value": "Planning Application PA/2025/00123, Design & Access Statement Rev C.",
+                  "source_hint": "Specific document references."
+                },
+                {
+                  "name": "scope_info_confidence_2_2_sp",
+                  "description": "Assessed confidence level for the scope information.",
+                  "data_type": "enum",
+                  "enum_values": ["High", "Medium", "Low"],
+                  "example_value": "High",
+                  "source_hint": "Analyst assessment based on source quality."
+                },
+                {
+                  "name": "civils_structural_scope_2_2_sp",
+                  "description": "Details of civils and structural works.",
+                  "example_value": "Site enabling works, piled foundations, reinforced concrete frame, structural steelwork for data halls and roof. [KIG: Specific details of retaining structures for basement level. - Implication: Full cost estimation for substructure challenging.]",
+                  "source_hint": "Planning drawings, structural specifications."
+                },
+                {
+                  "name": "mep_scope_2_2_sp",
+                  "description": "Details of M&E works.",
+                  "example_value": "HVAC systems including CRAC units for data halls, N+1 redundant power distribution (MV/LV, UPS, generators), VESDA and gas suppression fire protection systems, building management system (BMS).",
+                  "source_hint": "M&E specifications, planning documents."
+                },
+                {
+                  "name": "facade_envelope_scope_2_2_sp",
+                  "description": "Details of facade and building envelope.",
+                  "example_value": "High-performance insulated composite cladding system, curtain walling to office areas, single-ply membrane roofing system.",
+                  "source_hint": "Architectural drawings, facade specifications."
+                },
+                {
+                  "name": "internal_fit_out_scope_2_2_sp",
+                  "description": "Details of internal fit-out.",
+                  "example_value": "Data hall fit-out to 'white space' standard, raised access flooring, office areas to Cat A, welfare facilities.",
+                  "source_hint": "Interior layouts, fit-out specifications."
+                },
+                {
+                  "name": "specialist_packages_scope_2_2_sp",
+                  "description": "Details of any specialist packages.",
+                  "example_value": "Security systems including CCTV, access control, intruder detection. Data cabling infrastructure. Integration of client-furnished IT racks (if applicable).",
+                  "source_hint": "Specialist system specifications."
+                },
+                {
+                  "name": "known_exclusions_2_2_sp",
+                  "description": "Any major elements known to be excluded from the main scope.",
+                  "example_value": "Tenant-specific IT equipment installation and final server rack fit-out. Landscaping beyond basic hardstanding and boundary treatments is by separate contract.",
+                  "source_hint": "Scope documents, tender information."
+                }
+              ]
+            },
+            {
+              "point_id": "2.3_SP",
+              "point_title_final": "Detailed Location Analysis",
+              "ai_generation_goal": "To provide a thorough understanding of the project's physical site, its context, constraints, and any neighbouring sensitivities that could impact design, construction, or operations.",
+              "key_intelligence_questions_to_address": [
+                "What is the precise site address, and what are its general surroundings and current status (greenfield/brownfield)?",
+                "What do key site plans (boundary, layout, access) reveal?",
+                "What are the primary identified site constraints (physical, logistical, environmental, legal)?",
+                "What are the key neighbouring sensitivities (adjacent land uses, residential areas, ecological zones) and their potential implications?",
+                "What is the high-level geo-environmental overview (flood risk, potential contamination from past use)?",
+                "Are there critical 'random' issues (public consultation feedback, archaeology, dense/unforeseen utilities) known from OSINT?"
+              ],
+              "osint_focus_and_potential_sources": [
+                "Planning portals (maps, site plans, environmental statements, transport assessments, heritage statements, consultation responses), Google Maps/Street View, Environment Agency flood maps, BGS geological data, local news regarding site history or community feedback."
+              ],
+              "structuring_the_output_content_guide": "Use sub-headings: 'Overall Site & Location Description'; 'Key Site Plans Reviewed & Takeaways'; 'Identified Site Constraints'; 'Neighbouring Sensitivities & Key Adjacent Land Uses'; 'Geo-Environmental Overview'; 'Other Notable Site Factors'; 'Key Site-Related Implications for Engagement.'",
+              "handling_kigs_and_confidence_levels": "Differentiate between information from official documents vs. inferred. State if detailed surveys are KIGs. Clearly state if vicinity analysis is used and label as inference if so.",
+              "value_framing_for_external_client": "Enable clients to assess site-related risks and opportunities, understand access challenges, and factor in potential community or environmental impacts.",
+              "content_placeholder_detailed_prompt": "Overall Site & Location Description: {{site_location_description_2_3_sp}}\nKey Site Plans Reviewed & Takeaways: {{site_plans_takeaways_2_3_sp}}\nIdentified Site Constraints (Physical, Logistical, Environmental, Legal): {{site_constraints_2_3_sp}}\nNeighbouring Sensitivities & Key Adjacent Land Uses (with Potential Implications): {{neighbouring_sensitivities_2_3_sp}}\nGeo-Environmental Overview (Flood risk, Contamination potential from OSINT): {{geo_environmental_overview_2_3_sp}}\nOther Notable Site Factors (Public consultation outcomes, Archaeological flags, Utility density concerns based on vicinity analysis – clearly state basis if inferential): {{other_site_factors_2_3_sp}}\nKey Site-Related Implications for Engagement: {{site_implications_engagement_2_3_sp}}",
+              "placeholder_fields": [
+                {
+                  "name": "site_location_description_2_3_sp",
+                  "description": "Precise address, general surroundings, current status (greenfield/brownfield).",
+                  "example_value": "Site Address: Plot 17, Dublin Enterprise Zone, Grange Castle, Dublin. Greenfield site, formerly agricultural land, within an established industrial park.",
+                  "source_hint": "Planning application, maps."
+                },
+                {
+                  "name": "site_plans_takeaways_2_3_sp",
+                  "description": "Key insights from reviewed site plans (boundary, layout, access).",
+                  "example_value": "Planning Application PA/2025/00123, Site Layout Plan Rev B shows primary access from existing estate road to the north, with dedicated HGV turning circle. Site boundary is clearly demarcated.",
+                  "source_hint": "Site plans from planning portal."
+                },
+                {
+                  "name": "site_constraints_2_3_sp",
+                  "description": "Primary identified site constraints (physical, logistical, environmental, legal). List format preferred.",
+                  "example_value": "- Physical: Generally flat site, no obvious topographical constraints.\n- Logistical: Single point of access for construction traffic may require careful management.\n- Environmental: Proximity (<200m) to a protected watercourse (River Griffeen tributary) necessitating strict pollution control measures during construction.\n- Legal: [KIG: Specific site covenants or wayleaves. - Implication: Potential unforeseen restrictions on development or access.]",
+                  "source_hint": "Planning documents, environmental statements, transport assessments."
+                },
+                {
+                  "name": "neighbouring_sensitivities_2_3_sp",
+                  "description": "Key neighbouring sensitivities and their potential implications.",
+                  "example_value": "Adjacent logistics facility to the west (operational 24/7) – potential for interface issues. Residential area approx. 500m to the east – potential for noise/working hour restrictions during construction. Implications: Requires careful phasing, noise mitigation strategies, and community liaison.",
+                  "source_hint": "Maps, site visit (if applicable), planning consultation responses."
+                },
+                {
+                  "name": "geo_environmental_overview_2_3_sp",
+                  "description": "High-level geo-environmental overview (flood risk, contamination).",
+                  "example_value": "Site located in Flood Zone 1 (low risk). No historical industrial use indicating low intrinsic contamination potential. [KIG: Site-specific ground investigation report. - Implication: Uncertainty regarding specific soil conditions and bearing capacities affecting foundation design.]",
+                  "source_hint": "Environment Agency flood maps, BGS data, Phase 1 Geo-Env reports if found."
+                },
+                {
+                  "name": "other_site_factors_2_3_sp",
+                  "description": "Other notable site factors including public consultation, archaeology, utility density.",
+                  "example_value": "Public consultation for planning raised minor concerns about visual impact, addressed by landscaping plan. Desktop archaeological assessment indicates low potential. Vicinity analysis of utility maps shows major power and gas mains running along northern boundary; detailed utility surveys required to confirm precise locations and depths.",
+                  "source_hint": "Planning portal, consultation responses, utility maps."
+                },
+                {
+                  "name": "site_implications_engagement_2_3_sp",
+                  "description": "Summary of how site factors impact potential engagement for a typical firm.",
+                  "example_value": "The site's greenfield status and location within an established industrial park offer straightforward access and fewer legacy constraints than typical brownfield sites. However, proximity to the watercourse and major utilities requires careful management and specialist input during design and construction phases.",
+                  "source_hint": "Analyst synthesis of previous sub-points."
+                }
+              ]
+            },
+            {
+              "point_id": "2.4_SP",
+              "point_title_final": "Phasing & Programme Analysis",
+              "ai_generation_goal": "To outline the project's anticipated lifecycle, key phases, durations, milestones, and critical dependencies, enabling clients to plan their own engagement and resource allocation.",
+              "key_intelligence_questions_to_address": [
+                "What is the current overall status of the project?",
+                "What are the key project phases and their indicative durations/timelines?",
+                "What are the published or reliably reported key milestones and target dates? What is the source/confidence?",
+                "What are the critical path dependencies?",
+                "Are there any known programme risks or opportunities for acceleration?"
+              ],
+              "osint_focus_and_potential_sources": [
+                "Planning decision notices, project lead announcements, FTS/tender documents, investor briefings, industry news. Typical durations for similar projects for KIGs."
+              ],
+              "structuring_the_output_content_guide": "Use sub-headings: 'Current Project Status'; 'Overall Anticipated Project Duration'; 'Key Project Phases & Indicative Timelines'; 'Published/Reported Key Milestones'; 'Critical Path Dependencies'; 'Known Programme Accelerators/Risks.' Clearly state when speculation or estimation is used for dates.",
+              "handling_kigs_and_confidence_levels": "Differentiate confirmed dates (with sources) from estimates. Highlight KIGs using the marker. Estimates must be clearly labelled as such.",
+              "value_framing_for_external_client": "Provide clients with the best possible understanding of the project's temporal dimension.",
+              "content_placeholder_detailed_prompt": "Current Project Status: {{current_project_status_2_4_sp}}\nOverall Anticipated Project Duration: {{overall_duration_2_4_sp}}\nKey Project Phases & Indicative Timelines:\n{{#each project_phases_2_4_sp}}\n- {{this.phase_name}}: {{this.timeline_description}}\n{{/each}}\nPublished/Reported Key Milestones:\n{{#each key_milestones_2_4_sp}}\n- {{this.milestone_name}}: {{this.date_description}} (Source: {{this.source}} – Confidence: {{this.confidence}})\n{{/each}}\n{{#if (eq key_milestones_2_4_sp.length 0)}}[KIG: No specific published key milestones found. - Implication: Difficulty in precise long-term planning for engagement.]{{/if}}\nCritical Path Dependencies:\n{{#each critical_path_dependencies_2_4_sp}}\n- {{this.dependency_description}}\n{{/each}}\n{{#if (eq critical_path_dependencies_2_4_sp.length 0)}}[KIG: Specific critical path dependencies not detailed in available OSINT. - Implication: Standard project dependencies (funding, planning, key appointments) assumed.]{{/if}}\nKnown Programme Accelerators/Risks:\n- Accelerators: {{programme_accelerators_2_4_sp}}\n- Risks: {{programme_risks_2_4_sp}}",
+              "placeholder_fields": [
+                {
+                  "name": "current_project_status_2_4_sp",
+                  "description": "The current overall status of the project.",
+                  "example_value": "Full Planning Permission Granted (Ref: PA/2025/00123, Date: 2025-03-15) - Awaiting discharge of pre-commencement conditions. Main contractor ECI engagement anticipated Q3 2025.",
+                  "source_hint": "Planning portal, project announcements."
+                },
+                {
+                  "name": "overall_duration_2_4_sp",
+                  "description": "Overall anticipated project duration (if known/estimated).",
+                  "example_value": "Estimated 24-month construction period post-mobilisation, leading to target operational readiness by Q3 2026.",
+                  "source_hint": "Project announcements, typical durations."
+                },
+                {
+                  "name": "project_phases_2_4_sp",
+                  "description": "Array of project phase objects with names and indicative timelines.",
+                  "data_type": "array",
+                  "array_item_schema": {
+                    "type": "object",
+                    "properties": {
+                      "phase_name": {"type": "string", "example_value": "Detailed Design"},
+                      "timeline_description": {"type": "string", "example_value": "Q2-Q3 2025 (Estimated post-ECI appointment)"}
+                    }
+                  },
+                  "example_value": [
+                    {"phase_name": "Main Contractor Procurement (Two-Stage)", "timeline_description": "ECI Award Q3 2025; Stage 2 Award Q1 2026 (Anticipated)"},
+                    {"phase_name": "Construction Start (Mobilisation)", "timeline_description": "Q2 2026 (Target)"},
+                    {"phase_name": "Practical Completion", "timeline_description": "Q2 2028 (Target)"}
+                  ],
+                  "source_hint": "Project announcements, tender documents, analyst estimates."
+                },
+                {
+                  "name": "key_milestones_2_4_sp",
+                  "description": "Array of key milestone objects.",
+                  "data_type": "array",
+                  "array_item_schema": {
+                    "type": "object",
+                    "properties": {
+                      "milestone_name": {"type": "string", "example_value": "Grid Power Connection Energised"},
+                      "date_description": {"type": "string", "example_value": "Q1 2028 (Target)"},
+                      "source": {"type": "string", "example_value": "Investor Briefing Q1 2025"},
+                      "confidence": {"type": "enum", "enum_values": ["High", "Medium", "Low"], "example_value": "Medium"}
+                    }
+                  },
+                  "source_hint": "Official announcements, planning conditions."
+                },
+                {
+                  "name": "critical_path_dependencies_2_4_sp",
+                  "description": "Array of critical path dependency objects.",
+                  "data_type": "array",
+                  "array_item_schema": {
+                    "type": "object",
+                    "properties": {
+                      "dependency_description": {"type": "string", "example_value": "Securing final board approval for capital expenditure by Project Lead Org."}
+                    }
+                  },
+                  "example_value": [
+                    {"dependency_description": "Timely delivery of long-lead primary M&E plant (generators, UPS systems)."},
+                    {"dependency_description": "Discharge of pre-commencement planning condition related to local highway improvements."}
+                  ],
+                  "source_hint": "Planning conditions, project risk assessments if available."
+                },
+                {
+                  "name": "programme_accelerators_2_4_sp",
+                  "description": "Known programme accelerators.",
+                  "example_value": "Project Lead investigating extensive use of off-site modular construction for plant rooms to shorten on-site programme. Early engagement with utility provider for power connection.",
+                  "source_hint": "Project announcements, design statements."
+                },
+                {
+                  "name": "programme_risks_2_4_sp",
+                  "description": "Known programme risks.",
+                  "example_value": "Potential delays in discharge of planning condition X related to archaeological watching brief. Global supply chain volatility for key electronic components for M&E systems.",
+                  "source_hint": "Planning documents, market reports."
+                }
+              ]
+            },
+            {
+              "point_id": "2.5_SP",
+              "point_title_final": "Budget & Funding Analysis",
+              "ai_generation_goal": "To provide insight into the project's financial scale, the sources of its funding, and the status of that funding, helping clients assess project viability and commercial opportunity.",
+              "key_intelligence_questions_to_address": [
+                "What is the reported overall project investment value?",
+                "What is the estimated or reported construction budget?",
+                "Who are the primary funding sources?",
+                "What is the confirmation status of this funding? What's the evidence?",
+                "Are there any noteworthy financial details, terms, or risks relevant to project funding and stability?"
+              ],
+              "osint_focus_and_potential_sources": [
+                "Company annual reports, government grant announcements, planning documents, investor briefings, specialist financial press, industry news. Typical budget ranges for similar projects for KIGs."
+              ],
+              "structuring_the_output_content_guide": "Use sub-headings: 'Reported Overall Project Investment Value'; 'Estimated/Reported Construction Budget'; 'Primary Funding Sources Identified'; 'Funding Confirmation Status'; 'Noteworthy Financial Details/Risks.' For KIGs on budget/funding, provide typical ranges for similar projects if possible, clearly stating this is indicative.",
+              "handling_kigs_and_confidence_levels": "Distinguish stated figures from estimates. Detail sources. Explicitly state KIGs using the marker and explain implications.",
+              "value_framing_for_external_client": "Provide clients with the best available picture of the project's financial backing and scale.",
+              "content_placeholder_detailed_prompt": "Reported Overall Project Investment Value (if distinct from construction budget): {{overall_investment_value_2_5_sp}} (Source: {{overall_investment_source_2_5_sp}}, Date: {{overall_investment_date_2_5_sp}})\nEstimated/Reported Construction Budget (for defined scope): {{construction_budget_2_5_sp}} (Source: {{construction_budget_source_2_5_sp}}, Date: {{construction_budget_date_2_5_sp}})\nPrimary Funding Sources Identified:\n{{#each funding_sources_2_5_sp}}\n- {{this.source_description}}\n{{/each}}\n{{#if (eq funding_sources_2_5_sp.length 0)}}[KIG: Primary funding sources not publicly identified. - Implication: Difficulty assessing financial stability and commitment to the project.]{{/if}}\nFunding Confirmation Status: {{funding_status_2_5_sp}} – Evidence/Source: {{funding_status_evidence_2_5_sp}}\nNoteworthy Financial Details/Risks (relevant to project funding & stability): {{financial_details_risks_2_5_sp}}",
+              "placeholder_fields": [
+                {
+                  "name": "overall_investment_value_2_5_sp",
+                  "description": "Reported overall project investment value. State if not distinct or KIG.",
+                  "example_value": "€250 million. Note: This may include land acquisition and fit-out beyond core construction.",
+                  "source_hint": "Press releases, investor briefings."
+                },
+                {
+                  "name": "overall_investment_source_2_5_sp",
+                  "description": "Source of overall investment value information.",
+                  "example_value": "Press Release by Global Data Holdings PLC",
+                  "source_hint": "Specific document reference."
+                },
+                {
+                  "name": "overall_investment_date_2_5_sp",
+                  "description": "Date of overall investment value information.",
+                  "example_value": "2025-01-20",
+                  "source_hint": "Publication date of source."
+                },
+                {
+                  "name": "construction_budget_2_5_sp",
+                  "description": "Estimated or reported construction budget. State if KIG.",
+                  "example_value": "Circa €120-140 million (Inferred from similar projects and GIA). [KIG: Specific construction budget not publicly disclosed. - Implication: Challenge in accurately assessing scale of construction opportunity for specific trades.]",
+                  "source_hint": "Planning documents, industry benchmarks."
+                },
+                {
+                  "name": "construction_budget_source_2_5_sp",
+                  "description": "Source of construction budget information (if reported).",
+                  "example_value": "Analyst estimate based on industry comparables.",
+                  "source_hint": "If estimated, state basis."
+                },
+                {
+                  "name": "construction_budget_date_2_5_sp",
+                  "description": "Date of construction budget information (if reported).",
+                  "example_value": "2025-05-01",
+                  "source_hint": "Date of analysis or source publication."
+                },
+                {
+                  "name": "funding_sources_2_5_sp",
+                  "description": "Array of funding source objects.",
+                  "data_type": "array",
+                  "array_item_schema": {
+                    "type": "object",
+                    "properties": {
+                      "source_description": {"type": "string", "example_value": "Equity investment from parent company, Global Data Holdings PLC."}
+                    }
+                  },
+                  "example_value": [
+                    {"source_description": "Debt facility from a consortium of banks led by Bank X (Reported in financial news, Q1 2025)."},
+                    {"source_description": "Potential for pre-let agreements with anchor tenants to contribute to funding security."}
+                  ],
+                  "source_hint": "Financial reports, press releases, news."
+                },
+                {
+                  "name": "funding_status_2_5_sp",
+                  "description": "Confirmation status of project funding.",
+                  "example_value": "Initial phases confirmed funded via equity. Full funding package for all phases is a KIG, believed to be contingent on achieving specific pre-let targets.",
+                  "source_hint": "Investor statements, financial news."
+                },
+                {
+                  "name": "funding_status_evidence_2_5_sp",
+                  "description": "Evidence or source for funding confirmation status.",
+                  "example_value": "CEO Statement in Q4 2024 Earnings Call; Financial Times article dated 2025-02-10.",
+                  "source_hint": "Specific references."
+                },
+                {
+                  "name": "financial_details_risks_2_5_sp",
+                  "description": "Noteworthy financial details or risks related to funding.",
+                  "example_value": "Project is part of a larger €1 billion European expansion programme by Global Data Holdings, suggesting long-term strategic commitment if early phases are successful. Risk: Any downturn in the parent company's overall financial performance could impact investment in later, unfunded phases.",
+                  "source_hint": "Annual reports, market analysis."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "focus_type": "Company Strategic Initiative Investigation",
+          "section_title_final": "COMPANY INITIATIVE DEEP DIVE: {{company_name_metadata}} - {{initiative_name_metadata}}", // Populated from metadata or specific input
+          "points": [
+            {
+              "point_id": "2.1_CI", // CI for Company Initiative
+              "point_title_final": "Company Overview & Strategic Intent for Initiative",
+              "ai_generation_goal": "To understand the company's overall strategy, their specific goals for this initiative, and how this initiative fits into their broader business.",
+              "key_intelligence_questions_to_address": [
+                "What is the company's core business and market position?",
+                "What is the stated strategic rationale behind this specific initiative?",
+                "What are the key objectives, targets, and anticipated outcomes for this initiative?",
+                "How does this initiative align with the company's broader global or national strategy?"
+              ],
+              "osint_focus_and_potential_sources": [
+                "Company annual reports, investor presentations, strategic announcements, executive interviews, corporate website 'About Us' / 'Strategy' sections, reputable business press."
+              ],
+              "structuring_the_output_content_guide": "Structure with sub-headings: 'Company Background & Core Business'; 'Overview of Strategic Initiative'; 'Stated Strategic Rationale & Objectives for Initiative'; 'Anticipated Scale of Investment & Timeline for Initiative'; 'Alignment with Broader Corporate Strategy.'",
+              "handling_kigs_and_confidence_levels": "Differentiate stated strategy from inferred intent. Note KIGs using the marker where specific targets or investment details are not public.",
+              "value_framing_for_external_client": "Provide clients with a clear understanding of the driving forces and strategic importance of the initiative.",
+              "content_placeholder_detailed_prompt": "Company Background & Core Business: {{company_background_2_1_ci}}\nOverview of Strategic Initiative: {{initiative_overview_2_1_ci}}\nStated Strategic Rationale & Objectives for Initiative:\n{{#each initiative_objectives_2_1_ci}}\n- {{this.objective_description}}\n{{/each}}\n{{#if (eq initiative_objectives_2_1_ci.length 0)}}[KIG: Specific objectives for the initiative are not clearly stated. - Implication: Engagement strategies may lack precise alignment.]{{/if}}\nAnticipated Scale of Investment & Timeline for Initiative: {{initiative_scale_timeline_2_1_ci}}\nAlignment with Broader Corporate Strategy: {{initiative_alignment_strategy_2_1_ci}}",
+              "placeholder_fields": [
+                {
+                  "name": "company_background_2_1_ci",
+                  "description": "Brief overview of the company, its main sectors, and market standing.",
+                  "example_value": "BioNTech SE is a German biotechnology company focused on developing and manufacturing active immunotherapies for a patient-specific approach to the treatment of diseases. It is a global leader in mRNA technology.",
+                  "source_hint": "Company website, annual reports."
+                },
+                {
+                  "name": "initiative_overview_2_1_ci",
+                  "description": "Name and brief overview of the strategic initiative.",
+                  "example_value": "BioNTech's UK Expansion Programme for R&D and Manufacturing.",
+                  "source_hint": "Strategic announcements, press releases."
+                },
+                {
+                  "name": "initiative_objectives_2_1_ci",
+                  "description": "Array of objective objects for the initiative.",
+                  "data_type": "array",
+                  "array_item_schema": {
+                    "type": "object",
+                    "properties": {"objective_description": {"type": "string", "example_value": "To establish a leading presence in the UK life sciences ecosystem."}}
+                  },
+                  "example_value": [
+                    {"objective_description": "To accelerate development and manufacturing of mRNA-based therapies for oncology and infectious diseases."},
+                    {"objective_description": "To create over 150 highly skilled jobs in the UK by 2027."}
+                  ],
+                  "source_hint": "Company statements, investor presentations."
+                },
+                {
+                  "name": "initiative_scale_timeline_2_1_ci",
+                  "description": "Anticipated scale of investment and timeline (if known).",
+                  "example_value": "Up to £1 billion investment over 10 years (announced March 2023). First R&D facilities targeted for operation by late 2025. [KIG: Detailed breakdown of investment tranches per year. - Implication: Difficulty in assessing year-on-year capital project opportunities.]",
+                  "source_hint": "Press releases, financial reports."
+                },
+                {
+                  "name": "initiative_alignment_strategy_2_1_ci",
+                  "description": "How this initiative aligns with broader corporate strategy.",
+                  "example_value": "This initiative directly supports BioNTech's global strategy of diversifying its R&D and manufacturing footprint, investing in key innovation hubs, and enhancing pandemic preparedness capabilities.",
+                  "source_hint": "Annual reports, strategy documents."
+                }
+              ]
+            },
+            {
+              "point_id": "2.2_CI",
+              "point_title_final": "Overall Scope & Strategy of Initiative (Followed by Per-Site Briefs)",
+              "ai_generation_goal": "To outline the overall scope of the company's multi-site initiative and then provide a concise overview of each known individual site or project that forms part of it, including purpose, nature, scale, status, and implied needs.",
+              "key_intelligence_questions_to_address": [
+                "What is the overall scope of the initiative (types of facilities, number of sites, geography)?",
+                "What is the company's general strategy for delivering these sites (new builds, fit-outs, acquisitions)?",
+                "For each known site/project: purpose, location, scale, nature of work, current status/timeline, implied technical needs?",
+                "Are there indications that detailed site-specific information is available upon request or in separate annexes?"
+              ],
+              "osint_focus_and_potential_sources": [
+                "Company announcements, investor presentations, planning portals (for identified sites), industry news tracking the initiative's progress."
+              ],
+              "structuring_the_output_content_guide": "Start with 'Overall Initiative Scope & Delivery Strategy'. Then, for each known site, provide a structured brief. Conclude with a note about availability of detailed site-specific info.",
+              "handling_kigs_and_confidence_levels": "Clearly identify KIGs for specific site details using the marker. Differentiate confirmed sites from 'earmarked' or 'potential' locations.",
+              "value_framing_for_external_client": "Provide a strategic map of the company's initiative, allowing clients to identify multiple potential points of engagement.",
+              "content_placeholder_detailed_prompt": "Overall Initiative Scope & Delivery Strategy: {{overall_initiative_scope_strategy_2_2_ci}}\n\nIndividual Sites/Projects under Initiative:\n{{#each individual_sites_projects_2_2_ci}}\n\nSite/Project {{add @index 1}}: {{this.site_project_name_location}}\n- Purpose: {{this.purpose}}\n- Nature of Project: {{this.nature_of_project}}\n- Approx. Scale: {{this.approx_scale}}\n- Implied Fit-Out/Technical Requirements: {{this.implied_requirements}}\n- Current Status/Timeline for Fit-Out/Development: {{this.current_status_timeline}}\n{{/each}}\n{{#if (eq individual_sites_projects_2_2_ci.length 0)}}[KIG: No specific sites publicly identified as part of this initiative yet. - Implication: Opportunities are currently conceptual rather than tied to specific locations.]{{/if}}\n\nNote: Detailed intelligence on individual sites listed above may be available in dedicated site-specific dossiers or annexes, or can be developed upon request.",
+              "placeholder_fields": [
+                {
+                  "name": "overall_initiative_scope_strategy_2_2_ci",
+                  "description": "Summary of the initiative's breadth and the company's general approach to developing facilities.",
+                  "example_value": "BioNTech's UK initiative involves establishing a network of R&D centres and potentially a manufacturing facility. The primary delivery strategy appears to be long-term leases and fit-outs of existing or new-build shell & core properties developed by strategic real estate partners like Prologis.",
+                  "source_hint": "Company announcements, partnership details."
+                },
+                {
+                  "name": "individual_sites_projects_2_2_ci",
+                  "description": "Array of objects, each detailing a specific site or project within the initiative.",
+                  "data_type": "array",
+                  "array_item_schema": {
+                    "type": "object",
+                    "properties": {
+                      "site_project_name_location": {"type": "string", "example_value": "Cambridge R&D Centre (1000 Discovery Drive, Cambridge Biomedical Campus)"},
+                      "purpose": {"type": "string", "example_value": "Genomics, oncology, structural biology research; housing >90 scientists."},
+                      "nature_of_project": {"type": "string", "example_value": "Fit-out of a Shell & Core building completed Q4 2023 by Prologis (developer) and SDC Builders (base build contractor)."},
+                      "approx_scale": {"type": "string", "example_value": "BioNTech to occupy c.80,000 sq ft (c. 7,400 m2)."},
+                      "implied_requirements": {"type": "string", "example_value": "Highly specialized CL2 minimum labs, potential for CL3 zones, advanced M&E (HVAC, specialist gases, DI water), high power/data needs, vibration control."},
+                      "current_status_timeline": {"type": "string", "example_value": "[KIG: No public announcement yet on fit-out contractor or specific timelines for BioNTech's fit-out commencement. Shell building complete. - Implication: Opportunity for fit-out contractors may emerge soon; timeline for engagement unclear.]"}
+                    }
+                  },
+                  "example_value": [
+                    {
+                      "site_project_name_location": "London UK Headquarters & InstaDeep AI Hub (Potential)",
+                      "purpose": "Consolidated UK HQ, housing corporate functions, and an expanded InstaDeep AI Hub for drug discovery.",
+                      "nature_of_project": "Likely fit-out of existing prime office space or new development.",
+                      "approx_scale": "[KIG: Location, scale, and capex not yet announced. - Implication: Scope of opportunity unknown.]",
+                      "implied_requirements": "Significant power and cooling for High-Performance Computing (HPC), robust data connectivity, high-security environment, premium office fit-out.",
+                      "current_status_timeline": "Currently in planning/site selection phase as of May 2025. No firm timeline announced."
+                    }
+                  ],
+                  "source_hint": "Company announcements, planning portals, press."
+                }
+              ]
+            },
+            {
+              "point_id": "2.3_CI",
+              "point_title_final": "Overview of Key Site Locations & Characteristics (for Company Initiative)",
+              "ai_generation_goal": "To provide a summary of key locational factors, constraints, and sensitivities for each identified site within the company's broader initiative, cross-referencing sites from 2.2_CI.",
+              "key_intelligence_questions_to_address": [
+                "For each key site identified in 2.2_CI: What is its general setting?",
+                "What are the primary known constraints or sensitivities for each site (from initial OSINT review)?",
+                "Is a full detailed location analysis available elsewhere or on request?"
+              ],
+              "osint_focus_and_potential_sources": [
+                "High-level OSINT for each identified site: Google Maps, local authority planning overviews, science park websites, regional development agency information."
+              ],
+              "structuring_the_output_content_guide": "For each site listed in 2.2_CI: 'Site [Name/Ref from 2.2_CI]: Brief Description & Setting; Primary Known Constraints/Sensitivities; Note on detailed analysis availability.'",
+              "handling_kigs_and_confidence_levels": "Focus on high-level, easily verifiable OSINT. Clearly state that this is an overview and detailed site analysis is separate or a KIG if not available.",
+              "value_framing_for_external_client": "Gives a quick comparative snapshot of the locational context for multiple sites within an initiative.",
+              "content_placeholder_detailed_prompt": "{{#each sites_locations_characteristics_2_3_ci}}\nSite/Project: {{this.site_project_name_from_2_2}}\n- Brief Description & Setting: {{this.description_setting}}\n- Primary Known Constraints/Sensitivities (from initial review): {{this.constraints_sensitivities}}\n- Note: {{this.detailed_analysis_note}}\n\n{{/each}}\n{{#if (eq sites_locations_characteristics_2_3_ci.length 0)}}[KIG: No specific sites identified in 2.2_CI to provide location characteristics for. - Implication: Locational analysis cannot be performed.]{{/if}}",
+              "placeholder_fields": [
+                {
+                  "name": "sites_locations_characteristics_2_3_ci",
+                  "description": "Array of objects, each providing locational overview for a site identified in point 2.2_CI. AI must iterate through sites from 2.2_CI.",
+                  "data_type": "array",
+                  "array_item_schema": {
+                    "type": "object",
+                    "properties": {
+                      "site_project_name_from_2_2": {"type": "string", "example_value": "Cambridge R&D Centre (1000 Discovery Drive, Cambridge Biomedical Campus)"},
+                      "description_setting": {"type": "string", "example_value": "Located within the established Cambridge Biomedical Campus, a major UK life sciences hub with excellent transport links and proximity to academic institutions."},
+                      "constraints_sensitivities": {"type": "string", "example_value": "High demand for space and resources within CBC may lead to competition. Strict adherence to campus design, environmental guidelines, and construction logistics protocols expected. Potential for skilled labour shortages due to high concentration of similar projects."},
+                      "detailed_analysis_note": {"type": "string", "example_value": "Full detailed location analysis available in site-specific dossier XYZ or can be developed upon request."}
+                    }
+                  },
+                  "source_hint": "Synthesize from OSINT for each site in 2.2_CI (maps, planning overviews, etc.)."
+                }
+              ]
+            },
+            {
+              "point_id": "2.4_CI",
+              "point_title_final": "Overall Initiative Timeline & Phasing (with Site-Specific Details)",
+              "ai_generation_goal": "To outline the company's overarching multi-year plan for the initiative, if known, and then provide indicative timelines or status for each individual site/project within it, linking to sites from 2.2_CI.",
+              "key_intelligence_questions_to_address": [
+                "Is there a publicly stated overall timeline or phasing plan for the company's entire initiative?",
+                "For each site/project within the initiative: What is its current status, indicative timeline, key milestones, or known KIGs regarding its schedule?"
+              ],
+              "osint_focus_and_potential_sources": [
+                "Company strategic announcements, investor relations materials, roadmaps for the initiative, press releases on individual project milestones."
+              ],
+              "structuring_the_output_content_guide": "Optional initial part for 'Overall Initiative Timeline & Phasing'. Then, for each individual site/project detailed in 2.2_CI, add/integrate a sub-point for 'Indicative Timeline & Key Milestones'.",
+              "handling_kigs_and_confidence_levels": "Differentiate strategic/aspirational timelines from concrete site timelines. Highlight KIGs using the marker prominently.",
+              "value_framing_for_external_client": "Helps clients understand the long-term nature of commitment and relative maturity/urgency of different components.",
+              "content_placeholder_detailed_prompt": "{{#if overall_initiative_timeline_phasing_2_4_ci}}Overall Initiative Timeline & Phasing: {{overall_initiative_timeline_phasing_2_4_ci}}\n\n{{/if}}Individual Site/Project Timelines (referencing sites from 2.2_CI):\n{{#each site_specific_timelines_2_4_ci}}\nSite/Project: {{this.site_project_name_from_2_2}}\n- Indicative Timeline & Key Milestones: {{this.timeline_milestones}}\n{{/each}}\n{{#if (and (not overall_initiative_timeline_phasing_2_4_ci) (eq site_specific_timelines_2_4_ci.length 0))}}[KIG: No overall initiative timeline or site-specific timelines publicly available. - Implication: Significant uncertainty for planning engagement.]{{/if}}",
+              "placeholder_fields": [
+                {
+                  "name": "overall_initiative_timeline_phasing_2_4_ci",
+                  "description": "Overall timeline or phasing plan for the entire company initiative, if applicable/known.",
+                  "is_optional": true,
+                  "example_value": "BioNTech's UK expansion is a 10-year strategic commitment (2023-2033), with initial R&D sites targeted for operational status by 2025-2026, followed by potential manufacturing capability development post-2027.",
+                  "source_hint": "Strategic announcements, investor relations."
+                },
+                {
+                  "name": "site_specific_timelines_2_4_ci",
+                  "description": "Array of objects, each providing timeline details for a site identified in 2.2_CI.",
+                  "data_type": "array",
+                  "array_item_schema": {
+                    "type": "object",
+                    "properties": {
+                      "site_project_name_from_2_2": {"type": "string", "example_value": "Cambridge R&D Centre"},
+                      "timeline_milestones": {"type": "string", "example_value": "Shell building complete Q4 2023. BioNTech fit-out expected to commence H2 2025, operational target mid-2026. [KIG: Specific start date for fit-out. - Implication: Engagement window for fit-out contractors is approaching but not precisely defined.]"}
+                    }
+                  },
+                  "example_value": [
+                    {
+                      "site_project_name_from_2_2": "London UK Headquarters & InstaDeep AI Hub",
+                      "timeline_milestones": "Site selection and planning ongoing as of Q2 2025. [KIG: Timeline for development/fit-out entirely dependent on site selection and lease agreement. - Implication: Too early for specific engagement on this site.]"
+                    }
+                  ],
+                  "source_hint": "Press releases, project updates for each site in 2.2_CI."
+                }
+              ]
+            },
+            {
+              "point_id": "2.5_CI",
+              "point_title_final": "Overall Initiative Investment & Funding Strategy (with Site-Specific Details)",
+              "ai_generation_goal": "To detail the company's total planned investment for the multi-site initiative, key funding sources, and then break down site-specific budget/capex information or KIGs, linking to sites from 2.2_CI.",
+              "key_intelligence_questions_to_address": [
+                "What is the total planned investment by the company for this initiative?",
+                "What are the key funding sources for the overall initiative?",
+                "For each individual site/project: What are the specific budget/capex details if known, or is it part of an overall undisclosed budget? Are there site-specific grants or funding sources?"
+              ],
+              "osint_focus_and_potential_sources": [
+                "Company financial reports, investor briefings, government grant announcements, partnership announcements, reputable financial news."
+              ],
+              "structuring_the_output_content_guide": "Start with 'Overall Initiative Investment & Funding Strategy'. Then, for each individual site/project detailed in 2.2_CI, add/integrate a sub-point for 'Site-Specific Budget/Capex & Funding'.",
+              "handling_kigs_and_confidence_levels": "Clearly state when figures are for overall initiative versus specific sites. Highlight KIGs using the marker where breakdowns are unavailable. Specify sources.",
+              "value_framing_for_external_client": "Provides insight into financial scale and backing, helping clients assess commitment and value of individual project components.",
+              "content_placeholder_detailed_prompt": "Overall Initiative Investment & Funding Strategy: {{overall_initiative_investment_funding_2_5_ci}}\n\nIndividual Site/Project Financials (referencing sites from 2.2_CI):\n{{#each site_specific_financials_2_5_ci}}\nSite/Project: {{this.site_project_name_from_2_2}}\n- Site-Specific Budget/Capex & Funding: {{this.budget_capex_funding}}\n{{/each}}\n{{#if (and (not overall_initiative_investment_funding_2_5_ci) (eq site_specific_financials_2_5_ci.length 0))}}[KIG: No overall initiative investment strategy or site-specific financial details publicly available. - Implication: Significant uncertainty regarding financial scale and backing.]{{/if}}",
+              "placeholder_fields": [
+                {
+                  "name": "overall_initiative_investment_funding_2_5_ci",
+                  "description": "Total planned investment, key funding sources for the overall initiative.",
+                  "example_value": "BioNTech has committed up to £1 billion for its UK initiative over 10 years, supported by UK Government contributions (details undisclosed). Funding is primarily from corporate resources with potential for further strategic partnerships. [KIG: Detailed breakdown/phasing of the £1bn investment and government contribution specifics. - Implication: Annual capital expenditure unclear.]",
+                  "source_hint": "Company announcements, government press releases."
+                },
+                {
+                  "name": "site_specific_financials_2_5_ci",
+                  "description": "Array of objects, each providing financial details for a site identified in 2.2_CI.",
+                  "data_type": "array",
+                  "array_item_schema": {
+                    "type": "object",
+                    "properties": {
+                      "site_project_name_from_2_2": {"type": "string", "example_value": "Cambridge R&D Centre"},
+                      "budget_capex_funding": {"type": "string", "example_value": "[KIG: Specific capex for fit-out not disclosed, likely part of overall initiative budget. No site-specific grants announced for fit-out phase. - Implication: Value of fit-out contract unknown.]"}
+                    }
+                  },
+                  "example_value": [
+                    {
+                      "site_project_name_from_2_2": "London UK Headquarters & InstaDeep AI Hub",
+                      "budget_capex_funding": "[KIG: Capex and funding sources entirely dependent on site selection and scope, currently unknown. - Implication: Financial scale of this specific project element cannot be assessed.]"
+                    }
+                  ],
+                  "source_hint": "Financial reports, grant databases for each site in 2.2_CI."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    // ... (Sections 3-9, appendices, footer would follow) ...
+  ]
+}

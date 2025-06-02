@@ -1,0 +1,418 @@
+{
+  // ... (Assuming metadata, ai_processing_hints, output_instructions, Sections 1, 2, 3 are as previously defined) ...
+  "sections": [
+    // ... (Sections 1, 2, 3 as previously defined) ...
+    {
+      "section_number": 4,
+      "section_title": "TECHNICAL & OPERATIONAL ASSESSMENT: {{#if project_name_metadata}}{{project_name_metadata}}{{else}}{{company_name_metadata}} - {{initiative_name_metadata}}{{/if}}", // Dynamically populated
+      "section_objective": "To provide a detailed understanding of the project's design principles, site conditions, buildability challenges, technology adoption, HSQE factors, and logistical strategies, enabling clients to assess technical feasibility, risks, and alignment of their capabilities.",
+      "points": [
+        {
+          "point_id": "4.1",
+          "point_title_final": "Design Principles & Key Specifications",
+          "ai_generation_goal": "To outline the project's design philosophy, current design stage, key technical requirements, and mandated standards/certifications, enabling clients to understand complexity and required expertise.",
+          "key_intelligence_questions_to_address": [
+            "What is the overall design philosophy or intent?",
+            "What is the current design stage (e.g., RIBA stages)?",
+            "What key design documents (from OSINT) have been reviewed?",
+            "What are the identified key technical requirements (architectural, structural, M&E, process-specific)?",
+            "What specific standards and certifications are mandated or targeted? What is their status?",
+            "What are the key design-related implications for a potential engaging firm?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Planning application documents (Design & Access Statements, specific technical reports, drawings if available), Environmental Impact Assessments, project briefs (if public), industry standards databases."
+          ],
+          "structuring_the_output_content_guide": "Use sub-headings: 'Overall Design Philosophy/Intent'; 'Current Design Stage'; 'Key Design Documents Reviewed'; 'Identified Key Architectural & Functional Requirements'; 'Identified Key Structural Requirements'; 'Identified Key M&E / Building Services Requirements'; 'Process-Specific Design Requirements'; 'Mandated/Targeted Standards & Certifications'; 'Key Design-Related Implications for Engagement.'",
+          "handling_kigs_and_confidence_levels": "Clearly state KIGs for specific technical details using the marker. Distinguish 'stated targets' for standards from 'confirmed requirements.' If a standard isn't mentioned after diligent search, explicitly mark as KIG.",
+          "value_framing_for_external_client": "Provides clients with a clear understanding of the project's technical complexity, quality expectations, and specific compliance requirements.",
+          "content_placeholder_detailed_prompt": "Overall Design Philosophy/Intent: {{design_philosophy_4_1}}\nCurrent Design Stage: {{design_stage_4_1}} (Source: {{design_stage_source_4_1}})\nKey Design Documents Reviewed (OSINT): {{design_docs_reviewed_4_1}}\nIdentified Key Architectural & Functional Requirements: {{arch_functional_reqs_4_1}}\nIdentified Key Structural Requirements: {{structural_reqs_4_1}}\nIdentified Key M&E / Building Services Requirements: {{mep_services_reqs_4_1}}\nProcess-Specific Design Requirements (if applicable): {{process_specific_reqs_4_1}}\nMandated/Targeted Standards & Certifications:\n{{#each standards_checklist_4_1}}\n- {{this.standard_name}}: {{this.status_detail}}\n{{/each}}\n{{#if (eq standards_checklist_4_1.length 0)}}[KIG: No specific mandated/targeted standards or certifications publicly identified. - Implication: Quality and compliance expectations are less defined from OSINT.]{{/if}}\nKey Design-Related Implications for Engagement: {{design_implications_engagement_4_1}}",
+          "placeholder_fields": [
+            {
+              "name": "design_philosophy_4_1",
+              "description": "Overall design philosophy or intent for the project.",
+              "example_value": "To create a landmark, highly sustainable R&D facility that fosters collaboration, attracts leading scientific talent, and offers maximum future flexibility.",
+              "source_hint": "Design & Access Statements, project briefs."
+            },
+            {
+              "name": "design_stage_4_1",
+              "description": "Current design stage (e.g., RIBA stages).",
+              "example_value": "RIBA Stage 3 (Developed Design) completed, with key specialist packages (e.g., cleanrooms, M&E) progressing to RIBA Stage 4 (Technical Design).",
+              "source_hint": "Planning Portal documents, project updates."
+            },
+            {
+              "name": "design_stage_source_4_1",
+              "description": "Source for current design stage information.",
+              "example_value": "Project Lead's Q1 2025 Investor Update; Planning Application Document XYZ Rev C.",
+              "source_hint": "Specific document/announcement references."
+            },
+            {
+              "name": "design_docs_reviewed_4_1",
+              "description": "List of key design documents reviewed from OSINT.",
+              "example_value": "Design & Access Statement Rev C (2025-03-10); Outline M&E Specification (2025-02-15); Environmental Statement Chapter 5 (Project Description).",
+              "source_hint": "References from planning portal, project websites."
+            },
+            {
+              "name": "arch_functional_reqs_4_1",
+              "description": "Identified key architectural and functional requirements.",
+              "example_value": "Minimum GIA of 15,000 m2; specific lab-to-office ratio of 60:40; requirement for flexible, adaptable lab modules with interstitial service zones; dedicated GMP Grade C manufacturing suite of 1,000 m2.",
+              "source_hint": "Design briefs, architectural plans, user requirement specifications if available."
+            },
+            {
+              "name": "structural_reqs_4_1",
+              "description": "Identified key structural requirements.",
+              "example_value": "Vibration control to VC-A standard for sensitive lab areas (e.g., imaging suites); provision for future installation of heavy equipment (up to 5 tonnes point load) in specified zones; structural frame designed for future vertical expansion of one floor.",
+              "source_hint": "Structural specifications, design statements."
+            },
+            {
+              "name": "mep_services_reqs_4_1",
+              "description": "Identified key M&E / building services requirements.",
+              "example_value": "N+1 redundancy for critical cooling and power systems; specific air change rates (ACH) for CL2 and CL3 labs (e.g., 10 ACH and 15 ACH respectively); provision for specialist piped gases (N2, CO2, O2, Argon); humidity control to +/- 5% RH; temperature control to +/- 1°C in critical zones.",
+              "source_hint": "M&E specifications, room data sheets if available."
+            },
+            {
+              "name": "process_specific_reqs_4_1",
+              "description": "Process-specific design requirements, if applicable (e.g., for manufacturing).",
+              "example_value": "Facility to achieve GMP Grade C for main production suites and Grade B for fill-finish areas. Segregated material and personnel flows. Waste streams to comply with [Specific Environmental Permit requirements].",
+              "is_optional": true,
+              "source_hint": "User Requirement Specifications, process flow diagrams if OSINT available."
+            },
+            {
+              "name": "standards_checklist_4_1",
+              "description": "Array of standard objects detailing their status for the project.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "standard_name": {"type": "string", "example_value": "BREEAM"},
+                  "status_detail": {"type": "string", "example_value": "Target: 'Outstanding' (Source: Planning Statement). Pre-assessment indicates 'Excellent' is achievable with current design."}
+                }
+              },
+              "example_value": [
+                {"standard_name": "ISO 14644 (Cleanroom Standards)", "status_detail": "ISO Class 7 for main GMP suite, ISO Class 5 for critical zones within (Source: Outline Spec). [KIG: Specific classification for ancillary labs. - Implication: Full scope of cleanroom fit-out unclear.]"},
+                {"standard_name": "Fire Ratings (e.g., BS/EN codes)", "status_detail": "[KIG: Specific compartmentation requirements and fire strategy document not found in public domain. - Implication: Detailed fire protection scope cannot be fully assessed.]"},
+                {"standard_name": "Walk-on Ceiling Requirements", "status_detail": "Required for all interstitial service zones above labs and GMP suites to allow maintenance access without breaching controlled environments (Source: Design Review Meeting Minutes Snippet - if OSINT)."},
+                {"standard_name": "HTM/HBN (Healthcare Standards)", "status_detail": "Not applicable as this is not a primary healthcare facility, though relevant good practice may be adopted for lab design."}
+              ],
+              "source_hint": "Planning docs, specifications, project briefs. AI should try to find status for each common standard."
+            },
+            {
+              "name": "design_implications_engagement_4_1",
+              "description": "Key design-related implications for a potential engaging firm.",
+              "example_value": "High BREEAM target and GMP requirements necessitate suppliers/contractors with strong sustainable product credentials, proven experience in delivering complex, highly-serviced facilities, and robust QA/QC processes. The need for future flexibility implies a requirement for adaptable M&E systems and structural solutions.",
+              "source_hint": "Analyst synthesis of preceding sub-points."
+            }
+          ]
+        },
+        {
+          "point_id": "4.2",
+          "point_title_final": "Site Conditions & Constraints Analysis",
+          "ai_generation_goal": "To detail the physical characteristics of the site, including geotechnical aspects, access, utilities, contamination, and other constraints, highlighting their impact on project execution.",
+          "key_intelligence_questions_to_address": [
+            "What is the site's topography and general condition?",
+            "What is the geotechnical overview (from OSINT)?",
+            "What are the site access/egress conditions and constraints?",
+            "What is the status of existing/proposed utilities (power, water, gas, drainage, telecoms)?",
+            "What is the contamination potential or known hazards?",
+            "Are there other notable site constraints (archaeology, public consultation issues, dense existing infrastructure)?",
+            "What are the key site-related implications for potential engagers?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Planning portals (Phase 1 Geo-Env, Flood Risk, Transport Assessments, Archaeological reports, utility statements), BGS data, Environment Agency data, local council meeting minutes, OS maps, historical land use records."
+          ],
+          "structuring_the_output_content_guide": "Use sub-headings: 'Overall Site Description & Topography'; 'Geotechnical Overview'; 'Access & Egress Assessment'; 'Existing & Proposed Utilities Status'; 'Contamination Potential & Known Hazards'; 'Other Notable Site Constraints/Features'; 'Key Site-Related Implications for Engagement.'",
+          "handling_kigs_and_confidence_levels": "Clearly state when information is from official site-specific reports versus inferred (e.g., regional data, nearby sites, vicinity analysis - state basis explicitly). Highlight KIGs for detailed surveys using the marker.",
+          "value_framing_for_external_client": "Enables clients to assess site-specific risks, logistical challenges, and potential costs, and identify where their expertise might be needed.",
+          "content_placeholder_detailed_prompt": "Overall Site Description & Topography: {{site_desc_topo_4_2}}\nGeotechnical Overview (from available OSINT): {{geotech_overview_4_2}}\nAccess & Egress Assessment: {{access_egress_4_2}}\nExisting & Proposed Utilities Status:\n- Power: {{utilities_power_4_2}}\n- Water/Drainage: {{utilities_water_drainage_4_2}}\n- Gas: {{utilities_gas_4_2}}\n- Telecoms: {{utilities_telecoms_4_2}}\nContamination Potential & Known Hazards (from OSINT/Phase 1 reports): {{contamination_hazards_4_2}}\nOther Notable Site Constraints/Features (Public consultation outcomes, Archaeological flags, Utility density from vicinity analysis – state basis if inferential): {{other_constraints_features_4_2}}\nKey Site-Related Implications for Engagement: {{site_implications_engagement_4_2}}",
+          "placeholder_fields": [
+            {
+              "name": "site_desc_topo_4_2",
+              "description": "Overall site description and topography.",
+              "example_value": "The 5-hectare site is a former industrial area (brownfield), generally level but with a slight fall of 2m from north to south. Currently cleared of previous structures, with some remaining hardstanding.",
+              "source_hint": "Site plans, OS maps, planning descriptions."
+            },
+            {
+              "name": "geotech_overview_4_2",
+              "description": "Geotechnical overview based on available OSINT.",
+              "example_value": "Based on BGS mapping, underlying geology is London Clay. No site-specific intrusive Ground Investigation (GI) report found in public domain. [KIG: Absence of site-specific GI report. - Implication: Significant uncertainty regarding ground conditions, foundation design, and potential for unforeseen geotechnical issues, impacting cost and programme risk.] A Phase 1 Desk Study for an adjacent site (Ref: XYZ, 200m west) indicated potential for made ground up to 3m depth; this is an inference and requires site-specific verification.",
+              "source_hint": "BGS data, nearby site reports (if found and relevant), Phase 1 reports."
+            },
+            {
+              "name": "access_egress_4_2",
+              "description": "Site access and egress conditions and constraints.",
+              "example_value": "Primary access via an existing junction on the A123 dual carriageway; Transport Assessment (Doc TA/001) notes requirement for junction upgrade (Section 278 works) to accommodate construction traffic, including dedicated right-turn lane. Temporary construction access may be possible from B456 to the rear, subject to agreement.",
+              "source_hint": "Transport Assessments, site plans, planning conditions."
+            },
+            {
+              "name": "utilities_power_4_2",
+              "description": "Status of power utilities.",
+              "example_value": "Existing 11kV supply to site boundary noted; capacity upgrade to 5MVA required for proposed development. Nearest primary substation is 1.5 km. [KIG: Confirmed timeline and cost for power upgrade from DNO. - Implication: Potential major programme risk if power delivery is delayed.]",
+              "source_hint": "Utility statements, planning documents, DNO information if public."
+            },
+            {
+              "name": "utilities_water_drainage_4_2",
+              "description": "Status of water and drainage utilities.",
+              "example_value": "Existing mains water connection point identified on A123. Foul and surface water drainage strategy involves connection to existing public sewers, capacity confirmed as adequate by utility provider (Source: Drainage Strategy Report X). SUDS to be implemented on site.",
+              "source_hint": "Utility statements, drainage reports."
+            },
+            {
+              "name": "utilities_gas_4_2",
+              "description": "Status of gas utilities.",
+              "example_value": "[KIG: Availability and capacity of gas supply to site boundary. - Implication: If gas is required for process or heating, its absence could necessitate significant design changes or reliance on electric alternatives.]",
+              "source_hint": "Utility statements."
+            },
+            {
+              "name": "utilities_telecoms_4_2",
+              "description": "Status of telecoms utilities.",
+              "example_value": "Multiple fibre optic providers have infrastructure in the A123 corridor. Diverse duct entry points planned. Redundant connectivity is a key requirement.",
+              "source_hint": "Project requirements, local telecom infrastructure maps if available."
+            },
+            {
+              "name": "contamination_hazards_4_2",
+              "description": "Contamination potential and known hazards from OSINT.",
+              "example_value": "Historical use as a light engineering works suggests moderate likelihood of localized ground contamination (hydrocarbons, metals). Phase 1 Geo-Environmental report (Doc GE/001) recommends intrusive investigation (Phase 2). No significant UXO risk identified.",
+              "source_hint": "Phase 1 reports, historical maps, Environment Agency data."
+            },
+            {
+              "name": "other_constraints_features_4_2",
+              "description": "Other notable site constraints or features, including basis if inferential.",
+              "example_value": "Public consultation records (Planning Ref ABC) highlight local concerns regarding construction traffic management, leading to Condition Y on approved HGV routes and hours. Desktop archaeological assessment (Doc AR/001) indicates low potential. Vicinity analysis of utility CAD data (provided in planning pack) shows a high density of existing underground services (water, gas, telecoms) crossing the northern third of the site; precise locations, depths, and conditions are a KIG and critical for foundation design and diversion planning.",
+              "source_hint": "Planning portal, consultation responses, specialist reports."
+            },
+            {
+              "name": "site_implications_engagement_4_2",
+              "description": "Key site-related implications for potential engagers.",
+              "example_value": "The brownfield nature and historical use necessitate thorough ground investigation and potential remediation, creating risks but also opportunities for specialist contractors. Managing utility diversions and upgrades (especially power) will be critical path activities. Construction logistics will be constrained by access limitations and public interface requirements.",
+              "source_hint": "Analyst synthesis of preceding sub-points."
+            }
+          ]
+        },
+        {
+          "point_id": "4.3",
+          "point_title_final": "Buildability & Constructability Analysis",
+          "ai_generation_goal": "To identify and assess potential challenges related to the practical construction of key project elements, considering design complexity, site conditions, and proposed methodologies.",
+          "key_intelligence_questions_to_address": [
+            "What is the overall assessment of the project's construction complexity?",
+            "Which 2-4 key project elements present the most significant buildability or constructability challenges?",
+            "For each challenged element: What is the specific nature of the challenge, its potential impact, and are there any opportunities for well-positioned firms?",
+            "Are there any generally applicable mitigation strategies observed in similar projects?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Synthesis of design information (4.1), site conditions (4.2), and any stated or inferred construction methodologies. Benchmarking against similar projects (Section 5.5). Industry best practice guides."
+          ],
+          "structuring_the_output_content_guide": "Start with 'Overall Assessment of Construction Complexity'. Then, for 'Key Project Elements with Anticipated Buildability/Constructability Challenges:', detail each (2-4 examples) covering Nature of Challenge, Potential Impact, Opportunity/Angle for Engaging Firm, and General Mitigation Approaches. Conclude with 'General Constructability Considerations Noted.'",
+          "handling_kigs_and_confidence_levels": "Challenges identified should be grounded in available design and site information. Opportunities for engaging firms are possibilities based on typical market capabilities. Acknowledge this area may require specialist input beyond OSINT. Use KIG marker for missing critical construction methodology details.",
+          "value_framing_for_external_client": "Helps clients anticipate practical construction difficulties, assess if they have the right expertise or solutions, identify areas for innovation or value engineering, and factor these into risk assessment and pricing.",
+          "content_placeholder_detailed_prompt": "Overall Assessment of Construction Complexity: {{construction_complexity_assessment_4_3}}\n\nKey Project Elements with Anticipated Buildability/Constructability Challenges:\n{{#each buildability_challenges_4_3}}\n\nElement {{add @index 1}}: {{this.element_name}}\n- Nature of Challenge: {{this.challenge_nature}}\n- Potential Impact on Project: {{this.potential_impact}}\n- Opportunity/Angle for Engaging Firm: {{this.opportunity_angle}}\n- General Mitigation Approaches: {{this.mitigation_approaches}}\n{{/each}}\n{{#if (eq buildability_challenges_4_3.length 0)}}[KIG: Insufficient detailed design or site information to identify specific major buildability challenges beyond general project complexity. - Implication: Constructability risks are less defined at this stage.]{{/if}}\n\nGeneral Constructability Considerations Noted (if any): {{general_constructability_considerations_4_3}}",
+          "placeholder_fields": [
+            {
+              "name": "construction_complexity_assessment_4_3",
+              "description": "Overall assessment of the project's construction complexity.",
+              "example_value": "Highly Complex, due to: constrained urban site with live adjacent operations, deep basement construction near sensitive infrastructure, integration of specialist scientific equipment with exceptionally tight tolerances, and accelerated programme.",
+              "source_hint": "Synthesize from 4.1, 4.2, and programme information."
+            },
+            {
+              "name": "buildability_challenges_4_3",
+              "description": "Array of 2-4 objects, each detailing a key buildability challenge.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "element_name": {"type": "string", "example_value": "Installation of vibration-sensitive imaging equipment in basement levels."},
+                  "challenge_nature": {"type": "string", "example_value": "Achieving specified VC-A vibration criteria during construction and operation; complex logistics for rigging and installing large, delicate equipment in confined basement space."},
+                  "potential_impact": {"type": "string", "example_value": "Significant programme risk for equipment installation phase, high cost for specialist lifting and vibration isolation solutions, risk of equipment damage or non-performance if not correctly installed."},
+                  "opportunity_angle": {"type": "string", "example_value": "Opportunity for contractors with proven track record in specialist equipment installation in high-spec R&D/healthcare facilities. Requirement for advanced logistical planning and vibration monitoring expertise."},
+                  "mitigation_approaches": {"type": "string", "example_value": "Early engagement with equipment vendor and specialist installation contractor (ECI). Detailed 4D BIM modelling for logistics. Phased construction to isolate sensitive areas. Continuous vibration monitoring during adjacent works."}
+                }
+              },
+              "example_value": [
+                // Example 1 (imaging equipment) is embedded in properties above.
+                {
+                  "element_name": "Complex geometric facade system with bespoke GRC panels.",
+                  "challenge_nature": "Achieving tight tolerances for panel interfaces, managing complex geometry for fabrication and installation, ensuring weather-tightness for non-standard details.",
+                  "potential_impact": "Potential for delays in envelope completion, increased defect risk, higher costs for specialist facade contractor.",
+                  "opportunity_angle": "Requires specialist facade contractor with advanced 3D modelling, off-site manufacturing capability, and proven experience with complex GRC systems.",
+                  "mitigation_approaches": "Use of full-scale mock-ups for performance testing, advanced BIM for clash detection and interface management, dedicated facade quality control team."
+                }
+              ],
+              "source_hint": "Synthesize from 4.1, 4.2, design documents. Identify 2-4 key elements."
+            },
+            {
+              "name": "general_constructability_considerations_4_3",
+              "description": "Any generally applicable constructability considerations noted.",
+              "example_value": "The project's fast-track programme will require exceptional coordination between design and construction teams, potentially favouring an integrated delivery model (e.g., IPD Lite) or extensive use of ECI for key packages. [KIG: Project Lead's preferred construction methodology not explicitly stated. - Implication: Uncertainty for bidders on how to structure their delivery approach.]",
+              "is_optional": true,
+              "source_hint": "Analyst synthesis."
+            }
+          ]
+        },
+        {
+          "point_id": "4.4",
+          "point_title_final": "Innovation & Advanced Technology Adoption",
+          "ai_generation_goal": "To assess the project's or Project Lead's approach to adopting innovation and advanced construction technologies (ConTech), highlighting requirements and opportunities for engagement.",
+          "key_intelligence_questions_to_address": [
+            "What is the Project Lead/Organisation's stated or inferred overall approach to innovation and technology adoption?",
+            "For key ConTech categories, what is the known or potential level of adoption for this project/initiative?",
+            "What are the implications of this technology strategy for potential partners/suppliers?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Project briefs, design specifications, planning documents, Project Lead's corporate reports (innovation sections, R&D statements), industry articles on the project or Project Lead, ConTech vendor announcements."
+          ],
+          "structuring_the_output_content_guide": "Start with 'Project/Organisation's Stated or Inferred Approach to Innovation & Technology'. Then, for each ConTech category, provide details if known, or state KIG. Conclude with 'Overall Technology & Innovation Implications for Engagement.'",
+          "handling_kigs_and_confidence_levels": "Clearly state where adoption is 'stated requirement,' 'strongly implied/likely,' or 'KIG/no information' using the marker. Differentiate aspirations from confirmed plans.",
+          "value_framing_for_external_client": "Helps clients understand technological sophistication expected, identify needs for specific digital skills or tech solutions, and spot opportunities.",
+          "content_placeholder_detailed_prompt": "Project/Organisation's Stated or Inferred Approach to Innovation & Technology: {{innovation_approach_4_4}}\n\nTechnology Adoption Assessment:\n{{#each contech_categories_4_4}}\n{{add @index 1}}. {{this.category_name}}:\n   - Adoption Level & Details: {{this.adoption_details}}\n{{/each}}\n\nOverall Technology & Innovation Implications for Engagement: {{tech_innovation_implications_4_4}}",
+          "placeholder_fields": [
+            {
+              "name": "innovation_approach_4_4",
+              "description": "Project Lead/Organisation's stated or inferred overall approach to innovation and technology adoption.",
+              "example_value": "TechNova Corp has a public commitment to be an 'early adopter' of proven ConTech to drive efficiency, sustainability, and quality in their capital projects. They have a dedicated 'Digital Construction' working group. (Source: TechNova Sustainability Report 2024).",
+              "source_hint": "Corporate reports, innovation statements, project briefs."
+            },
+            {
+              "name": "contech_categories_4_4",
+              "description": "Array of objects, each detailing adoption for a specific ConTech category.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "category_name": {"type": "string", "example_value": "Digital Delivery & Collaboration (BIM, CDEs)"},
+                  "adoption_details": {"type": "string", "example_value": "ISO 19650 compliance mandated. BIM Level 2 minimum, with aspirations for extensive use of 4D scheduling, 5D cost management, and AIM delivery for FM. Specific CDE platform: Autodesk Construction Cloud (stated requirement). Digital Twin development post-handover is a strategic goal."}
+                }
+              },
+              "example_value": [
+                // Example 1 (Digital Delivery) is embedded above.
+                {"category_name": "Off-Site Manufacturing & Modular Construction (DfMA)", "adoption_details": "Planning documents and design statements indicate significant intent for prefabricated M&E modules, plant rooms, and potentially volumetric bathroom pods to accelerate programme and improve quality. [KIG: Specific % of off-site construction targeted not defined. - Implication: Scale of opportunity for DfMA specialists is indicative.]"},
+                {"category_name": "Automation, Robotics & 3D Printing", "adoption_details": "Use of drones for site surveys and progress monitoring confirmed. Potential for robotic setting-out and automated welding for structural steel being explored (Source: ECI Brief). No specific mention of on-site construction 3D printing (KIG)."},
+                {"category_name": "Reality Capture & Visualisation Technologies (Drones, LiDAR, AR/VR)", "adoption_details": "LiDAR scanning for as-built verification and QA/QC is mandated. AR/VR to be used for design reviews with stakeholders and potentially for on-site installation guidance for complex M&E."},
+                {"category_name": "AI, Machine Learning & Data Analytics", "adoption_details": "[KIG: Specific applications of AI/ML in project delivery not detailed. - Implication: Opportunities in this area are currently speculative, possibly around predictive analytics for risk or schedule.]"},
+                {"category_name": "IoT, Sensors & Wearable Technology / Connected Sites", "adoption_details": "On-site sensors for environmental monitoring (noise, dust, vibration) and asset tracking planned. Consideration for wearable technology for H&S monitoring."},
+                {"category_name": "Advanced Materials (non-environmental aspects here, technical properties)", "adoption_details": "Specification includes self-healing concrete for specific basement structures and advanced composite materials for lightweight, high-strength components in lab areas. Focus on materials with enhanced durability and low maintenance requirements."}
+              ],
+              "source_hint": "Project briefs, design specs, innovation statements. AI should cover all listed categories."
+            },
+            {
+              "name": "tech_innovation_implications_4_4",
+              "description": "Overall implications of the technology strategy for potential partners/suppliers.",
+              "example_value": "The project's advanced digital delivery requirements will necessitate partners with strong BIM expertise, experience with Autodesk Construction Cloud, and capability in delivering comprehensive digital handover information. Significant opportunities exist for DfMA specialists and those offering innovative solutions in reality capture and sustainable materials. A proactive approach to technology integration will be highly valued.",
+              "source_hint": "Analyst synthesis."
+            }
+          ]
+        },
+        {
+          "point_id": "4.5",
+          "point_title_final": "ESG (Environmental, Social, Governance) & HSQE Performance",
+          "ai_generation_goal": "To provide a comprehensive overview of the project's/organisation's strategic ESG goals and the site-specific, operational HSQE factors and requirements.",
+          "key_intelligence_questions_to_address": [
+            "A. Environmental Strategy & Carbon Management: Overarching goals (Net Zero, BREEAM, etc.)? Carbon neutrality approach/roadmap? Standardised assessment tools required? Key sustainable design/construction practices?",
+            "B. Site-Specific Environmental Management: Key permits/consents? Local authority/public consultation requirements? Waste/pollution control plans? Site-specific ecological/archaeological/heritage/utility considerations?",
+            "C. Health & Safety: Project Lead's H&S culture/record? Key site-specific hazards/mitigation? Specific H&S regulatory/client protocol requirements?",
+            "D. Quality Assurance & Control: Project-specific quality standards/expectations? Known QA/QC processes or inspection regimes?",
+            "E. Overall ESG/HSQE implications and opportunities for an engaging third party?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Corporate Sustainability Reports, planning application documents (Environmental Statements, Carbon Management Plans, H&S Plans), BREEAM/LEED pre-assessments, community engagement portals, HSE databases, industry standards."
+          ],
+          "structuring_the_output_content_guide": "Use main headings A-E as per KIQs. Populate each sub-point based on OSINT findings. KIGs should be clearly marked for unavailable specifics.",
+          "handling_kigs_and_confidence_levels": "Differentiate stated policy/targets from actual site-specific plans. Cite sources. Use KIG marker for gaps.",
+          "value_framing_for_external_client": "Provides a comprehensive view of ESG commitments and HSQE operational landscape, enabling clients to align practices, identify risks, and showcase credentials.",
+          "content_placeholder_detailed_prompt": "A. Environmental Strategy & Carbon Management (Project/Organisation Level):\n   - Overarching Environmental/Sustainability Goals: {{env_sustainability_goals_4_5a}}\n   - Carbon Neutrality Approach & Roadmaps: {{carbon_neutrality_approach_4_5a}}\n   - Standardised Carbon/Environmental Assessment Methodologies & Tools Required: {{carbon_assessment_tools_4_5a}}\n   - Key Strategic Sustainable Design/Construction Practices: {{sustainable_practices_4_5a}}\n\nB. Site-Specific Environmental Management (Operational Factors):\n   - Key Site-Specific Environmental Consents/Permits: {{site_env_consents_4_5b}}\n   - Local Authority Requirements & Public Consultation Outcomes (Noise, Dust, Hours, View etc.): {{local_auth_reqs_consultation_4_5b}}\n   - Site Waste Management Plan & Pollution Control Details: {{site_waste_pollution_control_4_5b}}\n   - Site-Specific Ecological & Biodiversity Protection Measures (On-Site): {{site_ecology_biodiversity_4_5b}}\n   - Archaeological & Heritage Considerations (On-Site): {{site_archaeology_heritage_4_5b}}\n   - Unforeseen Ground & Infrastructure Risks (Site-Specific, e.g., dense utilities, UXO): {{site_ground_infra_risks_4_5b}}\n\nC. Health & Safety (Specific Site/Project Factors):\n   - Project Lead's H&S Culture/Record & Accreditations: {{lead_hs_culture_record_4_5c}}\n   - Key Foreseeable Site-Specific Hazards & High-Level Mitigation Approaches: {{site_hazards_mitigation_4_5c}}\n   - Specific H&S Regulatory/Client Protocol Requirements (e.g., specific training, reporting): {{hs_regulatory_protocols_4_5c}}\n\nD. Quality Assurance & Control (Specific Site/Project Factors):\n   - Project-Specific Quality Standards & Expectations (beyond general compliance): {{project_quality_standards_4_5d}}\n   - Known Project-Specific QA/QC Processes, Systems or Inspection Regimes: {{project_qa_qc_processes_4_5d}}\n\nE. Overall ESG/HSQE Implications & Client Opportunities: {{overall_esg_hsqe_implications_opportunities_4_5e}}",
+          "placeholder_fields": [
+            // Subsection A
+            {"name": "env_sustainability_goals_4_5a", "description": "Overarching environmental/sustainability goals.", "example_value": "Target BREEAM 'Outstanding'. Stated commitment to Net Zero Operational Carbon by 2030 (Scope 1 & 2), Net Zero Embodied Carbon (Scope 3 up to practical completion) by 2040. Biodiversity Net Gain of 10% target. (Source: TechNova Sustainability Strategy 2024).", "source_hint": "Sustainability reports, planning statements."},
+            {"name": "carbon_neutrality_approach_4_5a", "description": "Carbon neutrality approach and roadmaps.", "example_value": "Adherence to TechNova's Corporate Carbon Management Plan. Use of PAS 2080 framework for infrastructure elements. Focus on lean design, low-carbon materials, and on-site renewables.", "source_hint": "Carbon management plans, design statements."},
+            {"name": "carbon_assessment_tools_4_5a", "description": "Standardised carbon/environmental assessment tools required.", "example_value": "Whole Life Carbon Assessment (WLCA) mandated using RICS WLCA standard and specific software (e.g., One Click LCA). Regular reporting through client's sustainability portal. [KIG: Specific WLCA benchmarks to be achieved. - Implication: Performance targets for carbon are qualitative rather than quantitative at this stage.]", "source_hint": "Sustainability plans, tender docs."},
+            {"name": "sustainable_practices_4_5a", "description": "Key strategic sustainable design/construction practices.", "example_value": "Prioritization of Circular Economy principles (design for disassembly, material reuse). Maximization of natural daylight. Specification of materials with high recycled content and EPDs. Water efficiency measures aiming for <X L/person/day.", "source_hint": "Design statements, sustainability strategies."},
+            // Subsection B
+            {"name": "site_env_consents_4_5b", "description": "Key site-specific environmental consents/permits.", "example_value": "Environmental Permit for discharge of treated groundwater during construction (Ref: EP/123). Section 61 consent for noise/vibration during piling. (Source: Planning Conditions Register).", "source_hint": "Planning portal, environmental permits."},
+            {"name": "local_auth_reqs_consultation_4_5b", "description": "Local authority requirements and public consultation outcomes.", "example_value": "Planning condition limits construction noise to 55 dBA LAeq at nearest sensitive receptor during daytime hours (0800-1800 Mon-Fri). Dust suppression measures to be agreed with LA. No work on Sundays/Bank Holidays. (Source: Planning Decision Notice).", "source_hint": "Planning conditions, consultation reports."},
+            {"name": "site_waste_pollution_control_4_5b", "description": "Site Waste Management Plan & Pollution Control details.", "example_value": "Site Waste Management Plan (SWMP) targets >95% diversion from landfill. Segregation of waste streams on-site. Bunding for fuel/chemical storage. Silt traps for surface water runoff. (Source: Outline CEMP).", "source_hint": "CEMP, SWMP if available."},
+            {"name": "site_ecology_biodiversity_4_5b", "description": "Site-specific ecological/biodiversity protection measures.", "example_value": "Protection measures for adjacent ancient woodland (root protection areas). Translocation of specific protected flora prior to works. Bat roosting features to be incorporated into new building design. (Source: Ecological Impact Assessment).", "source_hint": "EcIA, LEMP if available."},
+            {"name": "site_archaeology_heritage_4_5b", "description": "Archaeological & heritage considerations on-site.", "example_value": "Watching brief required during all ground-breaking works due to proximity to known Roman settlement. (Source: Archaeological Written Scheme of Investigation).", "source_hint": "WSI, heritage statements."},
+            {"name": "site_ground_infra_risks_4_5b", "description": "Unforeseen ground & infrastructure risks site-specific.", "example_value": "High density of uncharted Victorian-era services discovered during trial pitting in northern area, requiring careful excavation and potential diversions. (Source: Trial Pit Log - if OSINT). [KIG: Full extent of uncharted services. - Implication: Risk of delays and cost overruns during enabling works.]", "source_hint": "GI reports, utility surveys if found."},
+            // Subsection C
+            {"name": "lead_hs_culture_record_4_5c", "description": "Project Lead's H&S culture/record & accreditations.", "example_value": "TechNova Corp is ISO 45001 certified. Publishes annual safety performance data (e.g., AFR <0.1). Strong 'Safety First' culture promoted in corporate comms. Requires all principal contractors to be Safety Schemes in Procurement (SSIP) accredited.", "source_hint": "Corporate reports, H&S policy statements."},
+            {"name": "site_hazards_mitigation_4_5c", "description": "Key foreseeable site-specific hazards and high-level mitigation.", "example_value": "Work at height (facade, roofing) – use of collective protection, MEWPs. Interface with live adjacent university campus – strict segregation, controlled access points. Deep excavations for basement – temporary works design, monitoring. Lifting operations – appointed persons, lift plans.", "source_hint": "Outline H&S Plan, risk assessments if available."},
+            {"name": "hs_regulatory_protocols_4_5c", "description": "Specific H&S regulatory/client protocol requirements.", "example_value": "Compliance with CDM 2015 regulations. Client mandates daily safety briefings, weekly site safety walks by senior management, and use of their proprietary incident reporting system. Specific training for working near high-voltage equipment if applicable.", "source_hint": "Pre-construction Information, client H&S standards."},
+            // Subsection D
+            {"name": "project_quality_standards_4_5d", "description": "Project-specific quality standards & expectations.", "example_value": "Compliance with ISO 9001. Target 'zero defects at handover'. Adherence to specific client aesthetic standards for finishes. Use of client's Quality Management Portal for all documentation.", "source_hint": "Quality plans, employer's requirements."},
+            {"name": "project_qa_qc_processes_4_5d", "description": "Known project-specific QA/QC processes, systems or inspection regimes.", "example_value": "Requirement for detailed Inspection and Test Plans (ITPs) for all key work packages. Multi-stage sign-off for critical elements (e.g., concrete pours, M&E commissioning). Use of digital snagging tools (e.g., FieldView/Dalux). [KIG: Specific hold points or witness testing requirements for specialist systems. - Implication: Contractors need to build these into their programmes.]", "source_hint": "Quality plans, tender documents."},
+            // Subsection E
+            {"name": "overall_esg_hsqe_implications_opportunities_4_5e", "description": "Overall ESG/HSQE implications and client opportunities.", "example_value": "The project's high BREEAM target, Net Zero ambitions, and stringent H&S/Quality standards create significant opportunities for suppliers and contractors with strong sustainability credentials, robust safety records, proven quality management systems, and innovative low-carbon solutions. Demonstrating alignment with TechNova's ESG values will be a key differentiator.", "source_hint": "Analyst synthesis."}
+          ]
+        },
+        {
+          "point_id": "4.6",
+          "point_title_final": "Site Operations & Logistics Strategy",
+          "ai_generation_goal": "To assess the planned or likely site management strategy and logistical arrangements, highlighting complexity, key challenges, and implications for engaging parties.",
+          "key_intelligence_questions_to_address": [
+            "What is the overall assessment of site logistics complexity?",
+            "What is known about site establishment and layout?",
+            "What is the material and plant access/movement strategy?",
+            "How will interfaces with live environments or the public realm be managed?",
+            "What are the operational logistics for waste management and removal?",
+            "What are the key logistical risks or opportunities for an engaging third party?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Planning application documents (Construction Management Plans, Outline Logistics Plans, Site Layout Plans), Transport Assessments, local authority roadwork schedules, Google Maps/Street View."
+          ],
+          "structuring_the_output_content_guide": "Structure with sub-headings: 'Overall Site Logistics Complexity Assessment'; 'Site Establishment & Layout'; 'Material Delivery & Plant Movement Strategy'; 'Interface Management'; 'Site Waste Management & Removal Logistics'; 'Key Logistical & Site Management Implications or Opportunities for Engagement.'",
+          "handling_kigs_and_confidence_levels": "Clearly state if logistics plans are confirmed from official documents or inferred. Highlight KIGs for specific laydown areas, traffic management, or interface protocols using the marker. Emphasize details may be KIGs for early-stage projects.",
+          "value_framing_for_external_client": "Helps clients understand practicalities of working on site, assess logistical risks, plan operations, and identify where their expertise could add value.",
+          "content_placeholder_detailed_prompt": "Overall Site Logistics Complexity Assessment: {{logistics_complexity_4_6}}\n\nSite Establishment & Layout (indicative, from OSINT or outline plans):\n{{site_establishment_layout_4_6}}\n\nMaterial Delivery & Plant Movement Strategy:\n- Access Routes & Restrictions: {{material_access_routes_restrictions_4_6}}\n- On-Site Material Handling & Storage: {{material_handling_storage_4_6}}\n\nInterface Management:\n- With Live/Operational Environments (if applicable): {{interface_live_ops_4_6}}\n- With Public Realm / Third Parties: {{interface_public_third_parties_4_6}}\n\nSite Waste Management & Removal Logistics (Operational Aspects): {{waste_removal_logistics_4_6}}\n\nKey Logistical & Site Management Implications or Opportunities for Engagement: {{logistics_implications_opportunities_4_6}}",
+          "placeholder_fields": [
+            {
+              "name": "logistics_complexity_4_6",
+              "description": "Overall assessment of site logistics complexity.",
+              "example_value": "Highly constrained city-centre site with extremely limited access (single narrow street) and no on-site storage capacity beyond immediate work areas, requiring a meticulously planned Just-In-Time (JIT) delivery strategy and off-site consolidation.",
+              "source_hint": "Construction Management Plans, site context."
+            },
+            {
+              "name": "site_establishment_layout_4_6",
+              "description": "Details on site establishment and layout.",
+              "example_value": "Site accommodation likely to be multi-storey modular units on a small peripheral plot. Tower crane position indicated on outline logistics plan (Doc CMP/01). Laydown areas are virtually non-existent, requiring materials to be lifted to floor of use immediately. [KIG: Specific location for welfare/offices if not on main site. - Implication: Potential for off-site facilities impacting travel time.]",
+              "source_hint": "Outline Logistics Plans, site plans from planning."
+            },
+            {
+              "name": "material_access_routes_restrictions_4_6",
+              "description": "Material and plant access routes and restrictions.",
+              "example_value": "All deliveries via Gate A on Main Street, only between 09:30-15:30 Mon-Fri, booked via online portal. No articulated vehicles permitted on site; all materials to be transshipped at an off-site consolidation centre. (Source: Outline CMP). Weight restrictions on adjacent bridge to be confirmed.",
+              "source_hint": "Construction Management Plans, Transport Assessments."
+            },
+            {
+              "name": "material_handling_storage_4_6",
+              "description": "On-site material handling and storage strategy.",
+              "example_value": "All materials to be lifted to floor of use immediately upon delivery via tower crane or goods hoist. No on-site storage capacity for bulk materials. Just-In-Time delivery for all components is essential.",
+              "source_hint": "Construction Management Plans."
+            },
+            {
+              "name": "interface_live_ops_4_6",
+              "description": "Management of interfaces with live environments.",
+              "example_value": "Project involves refurbishment of 2 floors within an operational 10-storey hospital. Strict segregation of work areas, negative air pressure in construction zones, noise/vibration control, and out-of-hours working for disruptive tasks (e.g., core drilling) will be essential. Daily coordination meetings with hospital facilities management required.",
+              "is_optional": true,
+              "source_hint": "Project scope, CEMP if working in live environment."
+            },
+            {
+              "name": "interface_public_third_parties_4_6",
+              "description": "Management of interfaces with public realm or third parties.",
+              "example_value": "Site frontage on busy pedestrian thoroughfare (High Street). Full hoarding, scaffolding, and gantry license required from local authority. Pedestrian diversion routes to be agreed and maintained. Regular communication with adjacent retail businesses to mitigate disruption.",
+              "source_hint": "CEMP, planning conditions, site context."
+            },
+            {
+              "name": "waste_removal_logistics_4_6",
+              "description": "Operational logistics for waste management and removal.",
+              "example_value": "All waste to be segregated on floor of arising into designated bins/skips. Removed via hoist to consolidation area for collection by licensed waste carriers during approved hours. Emphasis on minimizing waste generation through DfMA and careful material ordering.",
+              "source_hint": "Site Waste Management Plan, CEMP."
+            },
+            {
+              "name": "logistics_implications_opportunities_4_6",
+              "description": "Key logistical risks or opportunities for an engaging third party.",
+              "example_value": "The severe logistical constraints create significant opportunities for contractors/suppliers with proven expertise in managing complex urban sites, JIT deliveries, and off-site consolidation. Innovations in compact plant or modular systems that reduce on-site activity will be highly valued. Risk of significant delays and costs if logistics are not meticulously planned and managed.",
+              "source_hint": "Analyst synthesis."
+            }
+          ]
+        }
+      ]
+    }
+    // ... (Sections 5-9, appendices, footer would follow) ...
+  ]
+}

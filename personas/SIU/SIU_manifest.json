@@ -1,0 +1,211 @@
+{
+  "persona_id": "Strategic_Intelligence_Unit_V1.0",
+  "version": "1.0.0",
+  "core_operational_rules": [
+    "The Strategic Intelligence Unit (SIU) operates as a cohesive team to produce comprehensive intelligence products.",
+    "All team members must adhere to their defined roles and the team's interaction protocols specified in 'Strategic_Intelligence_Unit_Team_Context_V1.6_2025-06-01.json'.",
+    "Maintain high standards of accuracy, objectivity, and timeliness in all analyses and reports.",
+    "Follow the SIU_Consolidated_SOP_V1.2.json for all operational procedures.",
+    "Utilize provided templates for all standardized outputs (dossiers, snapshots, etc.)."
+  ],
+  "core_definition_files": [
+    {
+      "description": "Main initialization prompt and high-level context for the Strategic Intelligence Unit team.",
+      "base_name": "SIU_Initialization_Prompt_JSON_V1.5",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": ".",
+      "is_required_flag": true
+    },
+    {
+      "description": "Core definition for team member Alex.",
+      "base_name": "Alex_Persona_V1.2_2025-04-22",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Core_Definition_Files",
+      "is_required_flag": true
+    },
+    {
+      "description": "Core definition for team member Jen.",
+      "base_name": "Jen_Persona_V1.6_2025-06-01",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Core_Definition_Files",
+      "is_required_flag": true
+    },
+    {
+      "description": "Core definition for team member Julian.",
+      "base_name": "Julian_Persona_V1.2_2025-04-22",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Core_Definition_Files",
+      "is_required_flag": true
+    },
+    {
+      "description": "Core definition for team member Max.",
+      "base_name": "Max_Persona_V1.5_2025-04-26",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Core_Definition_Files",
+      "is_required_flag": true
+    },
+    {
+      "description": "Core definition for team member Robin.",
+      "base_name": "Robin_Persona_V1.4_2025-04-22",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Core_Definition_Files",
+      "is_required_flag": true
+    },
+    {
+      "description": "Shared Core Knowledge Base for all SIU team members.",
+      "base_name": "Shared Core Knowledge Base",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Core_Definition_Files",
+      "is_required_flag": true
+    },
+    {
+      "description": "Defines the overall context, roles, and interaction protocols for the SIU team.",
+      "base_name": "Strategic_Intelligence_Unit_Team_Context_V1.6_2025-06-01",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Core_Definition_Files",
+      "is_required_flag": true
+    }
+  ],
+  "supporting_definition_files": [
+    {
+      "description": "Template for dossier appendices.",
+      "base_name": "appendices_template",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Dossier_Template",
+      "is_required_flag": false
+    },
+    {
+      "description": "Framework defining the structure for intelligence dossiers.",
+      "base_name": "orchestration_framework_dossier_v1.2",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Dossier_Template",
+      "is_required_flag": false
+    },
+    {
+      "description": "Template for Section 1: Executive Summary of a dossier.",
+      "base_name": "section_1_executive_summary_template",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Dossier_Template",
+      "is_required_flag": false
+    },
+    {
+      "description": "Template for Section 2: Deep Dive of a dossier.",
+      "base_name": "section_2_deep_dive_template",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Dossier_Template",
+      "is_required_flag": false
+    },
+    {
+      "description": "Template for Section 3: Project Lead Analysis of a dossier.",
+      "base_name": "section_3_project_lead_analysis_template",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Dossier_Template",
+      "is_required_flag": false
+    },
+    {
+      "description": "Template for Section 4: Technical/Operational Assessment of a dossier.",
+      "base_name": "section_4_technical_operational_assessment_template",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Dossier_Template",
+      "is_required_flag": false
+    },
+    {
+      "description": "Template for Section 5: Market & Competitive Landscape of a dossier.",
+      "base_name": "section_5_market_competitive_landscape_template",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Dossier_Template",
+      "is_required_flag": false
+    },
+    {
+      "description": "Template for Section 6: Procurement & Commercials of a dossier.",
+      "base_name": "section_6_procurement_commercials_template",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Dossier_Template",
+      "is_required_flag": false
+    },
+    {
+      "description": "Template for Section 7: Risk Register & Analysis of a dossier.",
+      "base_name": "section_7_risk_register_analysis_template",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Dossier_Template",
+      "is_required_flag": false
+    },
+    {
+      "description": "Template for Section 8: Strategic Implications & Outlook of a dossier.",
+      "base_name": "section_8_strategic_implications_outlook_template",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Dossier_Template",
+      "is_required_flag": false
+    },
+    {
+      "description": "Template for Section 9: KIGs & Recommended Actions of a dossier.",
+      "base_name": "section_9_kigs_recommended_actions_template",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Dossier_Template",
+      "is_required_flag": false
+    },
+    {
+      "description": "Template for recording abandoned research.",
+      "base_name": "abandoned_research_record",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Other_Templates",
+      "is_required_flag": false
+    },
+    {
+      "description": "Template for project audio overview.",
+      "base_name": "project_audio_overview",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Other_Templates",
+      "is_required_flag": false
+    },
+    {
+      "description": "Blueprint defining content structure for snapshot HTML outputs.",
+      "base_name": "snapshot_html",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Other_Templates",
+      "is_required_flag": false
+    },
+    {
+      "description": "LinkedIn Knowledge Base v1.",
+      "base_name": "LI_kb_v1",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Supporting_Definition_Files",
+      "is_required_flag": false
+    },
+    {
+      "description": "SIU Consolidated Standard Operating Procedures V1.2.",
+      "base_name": "SIU_Consolidated_SOP_V1.2",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Supporting_Definition_Files",
+      "is_required_flag": false
+    },
+    {
+      "description": "Standard Operating Procedures for LINC V1.2.",
+      "base_name": "SOP-LINC-V1.2",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Supporting_Definition_Files",
+      "is_required_flag": false
+    },
+    {
+      "description": "Style guide for LINC V1.2.",
+      "base_name": "STYLE-LINC-V1.2",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Supporting_Definition_Files",
+      "is_required_flag": false
+    },
+    {
+      "description": "Style A definition V1.",
+      "base_name": "style_a_definition_v1",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Supporting_Definition_Files",
+      "is_required_flag": false
+    },
+    {
+      "description": "Style B definition V1.",
+      "base_name": "style_b_definition_v1",
+      "extensions_to_try": ["json"],
+      "path_relative_to_persona_folder": "Team_Files/Supporting_Definition_Files",
+      "is_required_flag": false
+    }
+  ]
+}

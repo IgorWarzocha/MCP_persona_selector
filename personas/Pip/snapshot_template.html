@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEMPLATE: Interactive Strategic Snapshot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF7; /* Warm Off-White */
+        }
+        /* Styles for a compact media player */
+        .media-container {
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            overflow: hidden; /* Ensures the iframe corners are clipped by the border-radius */
+        }
+        .media-container iframe {
+            width: 100%;
+            height: 170px; /* A fixed, compact height for the player */
+            border: 0;
+            display: block; /* Removes any potential extra space below the iframe */
+        }
+        .tab-active {
+            border-bottom-color: #0A7373; /* Deep Teal */
+            color: #0A7373; /* Deep Teal */
+            font-weight: 600;
+        }
+        .tab-inactive {
+            border-bottom-color: transparent;
+            color: #4A5568; /* Cool Gray */
+        }
+        .accordion-header {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-header:hover {
+            background-color: #E9E7E2; /* Lighter Warm Neutral */
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .accordion-content.open {
+            padding-top: 1rem;
+            padding-bottom: 1rem; /* Adjusted padding */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Adjusted for potentially better fit */
+            margin-left: auto;
+            margin-right: auto;
+            height: 280px; /* Adjusted height */
+            max-height: 320px;
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .chart-container {
+                height: 320px;
+            }
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 24px;
+            padding-bottom: 0.25rem; /* Reduced to half of 0.5rem */
+        }
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px; /* Adjusted for line alignment */
+            top: 4px; /* Align with text better */
+            width: 16px;
+            height: 16px;
+            background-color: #0A7373; /* Deep Teal */
+            border-radius: 50%;
+            border: 3px solid #FDFBF7; /* Warm Off-White */
+            z-index: 1;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 0px; /* Center the line on the dot axis */
+            top: 4px; /* Start from the first dot */
+            bottom: 4px; /* End at the last dot */
+            width: 2px;
+            background-color: #CBD5E0; /* Light Gray */
+            z-index: 0; /* Behind dots */
+        }
+        .kig-item { list-style-type: decimal; margin-left: 1.5rem; }
+        .content-block h3 { /* Style for block titles */
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            color: #374151; /* gray-700 */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        .content-block p, .content-block ul, .content-block ol {
+            color: #4B5563; /* gray-600 */
+            line-height: 1.625; /* leading-relaxed */
+            margin-bottom: 1rem; /* mb-4 */
+        }
+        .content-block ul {
+            list-style-type: disc;
+            padding-left: 1.25rem; /* pl-5 */
+        }
+        /* Custom styles for tighter spacing */
+        .tight-spacing p {
+            margin-bottom: 0.0625rem; /* Reduced to half of 0.125rem */
+            line-height: 1.2; /* Even tighter line height */
+        }
+        /* Styles for the Streamlit iframe */
+        .streamlit-embed-container {
+            width: 100%;
+            min-height: 200px; /* Adjust as needed */
+            border: 1px solid #E2E8F0; /* Optional border */
+            border-radius: 0.375rem; /* Corresponds to rounded-md in Tailwind */
+            overflow: hidden; /* Ensures iframe corners are rounded */
+        }
+        .streamlit-embed-container iframe {
+            width: 100%;
+            height: 600px;
+            min-height: 200px; /* Ensure iframe takes up container height */
+            border: none;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="text-gray-800">
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl pb-8">
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">_placeholder_project_main_title_</h1>
+            <p class="text-lg text-gray-600 mt-2">_placeholder_project_subtitle_</p>
+            <p class="text-sm text-gray-500 mt-1">Ref: _placeholder_project_ref_number_ | Date: _placeholder_project_date_ | Classification: _placeholder_project_classification_</p>
+        </header>
+
+        <div class="bg-white shadow-xl rounded-lg p-4 sm:p-6 md:p-8">
+            <div class="media-container">
+                <iframe src="_placeholder_youtube_embed_url_" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+
+            <div class="border-b border-gray-300 mb-6">
+                <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
+                    <button class="tab-btn tab-active text-sm sm:text-base whitespace-nowrap py-3 px-3 sm:px-4 border-b-2 font-medium" data-tab="tab1_overview">Overview</button>
+                    <button class="tab-btn tab-inactive text-sm sm:text-base whitespace-nowrap py-3 px-3 sm:px-4 border-b-2 font-medium" data-tab="tab2_scope">Key Scope</button>
+                    <button class="tab-btn tab-inactive text-sm sm:text-base whitespace-nowrap py-3 px-3 sm:px-4 border-b-2 font-medium" data-tab="tab3_status">Status & Milestones</button>
+                    <button class="tab-btn tab-inactive text-sm sm:text-base whitespace-nowrap py-3 px-3 sm:px-4 border-b-2 font-medium" data-tab="tab4_analysis">Strategic Analysis & Insights</button>
+                    <button class="tab-btn tab-inactive text-sm sm:text-base whitespace-nowrap py-3 px-3 sm:px-4 border-b-2 font-medium" data-tab="tab_ask_question">Ask a Question</button>
+                    <button class="tab-btn tab-inactive text-sm sm:text-base whitespace-nowrap py-3 px-3 sm:px-4 border-b-2 font-medium" data-tab="tab5_full_report">Full Report</button>
+                </nav>
+            </div>
+
+            <div id="tab-content">
+                <div class="tab-pane active" id="tab1_overview">
+                    <div class="content-block">
+                        <h3>Project Summary</h3>
+                        <p>_placeholder_overview_project_summary_paragraph_1_</p>
+                        <p><strong>Key Strategic Thrust:</strong> _placeholder_overview_strategic_thrust_</p>
+                        <h4 class="text-md font-semibold text-gray-700 mt-4 mb-2">Top-line Objectives:</h4>
+                        <ul>
+                            <li>_placeholder_overview_objective_1_</li>
+                            <li>_placeholder_overview_objective_2_</li>
+                            </ul>
+                    </div>
+                    <div class="content-block mt-6">
+                        <h3>Key Data Infographics</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                            <div class="bg-sky-50 p-4 rounded-lg shadow">
+                                <h4 class="font-semibold text-sky-700">_placeholder_overview_data_card_1_title_</h4>
+                                <p class="text-2xl font-bold text-sky-900">_placeholder_overview_data_card_1_value_</p>
+                                <p class="text-sm text-sky-600">_placeholder_overview_data_card_1_description_</p>
+                            </div>
+                            <div class="bg-teal-50 p-4 rounded-lg shadow">
+                                <h4 class="font-semibold text-teal-700">_placeholder_overview_data_card_2_title_</h4>
+                                <p class="text-2xl font-bold text-teal-900">_placeholder_overview_data_card_2_value_</p>
+                                <p class="text-sm text-teal-600">_placeholder_overview_data_card_2_description_</p>
+                            </div>
+                            <div class="bg-indigo-50 p-4 rounded-lg shadow">
+                                <h4 class="font-semibold text-indigo-700">_placeholder_overview_data_card_3_title_</h4>
+                                <p class="text-2xl font-bold text-indigo-900">_placeholder_overview_data_card_3_value_</p>
+                                <p class="text-sm text-indigo-600">_placeholder_overview_data_card_3_description_</p>
+                            </div>
+                            </div>
+                        </div>
+                    <div class="content-block mt-6">
+                        <h3>Strategic Outlook</h3>
+                        <p>_placeholder_overview_strategic_outlook_paragraph_1_</p>
+                        <p>_placeholder_overview_strategic_outlook_paragraph_2_</p>
+                        <p>_placeholder_overview_strategic_outlook_paragraph_3_</p>
+                    </div>
+                </div>
+
+                <div class="tab-pane hidden" id="tab2_scope">
+                    <div class="content-block">
+                        <h3>Nature & Primary Function</h3>
+                        <p>_placeholder_scope_nature_primary_function_</p>
+                    </div>
+                    <div class="content-block mt-6">
+                        <h3>Overall Scale & Key Metrics</h3>
+                        <ul>
+                            <li><strong>Investment:</strong> _placeholder_scope_metrics_investment_</li>
+                            <li><strong>Duration:</strong> _placeholder_scope_metrics_duration_</li>
+                            <li><strong>R&D Sites:</strong> _placeholder_scope_metrics_rd_sites_</li>
+                            <li><strong>Jobs:</strong> _placeholder_scope_metrics_jobs_</li>
+                            <li><strong>Clinical Trials:</strong> _placeholder_scope_metrics_clinical_trials_</li>
+                            </ul>
+                    </div>
+                    <div class="content-block mt-6">
+                        <h3>Key Locations & Site(s) Overview</h3>
+                        <div class="space-y-6">
+                            <div class="p-5 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                                <h4 class="text-lg font-semibold text-gray-700 mb-2">_placeholder_scope_location_1_title_</h4>
+                                <p class="text-sm text-gray-500 mb-1"><span class="font-medium">Location:</span> _placeholder_scope_location_1_address_</p>
+                                <p class="text-sm text-gray-500 mb-1"><span class="font-medium">Focus:</span> _placeholder_scope_location_1_focus_</p>
+                            </div>
+                            <div class="p-5 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                                <h4 class="text-lg font-semibold text-gray-700 mb-2">_placeholder_scope_location_2_title_</h4>
+                                <p class="text-sm text-gray-500 mb-1"><span class="font-medium">Location:</span> _placeholder_scope_location_2_address_</p>
+                                <p class="text-sm text-gray-600">_placeholder_scope_location_2_focus_</p>
+                            </div>
+                            <div class="p-5 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                                <h4 class="text-lg font-semibold text-gray-700 mb-2">_placeholder_scope_location_3_title_</h4>
+                                <p class="text-sm text-gray-500 mb-1"><span class="font-medium">Location:</span> _placeholder_scope_location_3_address_</p>
+                                <p class="text-sm text-gray-500 mb-1"><span class="font-medium">Focus:</span> _placeholder_scope_location_3_focus_</p>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="content-block mt-6">
+                        <h3>Primary Scope Elements / Key Deliverables</h3>
+                        <ul>
+                            <li>_placeholder_scope_deliverable_1_</li>
+                            <li>_placeholder_scope_deliverable_2_</li>
+                            <li>_placeholder_scope_deliverable_3_</li>
+                            <li>_placeholder_scope_deliverable_4_</li>
+                            <li>_placeholder_scope_deliverable_5_</li>
+                            </ul>
+                    </div>
+                </div>
+                
+                <div class="tab-pane hidden" id="tab3_status">
+                    <div class="content-block">
+                        <h3>Overall Current Status</h3>
+                        <p>_placeholder_status_overall_current_status_paragraph_1_</p>
+                        <p>_placeholder_status_overall_current_status_paragraph_2_</p>
+                    </div>
+                    <div class="content-block mt-6">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-6 text-left">Key Milestones & Projected Timeline</h3>
+                        <div class="relative pl-8 py-4">
+                            <div class="timeline-line"></div>
+                            <div class="space-y-2"> 
+                                <div class="timeline-item">
+                                    <h4 class="font-semibold text-gray-700">_placeholder_timeline_milestone_1_date_</h4>
+                                    <p class="text-sm text-gray-600">_placeholder_timeline_milestone_1_description_</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <h4 class="font-semibold text-gray-700">_placeholder_timeline_milestone_2_date_</h4>
+                                    <p class="text-sm text-gray-600">_placeholder_timeline_milestone_2_description_</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <h4 class="font-semibold text-gray-700">_placeholder_timeline_milestone_3_date_</h4>
+                                    <p class="text-sm text-gray-600">_placeholder_timeline_milestone_3_description_</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <h4 class="font-semibold text-gray-700">_placeholder_timeline_milestone_4_date_</h4>
+                                    <p class="text-sm text-gray-600">_placeholder_timeline_milestone_4_description_</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <h4 class="font-semibold text-gray-700">_placeholder_timeline_milestone_5_date_</h4>
+                                    <p class="text-sm text-gray-600">_placeholder_timeline_milestone_5_description_</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <h4 class="font-semibold text-gray-700">_placeholder_timeline_milestone_6_date_</h4>
+                                    <p class="text-sm text-gray-600">_placeholder_timeline_milestone_6_description_</p>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="content-block mt-6">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-3">Investment & Funding Overview</h3>
+                        <div class="chart-container bg-white p-4 rounded-lg shadow">
+                            <canvas id="investmentChart"></canvas>
+                        </div>
+                        <div class="tight-spacing text-left mt-4"> 
+                            <p class="text-sm text-gray-600"><strong>Total Commitment:</strong> _placeholder_status_investment_total_commitment_</p>
+                            <p class="text-sm text-gray-600"><strong>Grant Support:</strong> _placeholder_status_investment_grant_support_</p>
+                            <p class="text-sm text-gray-600"><strong>Primary Funding Purpose:</strong> _placeholder_status_investment_purpose_</p>
+                        </div>
+                    </div>
+                    <div class="content-block mt-6">
+                        <h3>Key Programme Influencers</h3>
+                        <ul>
+                           <li>_placeholder_status_influencer_1_</li>
+                           <li>_placeholder_status_influencer_2_</li>
+                           <li>_placeholder_status_influencer_3_</li>
+                           <li>_placeholder_status_influencer_4_</li>
+                           </ul>
+                    </div>
+                </div>
+
+                <div class="tab-pane hidden" id="tab4_analysis">
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        _placeholder_analysis_intro_paragraph_</p>
+                    <div class="space-y-3" id="accordionContainerStrategic">
+                        <div class="accordion-item bg-white border border-gray-200 rounded-lg shadow-sm">
+                            <div class="accordion-header flex justify-between items-center p-4">
+                                <h3 class="text-lg font-medium text-gray-700">Stakeholder Dynamics</h3>
+                                <span class="accordion-icon text-xl text-gray-500 transform transition-transform duration-300">❯</span>
+                            </div>
+                            <div class="accordion-content px-4">
+                                <p>_placeholder_analysis_stakeholder_dynamics_content_</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item bg-white border border-gray-200 rounded-lg shadow-sm">
+                            <div class="accordion-header flex justify-between items-center p-4">
+                                <h3 class="text-lg font-medium text-gray-700">Technical & Operational Considerations</h3>
+                                <span class="accordion-icon text-xl text-gray-500 transform transition-transform duration-300">❯</span>
+                            </div>
+                            <div class="accordion-content px-4">
+                                <p>_placeholder_analysis_technical_considerations_content_</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item bg-white border border-gray-200 rounded-lg shadow-sm">
+                            <div class="accordion-header flex justify-between items-center p-4">
+                                <h3 class="text-lg font-medium text-gray-700">Commercial & Procurement Landscape</h3>
+                                <span class="accordion-icon text-xl text-gray-500 transform transition-transform duration-300">❯</span>
+                            </div>
+                            <div class="accordion-content px-4">
+                                <p>_placeholder_analysis_commercial_procurement_content_</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item bg-white border border-gray-200 rounded-lg shadow-sm">
+                            <div class="accordion-header flex justify-between items-center p-4">
+                                <h3 class="text-lg font-medium text-gray-700">Market & Competitive Environment</h3>
+                                <span class="accordion-icon text-xl text-gray-500 transform transition-transform duration-300">❯</span>
+                            </div>
+                            <div class="accordion-content px-4">
+                                <p>_placeholder_analysis_market_competitive_content_</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item bg-white border border-gray-200 rounded-lg shadow-sm">
+                            <div class="accordion-header flex justify-between items-center p-4">
+                                <h3 class="text-lg font-medium text-gray-700">Principal Risks Outlook</h3>
+                                <span class="accordion-icon text-xl text-gray-500 transform transition-transform duration-300">❯</span>
+                            </div>
+                            <div class="accordion-content px-4">
+                                <p>_placeholder_analysis_principal_risks_content_</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane hidden" id="tab_ask_question">
+                    <div class="streamlit-embed-container bg-gray-100 p-2">
+                        <iframe
+                            src="https://construction-intel-chatbot.streamlit.app/?config=_placeholder_streamlit_config_id_&embedded=true"
+                            title="Project Intelligence Chatbot Embed"
+                            allow="fullscreen">
+                        </iframe>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2 text-center">If the chatbot does not load, ensure the URL is correct and the app is running.</p>
+                </div>
+
+                <div class="tab-pane hidden" id="tab5_full_report">
+                    <div class="content-block">
+                        <h3>Unlock the Full Picture: From Snapshot to Comprehensive Dossier</h3>
+                        <p>_placeholder_full_report_intro_paragraph_1_</p>
+                        <p>_placeholder_full_report_intro_paragraph_2_</p>
+                        <p>_placeholder_full_report_intro_paragraph_3_</p>
+                        <div class="my-0"> 
+                            <p class="text-gray-700 mb-1"><strong>Snapshot:</strong> _placeholder_full_report_snapshot_description_</p> 
+                            <p class="text-gray-700 mb-0"><strong>Full Dossier:</strong> _placeholder_full_report_dossier_description_</p> 
+                        </div>
+                        <p>_placeholder_full_report_contact_call_to_action_</p>
+                        <p>Email: _placeholder_full_report_contact_email_</p>
+                        <p class="text-sm text-gray-500 mt-1">Reference: _placeholder_full_report_reference_line_</p>
+                    </div>
+                    <div class="content-block mt-6">
+                        <h3>Inside the Full Dossier: _placeholder_project_main_title_short_ Table of Contents</h3>
+                        <p>Here’s a preview of the comprehensive intelligence awaiting you in the full dossier (_placeholder_full_report_page_count_ pages):</p>
+                        <ul class="list-none pl-0 space-y-1 text-sm">
+                            <li><strong>Section 1:</strong> EXECUTIVE SUMMARY<br>(Covers: _placeholder_full_report_toc_section_1_covers_)</li>
+                            <li><strong>Section 2:</strong> COMPANY INITIATIVE DEEP DIVE<br>(Covers: _placeholder_full_report_toc_section_2_covers_)</li>
+                            <li><strong>Section 3:</strong> PROJECT LEAD & KEY PARTNER ANALYSIS<br>(Covers: _placeholder_full_report_toc_section_3_covers_)</li>
+                            <li><strong>Section 4:</strong> TECHNICAL & OPERATIONAL ASSESSMENT<br>(Covers: _placeholder_full_report_toc_section_4_covers_)</li>
+                            <li><strong>Section 5:</strong> MARKET & COMPETITIVE LANDSCAPE<br>(Covers: _placeholder_full_report_toc_section_5_covers_)</li>
+                            <li><strong>Section 6:</strong> PROCUREMENT STRATEGY & COMMERCIALS<br>(Covers: _placeholder_full_report_toc_section_6_covers_)</li>
+                            <li><strong>Section 7:</strong> RISK REGISTER & ANALYSIS<br>(Covers: _placeholder_full_report_toc_section_7_covers_)</li>
+                            <li><strong>Section 8:</strong> STRATEGIC IMPLICATIONS & ENGAGEMENT OUTLOOK<br>(Covers: _placeholder_full_report_toc_section_8_covers_)</li>
+                            <li><strong>Section 9:</strong> INTELLIGENCE GAPS & RECOMMENDED ACTIONS<br>(Covers: _placeholder_full_report_toc_section_9_covers_)</li>
+                            <li><strong>APPENDICES</strong><br>(Covers: _placeholder_full_report_toc_section_appendices_covers_)</li>
+                            </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+        let investmentChartInstance = null;
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetTabId = btn.dataset.tab;
+
+                tabBtns.forEach(b => {
+                    b.classList.remove('tab-active');
+                    b.classList.add('tab-inactive');
+                });
+                btn.classList.add('tab-active');
+                btn.classList.remove('tab-inactive');
+
+                tabPanes.forEach(pane => {
+                    if (pane.id === targetTabId) {
+                        pane.classList.remove('hidden');
+                        pane.classList.add('active');
+                    } else {
+                        pane.classList.add('hidden');
+                        pane.classList.remove('active');
+                    }
+                });
+
+                if (targetTabId === 'tab3_status' && document.getElementById('investmentChart')) {
+                    // Destroy existing chart before re-rendering to prevent issues
+                    if (investmentChartInstance) {
+                        investmentChartInstance.destroy();
+                    }
+                    renderInvestmentChart();
+                }
+            });
+        });
+
+        function renderInvestmentChart() {
+            const ctx = document.getElementById('investmentChart').getContext('2d');
+            investmentChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['_placeholder_chart_label_1_', '_placeholder_chart_label_2_'], // TEMPLATE_POINT: Chart Labels
+                    datasets: [{
+                        label: '_placeholder_chart_dataset_label_', // TEMPLATE_POINT: Chart Dataset Label
+                        data: [_placeholder_chart_data_1_, _placeholder_chart_data_2_], // TEMPLATE_POINT: Chart Data (numerical)
+                        backgroundColor: [
+                            'rgba(10, 115, 115, 0.7)',
+                            'rgba(79, 132, 196, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(10, 115, 115, 1)',
+                            'rgba(79, 132, 196, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Amount in £ Millions'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    if (value >= 1000) {
+                                        return '£' + (value / 1000) + 'B';
+                                    }
+                                    return '£' + value + 'M';
+                                }
+                            }
+                        },
+                        y: {
+                             grid: {
+                                 display: false
+                             }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.x !== null) {
+                                        if (context.parsed.x >=1000) {
+                                            label += '£' + (context.parsed.x / 1000).toFixed(1) + ' Billion';
+                                        } else {
+                                            label += '£' + context.parsed.x + ' Million';
+                                        }
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        const accordionContainers = ['accordionContainerStrategic']; // Add other accordion container IDs if needed
+        accordionContainers.forEach(containerId => {
+            const accordionContainer = document.getElementById(containerId);
+            if (accordionContainer) {
+                const accordionItems = accordionContainer.querySelectorAll('.accordion-item');
+                accordionItems.forEach(item => {
+                    const header = item.querySelector('.accordion-header');
+                    const content = item.querySelector('.accordion-content');
+                    const icon = item.querySelector('.accordion-icon');
+
+                    if (header && content && icon) {
+                        header.addEventListener('click', () => {
+                            const isOpen = content.classList.contains('open');
+                            
+                            // Close other open accordions within the same container
+                            accordionContainer.querySelectorAll('.accordion-content.open').forEach(openContent => {
+                                if (openContent !== content) {
+                                    openContent.classList.remove('open');
+                                    openContent.style.maxHeight = null;
+                                    const otherIcon = openContent.previousElementSibling.querySelector('.accordion-icon');
+                                    if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+                                }
+                            });
+
+                            if (isOpen) {
+                                content.classList.remove('open');
+                                content.style.maxHeight = null;
+                                icon.style.transform = 'rotate(0deg)';
+                            } else {
+                                content.classList.add('open');
+                                // IMPORTANT: This maxHeight calculation (+32px for padding) is crucial. DO NOT modify it,
+                                // as it ensures all text is visible and prevents cutoff issues with varied content.
+                                content.style.maxHeight = (content.scrollHeight + 32) + "px"; 
+                                icon.style.transform = 'rotate(90deg)';
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize the first tab as active on page load
+            if (tabPanes.length > 0 && !document.querySelector('.tab-pane.active')) {
+                tabPanes[0].classList.remove('hidden');
+                tabPanes[0].classList.add('active');
+            }
+            if (tabBtns.length > 0 && !document.querySelector('.tab-btn.tab-active')) {
+                tabBtns[0].classList.add('tab-active');
+                tabBtns[0].classList.remove('tab-inactive');
+            }
+        });
+    </script>
+</body>
+</html>

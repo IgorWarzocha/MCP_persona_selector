@@ -1,0 +1,387 @@
+{
+  // ... (Assuming metadata, ai_processing_hints, output_instructions, Sections 1, 2 are as previously defined) ...
+  "sections": [
+    // ... (Sections 1, 2 as previously defined) ...
+    {
+      "section_number": 3,
+      "section_title": "PROJECT LEAD & KEY PARTNER ANALYSIS: {{#if project_name_metadata}}{{project_name_metadata}}{{else}}{{company_name_metadata}} - {{initiative_name_metadata}}{{/if}}", // Dynamically populated
+      "section_objective": "To provide a detailed understanding of the primary organisation leading the project/initiative, any key delivery partners, the influential personnel involved, the decision-making dynamics, and key inter-organisational relationships, enabling clients to navigate and engage effectively.",
+      "points": [
+        {
+          "point_id": "3.1",
+          "point_title_final": "Profile of Project Lead Organisation",
+          "ai_generation_goal": "To understand the structure, strategy, relevant history, capabilities, and perceived strengths/weaknesses of the main entity leading/owning the project or initiative.",
+          "key_intelligence_questions_to_address": [
+            "What is the official name, type, and primary role of the Project Lead Organisation in this context?",
+            "What is their relevant organisational structure for this type of project/initiative?",
+            "What is their stated strategy that impacts this project/sector?",
+            "What is their relevant history, track record, and reputation with similar projects or in this market?",
+            "What are their key perceived strengths and weaknesses from the perspective of an organisation looking to engage with them?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Company website (About Us, Investor Relations, Strategy sections), annual reports, Companies House (UK), press releases, industry news, market reports discussing the organisation."
+          ],
+          "structuring_the_output_content_guide": "Use sub-headings: 'Organisation Name & Role in Project'; 'Brief Organisational Overview'; 'Relevant Organisational Structure'; 'Stated Organisational Strategy'; 'Relevant Organisational History & Performance'; 'Key Perceived Strengths'; 'Key Perceived Weaknesses/Challenges.'",
+          "handling_kigs_and_confidence_levels": "Clearly cite sources for strategic statements or performance history. Perceived strengths/weaknesses should be based on OSINT signals or common market perceptions, not pure speculation. Use KIG marker for unavailable critical info.",
+          "value_framing_for_external_client": "Helps clients understand the nature, priorities, capabilities, and potential pain points of the primary organisation they need to engage with.",
+          "content_placeholder_detailed_prompt": "Organisation Name: {{org_name_3_1}}\nRole in Project Context: {{org_role_in_project_3_1}}\nBrief Organisational Overview: {{org_overview_3_1}}\nRelevant Organisational Structure (as it pertains to this type of project): {{org_structure_relevant_3_1}}\nStated Organisational Strategy (impacting this project/sector): {{org_strategy_stated_3_1}}\nRelevant Organisational History & Performance (with similar projects or in this sector): {{org_history_performance_3_1}}\nKey Perceived Strengths (from an engager's perspective):\n{{#each org_strengths_3_1}}\n- {{this.strength_description}}\n{{/each}}\n{{#if (eq org_strengths_3_1.length 0)}}[KIG: No distinct strengths clearly identifiable from OSINT. - Implication: General market perception or standard capabilities assumed.]{{/if}}\nKey Perceived Weaknesses/Challenges (from an engager's perspective):\n{{#each org_weaknesses_3_1}}\n- {{this.weakness_description}}\n{{/each}}\n{{#if (eq org_weaknesses_3_1.length 0)}}[KIG: No distinct weaknesses clearly identifiable from OSINT. - Implication: Engagement risks may be less apparent initially.]{{/if}}",
+          "placeholder_fields": [
+            {
+              "name": "org_name_3_1",
+              "description": "Official Registered Name & Trading Name if different of the Project Lead Organisation.",
+              "example_value": "TechNova Corp PLC (Trading as TechNova Solutions)",
+              "source_hint": "Company website, Companies House."
+            },
+            {
+              "name": "org_role_in_project_3_1",
+              "description": "The organisation's primary role in the project/initiative.",
+              "example_value": "End-User/Client commissioning the Quantum Leap R&D Campus.",
+              "source_hint": "Project announcements, dossier context."
+            },
+            {
+              "name": "org_overview_3_1",
+              "description": "Brief overview of the organisation.",
+              "example_value": "FTSE 250 technology firm specializing in advanced materials and quantum computing research, with global operations.",
+              "source_hint": "Company website 'About Us', annual reports."
+            },
+            {
+              "name": "org_structure_relevant_3_1",
+              "description": "Relevant organisational structure for this type of project.",
+              "example_value": "Capital projects are managed by the 'Global Strategic Projects Division,' with regional execution teams. Decisions for UK projects of this scale are likely to be made by the UK Managing Director in conjunction with the Head of Global Strategic Projects. [KIG: Precise reporting lines for this specific initiative. - Implication: Exact decision-making pathway for project variations may be unclear.]",
+              "source_hint": "Organisational charts if public, investor briefings, news."
+            },
+            {
+              "name": "org_strategy_stated_3_1",
+              "description": "Stated organisational strategy impacting this project/sector. Cite source.",
+              "example_value": "Published strategy to invest £500M in UK R&D infrastructure by 2030 to become a global leader in applied quantum technologies. (Source: Annual Report 2024).",
+              "source_hint": "Annual reports, strategy documents, investor presentations."
+            },
+            {
+              "name": "org_history_performance_3_1",
+              "description": "Relevant history and performance with similar projects or in this sector.",
+              "example_value": "Successfully delivered two major R&D facilities in Germany and the US in the last 5 years. Known for high-specification builds but some past projects experienced an average 10% schedule overrun due to evolving technical requirements (Source: Internal Analysis of Press Reports; Project Omega Case Study).",
+              "source_hint": "Past project announcements, case studies, industry news."
+            },
+            {
+              "name": "org_strengths_3_1",
+              "description": "Array of perceived strengths from an engager's perspective.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {"strength_description": {"type": "string", "example_value": "Strong financial backing and clear long-term strategic vision for this sector."}}
+              },
+              "example_value": [
+                {"strength_description": "Access to world-leading internal scientific expertise."},
+                {"strength_description": "Reputation for fostering innovation and collaborative partnerships."}
+              ],
+              "source_hint": "Synthesize from OSINT signals, market reports."
+            },
+            {
+              "name": "org_weaknesses_3_1",
+              "description": "Array of perceived weaknesses/challenges from an engager's perspective.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {"weakness_description": {"type": "string", "example_value": "Can be slow in decision-making for non-standard commercial proposals due to multiple approval layers."}}
+              },
+              "example_value": [
+                {"weakness_description": "Limited in-house construction project management experience for projects of this scale in the UK."},
+                {"weakness_description": "Historically less focused on early supply chain engagement, leading to potential integration challenges later."}
+              ],
+              "source_hint": "Synthesize from OSINT signals, past project reviews if available."
+            }
+          ]
+        },
+        {
+          "point_id": "3.2",
+          "point_title_final": "Profile of Key Delivery Partner (if applicable)",
+          "ai_generation_goal": "To understand the structure, delivery model, history, and key relationships of any distinct organisation responsible for managing the project's execution on behalf of the Project Lead.",
+          "key_intelligence_questions_to_address": [
+            "Is there a distinct Key Delivery Partner separate from the Project Lead Organisation?",
+            "If so, what is their official name and specific role on this project?",
+            "What is their typical delivery model, organisational structure for project execution, relevant history, and track record?",
+            "What are their key known relationships (with the Project Lead or other influential entities)?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Project announcements, tender award notices, company websites of known PMCs/DMs active in the sector, industry news about project teams."
+          ],
+          "structuring_the_output_content_guide": "Conditional section. If no distinct partner, state this. If yes, profile using sub-headings: 'Organisation Name & Specific Role'; 'Brief Overview'; 'Delivery Model'; 'Relevant History & Track Record'; 'Key Relationships/Alliances.'",
+          "handling_kigs_and_confidence_levels": "Clearly state if the Delivery Partner role is confirmed or inferred. Focus on verifiable OSINT. Use KIG marker for unavailable critical info.",
+          "value_framing_for_external_client": "Helps clients understand the operational management layer of the project, who they might contract with, and that entity's priorities.",
+          "content_placeholder_detailed_prompt": "Is there a distinct Delivery Partner for this project separate from the Project Lead Organisation (profiled in 3.1)? {{#if has_distinct_delivery_partner_3_2}}Yes{{else}}No. Delivery is expected to be managed directly by the Project Lead Organisation (see 3.1 for profile). This section will be brief or state 'Not Applicable'.{{/if}}\n\n{{#if has_distinct_delivery_partner_3_2}}\nOrganisation Name: {{delivery_partner_name_3_2}}\nSpecific Role on this Project: {{delivery_partner_role_3_2}}\nBrief Overview of Delivery Partner: {{delivery_partner_overview_3_2}}\nDelivery Model Employed (for this project or typical): {{delivery_partner_model_3_2}}\nRelevant History & Track Record (with similar projects or Project Lead Org): {{delivery_partner_history_3_2}}\nKey Relationships/Alliances (if known):\n{{#each delivery_partner_relationships_3_2}}\n- {{this.relationship_description}}\n{{/each}}\n{{#if (eq delivery_partner_relationships_3_2.length 0)}}[KIG: No specific key relationships for this delivery partner publicly identified. - Implication: Influence network less clear.]{{/if}}\n{{else}}\n{{#unless has_distinct_delivery_partner_3_2}}\nNot Applicable.\n{{/unless}}\n{{/if}}",
+          "placeholder_fields": [
+            {
+              "name": "has_distinct_delivery_partner_3_2",
+              "description": "Boolean indicating if a distinct delivery partner exists.",
+              "data_type": "boolean",
+              "example_value": true,
+              "source_hint": "Project announcements, team structures."
+            },
+            {
+              "name": "delivery_partner_name_3_2",
+              "description": "Delivery Partner's Official Name (if has_distinct_delivery_partner_3_2 is true).",
+              "example_value": "ConstructManage Solutions Ltd.",
+              "is_conditional_on": "has_distinct_delivery_partner_3_2",
+              "source_hint": "Tender awards, project websites."
+            },
+            {
+              "name": "delivery_partner_role_3_2",
+              "description": "Specific role of the Delivery Partner on this project.",
+              "example_value": "Appointed as Project Management Consultant (PMC) by TechNova Corp to oversee design development, procurement, and construction delivery of the Quantum Leap Campus.",
+              "is_conditional_on": "has_distinct_delivery_partner_3_2",
+              "source_hint": "Contract announcements, role descriptions."
+            },
+            {
+              "name": "delivery_partner_overview_3_2",
+              "description": "Brief overview of the Delivery Partner.",
+              "example_value": "Specialist PMC firm with a strong track record in UK high-tech and R&D facility projects, known for complex stakeholder management.",
+              "is_conditional_on": "has_distinct_delivery_partner_3_2",
+              "source_hint": "Company website, industry profiles."
+            },
+            {
+              "name": "delivery_partner_model_3_2",
+              "description": "Delivery model employed by the partner.",
+              "example_value": "Typically manages a multi-disciplinary design team (appointed separately by client), procures main contractor via two-stage tender, and oversees construction delivery through to handover and commissioning support.",
+              "is_conditional_on": "has_distinct_delivery_partner_3_2",
+              "source_hint": "Case studies, typical service offerings."
+            },
+            {
+              "name": "delivery_partner_history_3_2",
+              "description": "Relevant history and track record.",
+              "example_value": "Successfully delivered 'Project Helix' (a comparable R&D facility) for BioCorp Ltd. and has worked with TechNova Corp on two smaller lab refurbishment projects in the past. Known for achieving demanding technical specifications on time.",
+              "is_conditional_on": "has_distinct_delivery_partner_3_2",
+              "source_hint": "Case studies, press releases."
+            },
+            {
+              "name": "delivery_partner_relationships_3_2",
+              "description": "Array of key relationships/alliances of the delivery partner.",
+              "data_type": "array",
+              "is_conditional_on": "has_distinct_delivery_partner_3_2",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {"relationship_description": {"type": "string", "example_value": "Long-standing relationship with 'Architects XYZ'."}}
+              },
+              "example_value": [
+                {"relationship_description": "Frequently partners with 'M&E Consultants ABC' on complex technical builds."},
+                {"relationship_description": "Known to have a framework of preferred specialist testing and commissioning providers."}
+              ],
+              "source_hint": "Past project teams, industry network analysis."
+            }
+          ]
+        },
+        {
+          "point_id": "3.3",
+          "point_title_final": "Key Personnel Profiles",
+          "ai_generation_goal": "To identify and provide concise, actionable intelligence on 2-4 of the most critical individuals whose decisions or influence could significantly impact a third-party's engagement success.",
+          "key_intelligence_questions_to_address": [
+            "Who are the 2-4 most pivotal individuals in the Project Lead Org, Delivery Partner, key Funder, or lead Advisory firms for this project/initiative?",
+            "What are their official roles and specific responsibilities for this project?",
+            "What is their assessed level of influence on decisions critical to an engaging third party?",
+            "What relevant background, experience, or known preferences do they have (from public sources)?",
+            "Are there any potential engagement angles or insights relevant for a third party?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "LinkedIn profiles, company website 'Our Team' pages, press releases announcing appointments, speaker bios from conferences, articles quoting these individuals, shareholder reports (for directors)."
+          ],
+          "structuring_the_output_content_guide": "Profile 2-4 critical individuals. For each: 'Name'; 'Organisation & Official Role'; 'Key Responsibilities'; 'Assessed Influence Level'; 'Relevant Background & Experience (Source)'; 'Potential Engagement Angle/Insight.'",
+          "handling_kigs_and_confidence_levels": "Focus on publicly verifiable information. Assessed influence is an analytical judgment. 'Potential Engagement Angle' is speculative but informed by OSINT. Use KIG marker if key personnel info is unavailable.",
+          "value_framing_for_external_client": "Provides human intelligence to help clients understand key personalities, tailor communication, and identify who to approach.",
+          "content_placeholder_detailed_prompt": "Profiles of 2-4 most critical individuals:\n\n{{#each key_personnel_3_3}}\nIndividual {{add @index 1}}:\nName: {{this.name}}\nOrganisation & Official Role: {{this.organisation_role}}\nKey Responsibilities (for this project/initiative): {{this.key_responsibilities}}\nAssessed Influence Level (on matters critical to a potential engager): {{this.influence_level}} – Justification: {{this.influence_justification}}\nRelevant Background & Experience: {{this.background_experience}} (Source: {{this.background_source}})\nPotential Engagement Angle/Insight (for a generic engaging company): {{this.engagement_angle}}\n\n{{/each}}\n{{#if (eq key_personnel_3_3.length 0)}}[KIG: Insufficient public information to profile key influential personnel for this project/initiative at this stage. - Implication: Difficulty in targeted stakeholder engagement without further human intelligence or project maturity.]{{/if}}",
+          "placeholder_fields": [
+            {
+              "name": "key_personnel_3_3",
+              "description": "An array of 2-4 objects, each profiling a key individual.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string", "example_value": "Dr. Eleanor Vance"},
+                  "organisation_role": {"type": "string", "example_value": "Head of Global Strategic Projects, TechNova Corp"},
+                  "key_responsibilities": {"type": "string", "example_value": "Overall strategic oversight and final investment approval for the Quantum Leap Campus initiative. Chairs the Project Steering Committee."},
+                  "influence_level": {"type": "enum", "enum_values": ["High", "Medium", "Low"], "example_value": "High"},
+                  "influence_justification": {"type": "string", "example_value": "Direct budgetary control and ultimate decision-maker on strategic partnerships and major contract awards."},
+                  "background_experience": {"type": "string", "example_value": "20 years in global high-tech capital project delivery. Led the development of TechNova's flagship Silicon Valley R&D centre. Known advocate for sustainable design and early contractor involvement."},
+                  "background_source": {"type": "string", "example_value": "LinkedIn Profile; Company Website 'Leadership' Page"},
+                  "engagement_angle": {"type": "string", "example_value": "Approaches emphasizing long-term sustainability benefits, innovation in construction methods, and alignment with global best practice in R&D facility design are likely to resonate. Known to value data-driven proposals and robust risk management plans."}
+                }
+              },
+              "example_value": [
+                // Example for Individual 1 (Dr. Vance) is embedded in properties above
+                {
+                  "name": "Mr. David Lee",
+                  "organisation_role": "Project Director (Quantum Leap Campus), ConstructManage Solutions Ltd.",
+                  "key_responsibilities": "Day-to-day leadership of the PMC team, managing design development, procurement process, and construction phase delivery. Primary interface with main contractor.",
+                  "influence_level": "High",
+                  "influence_justification": "Key recommender to TechNova for contractor selection and manages all operational project decisions.",
+                  "background_experience": "15 years as Project Director on large complex industrial and technology projects. Previously worked for Main Contractor X. Strong focus on programme and commercial control.",
+                  "background_source": "LinkedIn Profile; ConstructManage Website",
+                  "engagement_angle": "Focus on clear communication, demonstrable programme certainty, and proactive commercial management. Values partners who can solve problems autonomously and report effectively."
+                }
+              ],
+              "source_hint": "LinkedIn, company websites, press releases."
+            }
+          ]
+        },
+        {
+          "point_id": "3.4",
+          "point_title_final": "Decision-Making Unit (DMU) Mapping & Process Analysis",
+          "ai_generation_goal": "To illustrate how key decisions relevant to potential engagement are typically made within the Project Lead Organisation (and Key Delivery Partner, if applicable), identifying key players, influencers, and process patterns.",
+          "key_intelligence_questions_to_address": [
+            "For key decision areas relevant to a third-party engager, who are the primary decision-makers?",
+            "Who are the key influencers?",
+            "What is the typical decision-making process and an indicative timeline?",
+            "What are the key KIGs in understanding the DMU/process and their implications?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Synthesis of organisational structure (3.1, 3.2) and personnel profiles (3.3). Public procurement policies or tender documents. Articles on corporate governance. Market intelligence on similar organisations."
+          ],
+          "structuring_the_output_content_guide": "Structure with sub-headings: 'Key Decision Area(s)'; 'Identified Key Decision-Makers'; 'Identified Key Influencers'; 'Typical Decision-Making Process & Timeline'; 'Key Insights/Gaps in DMU Understanding'; 'Potential Implications/Opportunities for Engagement.' Visual DMU map is separate.",
+          "handling_kigs_and_confidence_levels": "DMU mapping from OSINT is often inferential. Clearly state when processes or influence are 'inferred' vs. 'stated'. Use KIG marker for gaps.",
+          "value_framing_for_external_client": "Helps clients target engagement effectively, understand decision timelines, and identify key individuals.",
+          "content_placeholder_detailed_prompt": "Key Decision Area(s) Relevant to Engagement: {{key_decision_areas_3_4}}\n\nIdentified Key Decision-Makers (for these areas):\n{{#each decision_makers_3_4}}\n- Name/Role: {{this.name_role}} – Specific Decision Power: {{this.decision_power}}\n{{/each}}\n{{#if (eq decision_makers_3_4.length 0)}}[KIG: Specific decision-makers for key areas not clearly identifiable. - Implication: Engagement targeting may be less precise.]{{/if}}\n\nIdentified Key Influencers:\n{{#each key_influencers_3_4}}\n- Name/Role: {{this.name_role}} – Nature of Influence: {{this.influence_nature}}\n{{/each}}\n{{#if (eq key_influencers_3_4.length 0)}}[KIG: Specific key influencers not clearly identifiable. - Implication: Understanding of informal power structures is limited.]{{/if}}\n\nTypical Decision-Making Process & Timeline (Known/Inferred for these areas): {{decision_process_timeline_3_4}}\n\nKey Insights/Gaps in DMU Understanding: {{dmu_insights_gaps_3_4}}\nPotential Implications/Opportunities for Engagement: {{dmu_implications_opportunities_3_4}}",
+          "placeholder_fields": [
+            {
+              "name": "key_decision_areas_3_4",
+              "description": "List of key decision areas relevant to an engaging third party.",
+              "example_value": "Selection of main contractor; Approval of major design changes; Appointment of specialist Tier 2 subcontractors for packages >£5M.",
+              "source_hint": "Analyst judgment based on project type and client needs."
+            },
+            {
+              "name": "decision_makers_3_4",
+              "description": "Array of key decision-maker objects.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "name_role": {"type": "string", "example_value": "Dr. Eleanor Vance (Head of Global Strategic Projects, TechNova Corp)"},
+                  "decision_power": {"type": "string", "example_value": "Final approver for main contractor appointment and budget variations >10%."}
+                }
+              },
+              "example_value": [
+                {"name_role": "Mr. David Lee (Project Director, ConstructManage Solutions Ltd.)", "decision_power": "Recommends main contractor to TechNova Steering Committee; approves design changes within contingency."}
+              ],
+              "source_hint": "Synthesize from 3.1, 3.2, 3.3."
+            },
+            {
+              "name": "key_influencers_3_4",
+              "description": "Array of key influencer objects.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "name_role": {"type": "string", "example_value": "Lead Technical Architect (External Consultant - ArchiDesign Ltd.)"},
+                  "influence_nature": {"type": "string", "example_value": "Technical gatekeeper for design compliance and material specifications; strong influence on aesthetic and functional aspects."}
+                }
+              },
+              "example_value": [
+                {"name_role": "Head of Procurement (TechNova Corp)", "influence_nature": "Ensures compliance with procurement policy; influences commercial terms and evaluation weighting."}
+              ],
+              "source_hint": "Synthesize from project team structures, past procurement patterns."
+            },
+            {
+              "name": "decision_process_timeline_3_4",
+              "description": "Typical decision-making process and timeline for the identified areas.",
+              "example_value": "For main contractor appointment on projects >£100M: Longlist via EOI -> PQQ evaluation by PMC & TechNova Procurement -> Shortlist of 3-4 for ITT -> Tender evaluation panel (PMC, TechNova Technical & Procurement leads) scores bids -> Recommendation by PMC to TechNova Steering Committee chaired by Dr. Vance. Process typically takes 6-9 months from EOI to award. [KIG: Precise composition of tender evaluation panel for this specific project. - Implication: Nuances of scoring priorities might be missed.]",
+              "source_hint": "Public procurement documents, industry norms, inferred from org structure."
+            },
+            {
+              "name": "dmu_insights_gaps_3_4",
+              "description": "Key insights or gaps in understanding the DMU.",
+              "example_value": "While formal process is clear, the level of informal influence exerted by TechNova's internal R&D department heads on technical specifications is a KIG. This could lead to late-stage design changes if their requirements are not captured early.",
+              "source_hint": "Analyst synthesis."
+            },
+            {
+              "name": "dmu_implications_opportunities_3_4",
+              "description": "Potential implications or opportunities for engagement based on DMU analysis.",
+              "example_value": "Ensuring both the formal PMC route (Mr. Lee) and key technical influencers within TechNova are engaged early is crucial. Opportunity for firms that can demonstrate strong alignment with TechNova's R&D vision, not just construction capability.",
+              "source_hint": "Analyst synthesis."
+            }
+          ]
+        },
+        {
+          "point_id": "3.5",
+          "point_title_final": "Key Relationship Mapping (Project Entities)",
+          "ai_generation_goal": "To identify and assess significant, publicly known relationships of the Project Lead Organisation and Key Delivery Partner with other entities, highlighting implications for potential engagers.",
+          "key_intelligence_questions_to_address": [
+            "What significant, publicly known past or current project collaborations, JVs, or strategic partnerships does the Project Lead Organisation have?",
+            "What significant relationships does the Key Delivery Partner (if distinct) have?",
+            "How might these existing relationships impact a new third party?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Press releases, company websites (partner pages, case studies), annual reports mentioning key partners, framework award notices, industry news on project collaborations."
+          ],
+          "structuring_the_output_content_guide": "Title: 'Ecosystem Alliances & Key Relationships'. Focus on verifiable OSINT. Structure: 'Key Relationships of [Project Lead Org]'; 'Key Relationships of [Key Delivery Partner] (if distinct)'; 'Potential Implications & Opportunities for an Engaging Third Party.'",
+          "handling_kigs_and_confidence_levels": "Focus on publicly evidenced relationships. Avoid speculation on strength/exclusivity unless supported by evidence. Use KIG marker where appropriate.",
+          "value_framing_for_external_client": "Helps clients understand the existing network, identify allies or competitor links, and navigate the ecosystem.",
+          "content_placeholder_detailed_prompt": "Ecosystem Alliances & Key Relationships:\n\nKey Relationships of {{project_lead_org_name_3_5}} (from 3.1):\n{{#if has_distinct_delivery_partner_3_2_from_context}}\n- With {{delivery_partner_name_3_2_from_context}} (Key Delivery Partner from 3.2): {{project_lead_to_delivery_partner_relationship_3_5}}\n{{/if}}\n- With Other Significant Entities (Consultants, Major Suppliers, JV Partners):\n{{#each project_lead_other_relationships_3_5}}\n  - With {{this.entity_name}}: {{this.relationship_nature}} (Source: {{this.source}})\n{{/each}}\n{{#if (eq project_lead_other_relationships_3_5.length 0)}}  [KIG: No other significant, publicly documented relationships for {{project_lead_org_name_3_5}} identified. - Implication: May indicate a more open field or reliance on project-specific procurement.]{{/if}}\n\n{{#if has_distinct_delivery_partner_3_2_from_context}}\nKey Relationships of {{delivery_partner_name_3_2_from_context}} (Key Delivery Partner from 3.2):\n- With Other Significant Entities:\n{{#each delivery_partner_other_relationships_3_5}}\n  - With {{this.entity_name}}: {{this.relationship_nature}} (Source: {{this.source}})\n{{/each}}\n{{#if (eq delivery_partner_other_relationships_3_5.length 0)}}  [KIG: No other significant, publicly documented relationships for {{delivery_partner_name_3_2_from_context}} identified. - Implication: May indicate a flexible approach to team formation.]{{/if}}\n{{/if}}\n\nPotential Implications & Opportunities for an Engaging Third Party: {{relationship_implications_opportunities_3_5}}",
+          "placeholder_fields": [
+            {
+              "name": "project_lead_org_name_3_5",
+              "description": "Name of the Project Lead Organisation.",
+              "example_value": "TechNova Corp PLC",
+              "source_hint": "From point 3.1 (org_name_3_1)."
+            },
+            {
+              "name": "has_distinct_delivery_partner_3_2_from_context", // AI needs to get this boolean from context of 3.2
+              "description": "Boolean indicating if a distinct delivery partner exists (from 3.2 context).",
+              "data_type": "boolean",
+              "example_value": true
+            },
+            {
+              "name": "delivery_partner_name_3_2_from_context", // AI needs to get this from context of 3.2
+              "description": "Name of the Key Delivery Partner (if one exists, from 3.2 context).",
+              "example_value": "ConstructManage Solutions Ltd.",
+              "is_conditional_on": "has_distinct_delivery_partner_3_2_from_context"
+            },
+            {
+              "name": "project_lead_to_delivery_partner_relationship_3_5",
+              "description": "Nature of relationship between Project Lead and Key Delivery Partner.",
+              "example_value": "ConstructManage Solutions Ltd. has been appointed as PMC on three previous TechNova Corp projects in the last 5 years, focusing on high-tech fit-outs. Known for a collaborative but firm contractual approach. (Source: Joint Press Release, Project Alpha Completion, 2023).",
+              "is_conditional_on": "has_distinct_delivery_partner_3_2_from_context",
+              "source_hint": "Press releases, case studies."
+            },
+            {
+              "name": "project_lead_other_relationships_3_5",
+              "description": "Array of other significant relationships of the Project Lead Org.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "entity_name": {"type": "string", "example_value": "ArchiDesign Ltd. (Lead Architectural Firm)"},
+                  "relationship_nature": {"type": "string", "example_value": "Appointed as lead architect for 2 of TechNova's last 3 major R&D developments in Europe."},
+                  "source": {"type": "string", "example_value": "Project Websites; ArchiDesign Portfolio"}
+                }
+              },
+              "example_value": [
+                {"entity_name": "Quantum Systems Inc.", "relationship_nature": "Strategic R&D alliance announced in 2024 for joint development of quantum entanglement technologies, core to the Quantum Leap Campus's research goals.", "source": "TechNova Corp Investor Briefing Q1 2024"}
+              ],
+              "source_hint": "Press releases, partner pages, annual reports."
+            },
+            {
+              "name": "delivery_partner_other_relationships_3_5",
+              "description": "Array of other significant relationships of the Key Delivery Partner.",
+              "data_type": "array",
+              "is_conditional_on": "has_distinct_delivery_partner_3_2_from_context",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "entity_name": {"type": "string", "example_value": "M&E Consultants ABC"},
+                  "relationship_nature": {"type": "string", "example_value": "Frequent collaboration on technically complex projects, often brought in by ConstructManage at early design stages."},
+                  "source": {"type": "string", "example_value": "Industry event speaker lists; Past project team analysis"}
+                }
+              },
+              "source_hint": "Delivery partner's website, case studies."
+            },
+            {
+              "name": "relationship_implications_opportunities_3_5",
+              "description": "Potential implications and opportunities for an engaging third party based on these relationships.",
+              "example_value": "The established relationship between TechNova and ArchiDesign Ltd. suggests that key design decisions may be heavily influenced by the architect; early engagement with ArchiDesign could be beneficial for suppliers of innovative materials or systems. ConstructManage's preference for M&E Consultants ABC might create a preferred route for M&E subcontractors aligned with ABC or a challenge for others. The strategic alliance with Quantum Systems Inc. may limit opportunities for alternative core technology providers unless a compelling niche or complementary offering can be demonstrated.",
+              "source_hint": "Analyst synthesis based on relationship findings."
+            }
+          ]
+        }
+      ]
+    }
+    // ... (Sections 4-9, appendices, footer would follow) ...
+  ]
+}

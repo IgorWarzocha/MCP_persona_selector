@@ -1,0 +1,340 @@
+{
+    {
+      "section_number": 1,
+      "section_title": "EXECUTIVE SUMMARY",
+      "section_objective": "To provide a concise, high-impact overview of the entire dossier, enabling busy stakeholders to grasp the project's essence, key findings, primary risks, strategic implications, and recommended next steps at a glance. This section must be client-centric and actionable.",
+      "points": [
+        {
+          "point_id": "1.1",
+          "point_title_final": "Project Synopsis & Key Opportunity/Challenge",
+          "ai_generation_goal": "To immediately orient the reader by defining the project and its core strategic relevance (the 'why this, why now'), generating a tight 1-2 sentence synopsis and crystallizing one critical strategic opportunity or challenge.",
+          "key_intelligence_questions_to_address": [
+            "What is the project in one or two clear sentences?",
+            "What is the single most significant strategic opportunity this project presents or the primary challenge it aims to address/poses?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Initial project announcements, high-level project briefs, statements by project leads, executive summaries in planning documents."
+          ],
+          "structuring_the_output_content_guide": "Synopsis: Extremely tight, 1-2 sentences. Opportunity/Challenge: Crystallize one critical point. Ensure flexibility based on overall dossier content. Consider posing the opportunity/challenge as a direct question or bold statement for impact if appropriate.",
+          "handling_kigs_and_confidence_levels": "Information for this point should generally be high-level and confirmable. If core purpose is unclear, this is a major KIG to flag explicitly using the KIG marker.",
+          "value_framing_for_external_client": "Frame the opportunity/challenge in terms that resonate with a business leader looking for strategic advantage or risk mitigation.",
+          "content_placeholder_detailed_prompt": "Synopsis (Max 2 lines): {{synopsis_1_1}}\nKey Strategic Opportunity or Challenge (1 critical point): {{key_opportunity_challenge_1_1}}",
+          "placeholder_fields": [
+            {
+              "name": "synopsis_1_1",
+              "description": "Concise project definition.",
+              "constraints": "Maximum 2 lines.",
+              "example_value": "The 'Quantum Leap Initiative' is a £500 million strategic investment by TechNova Corp to establish a cutting-edge quantum computing research and development campus in Bristol, UK, aiming for completion by 2028.",
+              "source_hint": "Synthesize from primary project announcements, high-level briefs."
+            },
+            {
+              "name": "key_opportunity_challenge_1_1",
+              "description": "The single most significant strategic opportunity this project presents or the primary challenge it aims to address/poses.",
+              "constraints": "1 critical point, framed for impact.",
+              "example_value": "Opportunity: Positions the UK at the forefront of commercial quantum computing, addressing a critical national strategic priority and attracting global talent. Challenge: Navigating the complex and rapidly evolving technological landscape while securing the highly specialized supply chain.",
+              "source_hint": "Identify from project lead statements, strategic documents, or market analysis."
+            }
+          ],
+          "completion_examples": [
+            {
+              "case_description": "Example for a Data Centre Project",
+              "filled_content": "Synopsis (Max 2 lines): Project Cerberus involves the development of a 40MW Tier IV hyperscale data centre facility in the Dublin Enterprise Zone, by Global Data Holdings, targeting operational readiness by Q3 2026.\nKey Strategic Opportunity or Challenge (1 critical point): Opportunity: To capture escalating cloud service provider demand in a power-constrained key European market, offering sustainable and resilient infrastructure."
+            },
+            {
+              "case_description": "Example for a Pharmaceutical Manufacturing Plant",
+              "filled_content": "Synopsis (Max 2 lines): PharmaBuildCo is constructing a new £150M multi-product GMP biologics manufacturing facility in Liverpool for BioSynth Ltd., intended to enhance their global production capacity for next-generation therapies.\nKey Strategic Opportunity or Challenge (1 critical point): Challenge: Ensuring the facility meets stringent evolving regulatory standards (MHRA, FDA) for advanced therapy medicinal products (ATMPs) while adhering to an aggressive construction and validation timeline."
+            }
+          ]
+        },
+        {
+          "point_id": "1.2",
+          "point_title_final": "Summary of Key Findings (Client-Centric View)",
+          "ai_generation_goal": "To provide a distilled essence of the most critical findings from the main analytical pillars (Stakeholder, Technical, Commercial, Competitive) that directly inform a client's understanding and potential engagement strategy. This requires specifying the Target Audience and Project Leading Party for context.",
+          "key_intelligence_questions_to_address": [
+            "Who is the target audience for this dossier (e.g., Contractor, Consultant, Subcontractor)?",
+            "Who is the Project Leading Party (e.g., Developer, End-User, Tier 1 Contractor)?",
+            "For each pillar (Stakeholder, Technical, Commercial, Competitive), what is the single most crucial finding relevant to the target audience engaging with the Project Leading Party?",
+            "What is the primary implication or opportunity for the client arising from each of these key findings?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "This is a synthesis of later detailed sections. Sources will be varied (planning docs, company reports, market analysis, etc.)."
+          ],
+          "structuring_the_output_content_guide": "Begin by stating: 'Target Audience for this Dossier: [Specify]' and 'Project Leading Party: [Specify]'. Then for each pillar (Stakeholder, Technical, Commercial, Competitive): Present the 'Key Finding relevant to [Target Audience] for engaging [Project Leading Party]: [Finding]' followed by '– Implication/Opportunity for Client: [Elaborate concisely]'. Aim for extreme brevity and strategic focus per pillar.",
+          "handling_kigs_and_confidence_levels": "Summarize only well-supported findings. If a pillar has no standout 'key finding' due to KIGs, briefly note this using the KIG marker, e.g., '[KIG: No standout technical finding due to lack of detailed specifications - Implication: Difficulty in assessing specific technical alignment without further info.]'",
+          "value_framing_for_external_client": "Ensure each finding and implication directly addresses 'what's in it for me / what do I need to watch out for' from the perspective of a business considering engagement.",
+          "content_placeholder_detailed_prompt": "Target Audience for this Dossier: {{target_audience_1_2}}\nProject Leading Party: {{project_leading_party_1_2}}\n\nStakeholder Finding: {{stakeholder_finding_1_2}} – Implication/Opportunity for Client: {{stakeholder_implication_1_2}}\nTechnical Finding: {{technical_finding_1_2}} – Implication/Opportunity for Client: {{technical_implication_1_2}}\nCommercial Finding: {{commercial_finding_1_2}} – Implication/Opportunity for Client: {{commercial_implication_1_2}}\nCompetitive Finding: {{competitive_finding_1_2}} – Implication/Opportunity for Client: {{competitive_implication_1_2}}",
+          "placeholder_fields": [
+            {
+              "name": "target_audience_1_2",
+              "description": "The intended recipient profile for this dossier.",
+              "example_value": "Tier 1 Main Contractor",
+              "source_hint": "Specified at dossier initiation, from 'dossier_prepared_for' metadata or ai_processing_hints."
+            },
+            {
+              "name": "project_leading_party_1_2",
+              "description": "The main entity leading or commissioning the project.",
+              "example_value": "Global Tech Developer X",
+              "source_hint": "Identify from Section 3.1 or project announcements."
+            },
+            {
+              "name": "stakeholder_finding_1_2",
+              "description": "Key stakeholder-related finding relevant to target audience engaging project lead.",
+              "example_value": "Project Lead X prioritizes partners with demonstrable local supply chain engagement.",
+              "source_hint": "Synthesize from Section 3."
+            },
+            {
+              "name": "stakeholder_implication_1_2",
+              "description": "Implication/Opportunity of stakeholder finding for the client.",
+              "example_value": "Highlighting local SME partnerships and employment in proposals is crucial.",
+              "source_hint": "Derived from stakeholder finding."
+            },
+            {
+              "name": "technical_finding_1_2",
+              "description": "Key technical finding relevant to target audience engaging project lead.",
+              "example_value": "The project mandates BREEAM Outstanding and Net Zero Carbon in construction.",
+              "source_hint": "Synthesize from Section 4."
+            },
+            {
+              "name": "technical_implication_1_2",
+              "description": "Implication/Opportunity of technical finding for the client.",
+              "example_value": "Significant opportunity for firms with proven sustainable construction expertise and low-carbon material solutions.",
+              "source_hint": "Derived from technical finding."
+            },
+            {
+              "name": "commercial_finding_1_2",
+              "description": "Key commercial finding relevant to target audience engaging project lead.",
+              "example_value": "Project Lead X prefers fixed-price D&B contracts with shared risk on specific pre-agreed items.",
+              "source_hint": "Synthesize from Section 6."
+            },
+            {
+              "name": "commercial_implication_1_2",
+              "description": "Implication/Opportunity of commercial finding for the client.",
+              "example_value": "Requires robust cost estimation and risk management capabilities; potential for higher margins if risks are well-managed.",
+              "source_hint": "Derived from commercial finding."
+            },
+            {
+              "name": "competitive_finding_1_2",
+              "description": "Key competitive finding relevant to target audience engaging project lead.",
+              "example_value": "Incumbent Contractor Y has a strong relationship but lacks recent experience in the specific advanced technology Z required.",
+              "source_hint": "Synthesize from Section 5."
+            },
+            {
+              "name": "competitive_implication_1_2",
+              "description": "Implication/Opportunity of competitive finding for the client.",
+              "example_value": "Opportunity to differentiate by showcasing superior expertise in technology Z and a fresh approach.",
+              "source_hint": "Derived from competitive finding."
+            }
+          ]
+        },
+        {
+          "point_id": "1.3",
+          "point_title_final": "Principal Risks & Potential Mitigation Areas (Client-Centric View)",
+          "ai_generation_goal": "To highlight 2-3 key project-related risks that could impact a client's engagement and to identify potential mitigation areas where the client might offer solutions or should exercise caution. Requires Client Profile and Project Leading Entity.",
+          "key_intelligence_questions_to_address": [
+            "Who is the Client Profile for this dossier?",
+            "Who is the Project Leading Entity?",
+            "What are the 2-3 most significant project risks (from later detailed analysis) that would concern this Client Profile or which they are well-positioned to help mitigate?",
+            "How could this Client Profile's expertise/services address or reduce these risks for the Project Leading Entity?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Synthesis of detailed risk analysis (Section 7) and stakeholder/project understanding (Sections 2, 3, 4)."
+          ],
+          "structuring_the_output_content_guide": "Frame risks and mitigations from the Client Profile's value proposition angle. Structure: 'Client Profile for this Dossier: [Specify]'; 'Project Leading Entity: [Specify]'. For each of 2-3 key risks: 'Risk: [Description of risk] – Potential Mitigation by [Client Profile]: [Explain how client's expertise/service addresses this specific risk, highlighting their potential value to the Project Leading Entity].'",
+          "handling_kigs_and_confidence_levels": "Risks should be based on evidence from the dossier (Section 7). Mitigation suggestions should be logical extensions of typical client capabilities for the stated profile. If insufficient risks are identified for the client profile, state this as a KIG.",
+          "value_framing_for_external_client": "Position risks not just as threats, but as areas where the client can demonstrate their unique value or problem-solving capabilities.",
+          "content_placeholder_detailed_prompt": "Client Profile for this Dossier: {{client_profile_1_3}}\nProject Leading Entity: {{project_leading_entity_1_3}}\n\nIdentified Project Risks (Max 2-3) that directly affect {{client_profile_1_3}}'s potential engagement OR which {{client_profile_1_3}} can help {{project_leading_entity_1_3}} mitigate:\n{{#each identified_risks_1_3}}\nRisk {{add @index 1}}: {{this.description}} – Potential Mitigation by {{../client_profile_1_3}}: {{this.mitigation_by_client}}\n{{/each}}\n{{#if (eq identified_risks_1_3.length 0)}}[KIG: Insufficient distinct project risks directly relevant to the specified Client Profile were identified from the available intelligence. - Implication: General project risks from Section 7 apply, but tailored client-centric risk/mitigation opportunities are not apparent at this stage.]{{/if}}",
+          "placeholder_fields": [
+            {
+              "name": "client_profile_1_3",
+              "description": "The specific profile of the client for whom this risk assessment is tailored.",
+              "example_value": "Specialist M&E Contractor",
+              "source_hint": "Specified at dossier initiation or derived from 'dossier_prepared_for' metadata."
+            },
+            {
+              "name": "project_leading_entity_1_3",
+              "description": "The main entity leading or commissioning the project.",
+              "example_value": "University Estates Department",
+              "source_hint": "Identify from Section 3.1 or project announcements."
+            },
+            {
+              "name": "identified_risks_1_3",
+              "description": "An array of 0 to 3 risk objects, each detailing a risk and its client-centric mitigation. AI should select these from Section 7 based on relevance to client_profile_1_3.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "description": {"type": "string", "example_value": "Delays in securing specialized long-lead M&E equipment due to global supply chain constraints."},
+                  "mitigation_by_client": {"type": "string", "example_value": "Leverage established global supplier network and advanced procurement strategies to secure equipment early and offer alternative sourcing options."}
+                }
+              },
+              "example_value": [
+                {"description": "Complex integration of legacy building systems with new smart building technology.", "mitigation_by_client": "Offer specialist BMS integration expertise and phased retrofitting solutions to minimize disruption."},
+                {"description": "Stringent energy performance targets requiring innovative M&E design.", "mitigation_by_client": "Propose cutting-edge, energy-efficient M&E systems with performance guarantees, backed by detailed modelling."}
+              ],
+              "source_hint": "Synthesize from Section 7, filtered for relevance to client_profile_1_3."
+            }
+          ]
+        },
+        {
+          "point_id": "1.4",
+          "point_title_final": "Strategic Assessment",
+          "ai_generation_goal": "To provide a balanced, high-level evaluation of the project's overall strategic importance, viability, key opportunities, and significant challenges, framed to allow the reader to overlay their own specific strategic fit. This requires specifying a Generalised Client Profile, Project Lead Type, and Project Stage.",
+          "key_intelligence_questions_to_address": [
+            "What is the overall strategic importance and potential of this project considering its current stage and lead entity?",
+            "What is the project's viability/maturity level?",
+            "What is the scale of opportunity for a typical well-positioned engaging firm?",
+            "What are the key strategic drivers for the Project Lead?",
+            "What are the major impediments or accelerators for the project?",
+            "What is the overall strategic recommendation for a generalized client profile to consider regarding this project?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Synthesis of all preceding sections – project details, market context, stakeholder analysis, technical assessment, financial health."
+          ],
+          "structuring_the_output_content_guide": "Content should vary based on project nature. Guiding Perspective: 'To be framed from the viewpoint of a typical [Generalised Client Profile] considering engagement with [Project Lead Type] regarding a project at [Project Stage].' Key aspects to cover: Project Viability/Maturity; Scale of Opportunity; Strategic Drivers for Project Lead; Major Impediments/Accelerators; Overall Strategic Recommendation. ",
+          "handling_kigs_and_confidence_levels": "Assessment should be grounded in dossier findings. Confidence in assessments should be implicitly or explicitly conveyed. KIGs impacting this assessment should be noted using the KIG marker.",
+          "value_framing_for_external_client": "Provide an objective strategic 'temperature check' that empowers the client's own decision-making process rather than making a decision for them.",
+          "content_placeholder_detailed_prompt": "Guiding Perspective for Assessment: (To be framed from the viewpoint of a typical {{generalised_client_profile_1_4}} considering engagement with {{project_lead_type_1_4}} regarding a project at {{project_stage_1_4}}).\n\nKey Assessment Points (Adapt as necessary):\nProject Maturity & Momentum: {{project_maturity_momentum_1_4}}\nScale & Nature of Opportunity (for typical {{generalised_client_profile_1_4}}): {{scale_nature_opportunity_1_4}}\nStrategic Importance to Project Lead: {{strategic_importance_to_lead_1_4}}\nKey Success Factors & Major Hurdles (from typical {{generalised_client_profile_1_4}}'s view): {{key_success_factors_hurdles_1_4}}\nOverall Strategic Recommendation (for typical {{generalised_client_profile_1_4}}'s consideration): {{overall_strategic_recommendation_1_4}}",
+          "placeholder_fields": [
+            {
+              "name": "generalised_client_profile_1_4",
+              "description": "A typical client profile for whom this assessment is framed.",
+              "example_value": "Specialist Contractor in the Pharma sector",
+              "source_hint": "Dossier initiation parameter or derived from 'dossier_prepared_for'."
+            },
+            {
+              "name": "project_lead_type_1_4",
+              "description": "The type of entity leading the project.",
+              "example_value": "Global Pharmaceutical Developer",
+              "source_hint": "Derived from Section 3.1."
+            },
+            {
+              "name": "project_stage_1_4",
+              "description": "The current stage of the project.",
+              "example_value": "Planning Application submitted",
+              "source_hint": "Derived from Section 2.4."
+            },
+            {
+              "name": "project_maturity_momentum_1_4",
+              "description": "Assessment of the project's viability and current progress.",
+              "example_value": "Early credible signals: Planning submitted with strong local authority support, initial funding tranches reportedly secured. Momentum building towards main contractor ECI engagement.",
+              "source_hint": "Synthesize from Sections 2.4, 2.5, 3.1."
+            },
+            {
+              "name": "scale_nature_opportunity_1_4",
+              "description": "Description of the opportunity for the generalised client profile.",
+              "example_value": "Significant and well-aligned: Opportunity to deliver complex GMP manufacturing suites, leveraging specialist cleanroom and process M&E expertise. Potential for long-term service contracts.",
+              "source_hint": "Synthesize from Sections 2.2, 4.1, and client profile capabilities."
+            },
+            {
+              "name": "strategic_importance_to_lead_1_4",
+              "description": "How important this project is to the project lead.",
+              "example_value": "Flagship initiative: Represents a key part of their European expansion and entry into advanced biologics manufacturing. High board-level visibility.",
+              "source_hint": "Synthesize from Section 3.1, project announcements."
+            },
+            {
+              "name": "key_success_factors_hurdles_1_4",
+              "description": "Critical factors for success and major challenges from the client profile's perspective.",
+              "example_value": "Key Success Factors: Demonstrable track record in GMP facility delivery, innovative solutions for energy efficiency. Major Hurdles: Aggressive timeline, securing skilled labour for specialized fit-out, potential for complex interface management with existing site operations.",
+              "source_hint": "Synthesize from Sections 4, 5, 6, 7."
+            },
+            {
+              "name": "overall_strategic_recommendation_1_4",
+              "description": "High-level recommendation for the generalised client profile's consideration.",
+              "example_value": "Priority Target: Engage Proactively. The alignment is strong, and the project's strategic importance to the lead suggests a commitment to quality partners. Prepare for a rigorous PQQ focused on technical competence and past GMP performance.",
+              "source_hint": "Overall synthesis of dossier findings."
+            }
+          ]
+        },
+        {
+          "point_id": "1.5",
+          "point_title_final": "Key Intelligence Gaps Summary",
+          "ai_generation_goal": "To transparently highlight the 2-3 most strategically significant unanswered questions or information gaps that could materially affect an engaging organisation's decision-making or approach, managing expectations about the completeness of the current intelligence. Requires Dossier Date.",
+          "key_intelligence_questions_to_address": [
+            "What are the 2-3 most critical pieces of information that are currently unknown or unverified after diligent OSINT?",
+            "What is the potential impact or implication of each of these key gaps for an organisation considering engagement?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "This is a consolidation of KIGs identified throughout all sections of the dossier and listed in detail in Section 9.1."
+          ],
+          "structuring_the_output_content_guide": "List only the 2-3 most strategically significant KIGs. For each: 'Gap: [Description of KIG, cross-referencing detailed section if helpful, e.g., 'Precise funding confirmation status for Phase 2 (see 2.5)'].' – 'Potential Implication for Engaging Organisation: [Explain why this gap matters, e.g., 'Uncertainty over long-term project continuity could affect resource commitment.']' Ensure consistency with the detailed KIGs listed in Section 9.1.",
+          "handling_kigs_and_confidence_levels": "Focus on verifiable gaps. State implications clearly but without undue speculation. If fewer than 2-3 strategically significant KIGs exist, list what is found. If no *strategically significant* KIGs, state this positively.",
+          "value_framing_for_external_client": "Frame gaps as areas for further due diligence or clarification, potentially highlighting where the client's own networks or further commissioned intelligence could add value.",
+          "content_placeholder_detailed_prompt": "The following are the most strategically significant intelligence gaps identified as of {{dossier_publication_date}}, which could impact an organisation's engagement strategy:\n\n{{#each key_intelligence_gaps_summary_1_5}}\n{{add @index 1}}. Gap: {{this.description}} – Potential Implication for Engaging Organisation: {{this.implication}}\n{{/each}}\n{{#if (eq key_intelligence_gaps_summary_1_5.length 0)}}No strategically significant intelligence gaps impacting immediate engagement decisions were identified at this stage. Detailed KIGs are listed in Section 9.1.{{/if}}",
+          "placeholder_fields": [
+            {
+              "name": "dossier_publication_date",
+              "description": "The publication date of this dossier.",
+              "example_value": "2025-05-28",
+              "source_hint": "From 'metadata_visible_to_client.dossier_publication_date'."
+            },
+            {
+              "name": "key_intelligence_gaps_summary_1_5",
+              "description": "An array of 0 to 3 objects, each describing a key KIG and its implication. AI should select the most strategic KIGs from Section 9.1.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "description": {"type": "string", "example_value": "Confirmed timeline for main contractor appointment and start-on-site for Phase 1."},
+                  "implication": {"type": "string", "example_value": "Difficulty for potential subcontractors in planning resource allocation and bid finalisation."}
+                }
+              },
+              "example_value": [
+                {"description": "Precise funding confirmation status for Phase 2 (see 2.5).", "implication": "Uncertainty over long-term project continuity could affect resource commitment for partners involved in Phase 1."},
+                {"description": "Detailed technical specifications for the bespoke automation system in Lab Block C (see 4.1).", "implication": "Inability for specialist suppliers to accurately cost or assess integration feasibility, potentially delaying procurement for this critical package."}
+              ],
+              "source_hint": "Select top 2-3 strategic KIGs from Section 9.1."
+            }
+          ]
+        },
+        {
+          "point_id": "1.6",
+          "point_title_final": "Concluding Recommendation & Proposed Next Steps (for Client Consideration)",
+          "ai_generation_goal": "To provide a clear, logical, and actionable concluding perspective, guiding the client's thinking on how they might approach the opportunity or project, based on the dossier's overall findings. This requires specifying a Generalised Client Profile.",
+          "key_intelligence_questions_to_address": [
+            "Based on the entire Executive Summary, what is the overall strategic stance an engaging organisation should consider (e.g., prioritize engagement, monitor, approach cautiously)?",
+            "What are 2-3 tangible, actionable next steps that an engaging organisation should consider based on the intelligence presented?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "This is a synthesis of the entire Executive Summary and the strategic direction of the dossier."
+          ],
+          "structuring_the_output_content_guide": "Frame as client-centric and actionable, not a directive. Structure: 'Overall Recommendation (for [Generalised Client Profile]'s consideration regarding this project/opportunity): [e.g., 'High Priority Engagement Advised, subject to clarification of KIGs X & Y']' Then list: 'Proposed Next Steps (for [Generalised Client Profile] to consider): 1. [Specific action...]' Ensure next steps are tangible and link to dossier findings.",
+          "handling_kigs_and_confidence_levels": "Recommendations should be conditional on KIGs where appropriate. Next steps should be realistic and actionable. If overall recommendation is heavily contingent on KIGs, state this.",
+          "value_framing_for_external_client": "Empower the client with a clear summary of what the intelligence means for *them* and what they might *do* next, facilitating their internal decision-making process.",
+          "content_placeholder_detailed_prompt": "Overall Recommendation (for a typical {{generalised_client_profile_1_6}} considering this project/opportunity): {{overall_recommendation_1_6}}\n\nProposed Next Steps (for a typical {{generalised_client_profile_1_6}} to consider):\n{{#each proposed_next_steps_1_6}}\n{{add @index 1}}. {{this.step_description}}\n{{/each}}",
+          "placeholder_fields": [
+            {
+              "name": "generalised_client_profile_1_6",
+              "description": "A typical client profile for whom this recommendation and next steps are framed.",
+              "example_value": "Specialist Engineering Consultancy",
+              "source_hint": "Dossier initiation parameter or derived from 'dossier_prepared_for'."
+            },
+            {
+              "name": "overall_recommendation_1_6",
+              "description": "The overall strategic stance the client should consider.",
+              "example_value": "This project presents a significant but complex opportunity that warrants proactive and well-prepared engagement, contingent on satisfactory resolution of KIGs related to Phase 2 funding.",
+              "source_hint": "Synthesize from entire Executive Summary, especially point 1.4 and 1.5."
+            },
+            {
+              "name": "proposed_next_steps_1_6",
+              "description": "An array of 2-3 objects, each describing a specific, actionable next step for the client.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "step_description": {"type": "string", "example_value": "Thoroughly evaluate internal capabilities against the detailed technical and resource requirements outlined in Sections 4 and 8.3 of this dossier."}
+                }
+              },
+              "example_value": [
+                {"step_description": "Focus business development efforts on clearly articulating a value proposition that addresses the Project Lead's stated objectives regarding sustainability and innovation, as highlighted in Sections 2.1 and 3.1."},
+                {"step_description": "Actively monitor for clarification on Key Intelligence Gaps related to detailed funding for Phase 2 and the specific procurement timeline for specialist packages, as outlined in Section 9.1."},
+                {"step_description": "Initiate early, informal discussions with key influencers within the Project Lead's technical team (see Section 3.3) to understand evolving design requirements for specialist systems."}
+              ],
+              "source_hint": "Derived from key findings, KIGs, and strategic assessment of the dossier."
+            }
+          ]
+        }
+      ]
+    }
+    // ... Subsequent sections (2-9, appendices, footer) would follow, similarly optimized ...
+  ]
+}

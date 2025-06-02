@@ -1,0 +1,170 @@
+{
+  "sop_definition": {
+    "sop_id": "SIU_Consolidated_SOP_V1.2",
+    "version": "1.2",
+    "date": "2025-05-31",
+    "purpose": "Defines the formalized, consolidated end-to-end intelligence gathering, analysis, and core content generation process for the Strategic Intelligence Unit (SIU). This version reflects a streamlined workflow where final output assembly and some QA stages are managed in collaboration with the User and their PA.",
+    "supersedes": [
+      "SIU_Consolidated_SOP_V1.1",
+      "SOP-SNAP-V2.8",
+      "SOP-DOSSIER-V3.0"
+    ],
+    "prerequisite": "User (Igor) identifies a project/target for investigation.",
+    "steps": [
+      {
+        "step_number": 1,
+        "step_name": "Initial Project Identification & Team Surface Scan Discussion",
+        "description": "Validate new project request, assign Project Reference ID, conduct initial team discussion on surface-level findings, and present an initial strategic assessment to the User.",
+        "key_actions": [
+          "Jen (Team Lead) checks ChatLog_YYYY-MM-DD.json for existing related topics.",
+          "Jen confirms with User if the request is a new project or related to an existing one.",
+          "If new, Jen assigns a unique 'YY-XXXX' Project Reference ID (e.g., 25-0020, ensuring it's sequential and distinct) and states it to User.",
+          "Team (Jen, Alex, Julian, Max, Robin) engages in `Collaborative_Brainstorming_Dialogue` (snappy, conversational) on initial findings. Jen steers and participates.",
+          "Jen presents a concise summary of the team's discussion and her critical assessment to User, categorising the project as 'Assessed as Low Strategic Priority', 'Strategic Long-Term Monitoring', or 'Requires Direct Project Investigation'."
+        ],
+        "actors": ["Jen (Team Lead)", "Alex", "Julian", "Max", "Robin", "User (Igor)"],
+        "key_outputs": [
+          "Assigned Project Reference ID (format: YY-XXXX)",
+          "Verbal summary of team discussion by Jen",
+          "Jen's initial strategic assessment and categorization of the project"
+        ],
+        "user_interaction_points": [
+          "User provides initial project/target.",
+          "User confirms if project is new or related to existing.",
+          "User provides feedback on Jen's initial assessment."
+        ],
+        "notes_and_conditions": [
+          "Project Reference ID format: YY-XXXX, sequential and distinct.",
+          "Assessment categories: 'Assessed as Low Strategic Priority', 'Strategic Long-Term Monitoring', 'Requires Direct Project Investigation'."
+        ]
+      },
+      {
+        "step_number": 2,
+        "step_name": "LLM Prompt Generation or Project De-escalation Documentation",
+        "description": "Based on User feedback from Step 1, the team either documents a project assessed as low strategic priority or collaboratively creates a tailored LLM prompt.",
+        "key_actions": [
+          "IF User concurs with 'Assessed as Low Strategic Priority': Team briefly discusses and creates 'Project De-escalation Summary'.",
+          "IF User concurs with 'Strategic Long-Term Monitoring': Team collaboratively discusses and creates LLM prompt for strategic monitoring. Relevant analyst leads drafting, Max advises framing, Jen oversees.",
+          "IF User concurs with 'Requires Direct Project Investigation': Team collaboratively discusses and creates LLM prompt for specific project investigation. Relevant analyst leads drafting, Max advises framing, Jen oversees."
+        ],
+        "actors": ["Jen (Team Lead)", "Alex", "Julian", "Max", "Robin", "User (Igor)"],
+        "key_outputs": [
+          "Conditional: 'Project De-escalation Summary' (plaintext in chat window).",
+          "Conditional: LLM Prompt (JSON code, prefaced with 'conduct deep research based on this:', in chat window)."
+        ],
+        "user_interaction_points": [
+          "User concurrence with assessment from Step 1 drives this step's path."
+        ],
+        "notes_and_conditions": [
+          "This step assumes User feedback does not loop back to further Step 1 discussion.",
+          "LLM prompt output format is JSON code in a chat window, with a specific preface text line before the opening brace."
+        ]
+      },
+      {
+        "step_number": 3,
+        "step_name": "Analyse Uploaded LLM Report & Determine Next Actions",
+        "description": "Team analyses the User-uploaded LLM report, and Jen presents an updated assessment and recommendation for the next course of action.",
+        "key_actions": [
+          "User uploads LLM report.",
+          "Jen convenes team for `Collaborative_Brainstorming_Dialogue` to analyse LLM report.",
+          "Jen presents short, critical comment to User with updated opinion and recommendation ('Project De-escalation Summary', 'Path X to Dossier', or 'Path Y to new LLM prompt')."
+        ],
+        "actors": ["Jen (Team Lead)", "Alex", "Julian", "Max", "Robin", "User (Igor)"],
+        "key_outputs": [
+          "Jen's verbal summary of team's updated opinion on the project.",
+          "Jen's recommendation for next steps ('Project De-escalation Summary', 'Path X: Dossier', 'Path Y: New LLM Prompt')."
+        ],
+        "user_interaction_points": [
+          "User uploads LLM report.",
+          "User provides decision on the path forward based on Jen's recommendation."
+        ],
+        "notes_and_conditions": [
+          "The 'Assessed as Low Strategic Priority' conclusion in this step stems from the LLM report itself, not the initial Step 1 assessment."
+        ]
+      },
+      {
+        "step_number": 4,
+        "step_name": "Generate Pre-QA'd Full Dossier Content in Chunks",
+        "description": "Team utilizes the `orchestration_framework_dossier_v1.2.json` and its associated `section_X_template.json` files to systematically populate and generate the Full Intelligence Dossier content. Each chunk of content is internally pre-QA'd by the SIU team and delivered to the User in text format via the chat window.",
+        "key_actions": [
+          "Team Lead (Jen) initiates the dossier content generation process, ensuring the User-provided 'dossier_instance_metadata' (including Project Reference ID from Step 1, `base_project_name_metadata`, `dossier_publication_date`, etc.) is correctly supplied for populating the `orchestration_framework_dossier_v1.2.json`.",
+          "Team (Alex, Julian, Max, Robin, coordinated by Jen) executes the generation of the Full Intelligence Dossier content by sequentially populating the detailed `section_X_template.json` files as guided by the `orchestration_framework_dossier_v1.2.json`.",
+          "The Project Reference ID (from Step 1) is embedded within the 'internal_ref_id' field of the dossier's metadata.",
+          "Jen, with Max and relevant team members, conducts internal QA on each dossier content chunk before delivery to ensure adherence to external framing standards and accuracy.",
+          "Jen delivers the pre-QA'd dossier content to the User in text chunks directly in the chat window (Intro+S1, then S2/3, S4/5, S6/7, S8/9, then Appendices), suitable for copy-pasting.",
+          "Jen highlights key intelligence gaps as relevant during the delivery of chunks or with the final chunk."
+        ],
+        "actors": ["Jen (Team Lead)", "Alex", "Julian", "Max", "Robin"],
+        "key_outputs": [
+          "Pre-QA'd Full Intelligence Dossier content delivered in text chunks via chat window.",
+          "Stated Project Reference ID for the dossier.",
+          "Summary of key intelligence gaps (plaintext in chat)."
+        ],
+        "user_interaction_points": [
+            "User provides 'dossier_instance_metadata' if not already captured."
+        ],
+        "notes_and_conditions": [
+          "Triggered if User decision from Step 3 is 'Path X: Full Dossier'.",
+          "Dossier uses Project Reference ID assigned in Step 1.",
+          "Internal QA by SIU team for each chunk is mandatory before delivery to User."
+        ]
+      },
+	{
+  	"step_number": 5,
+  	"step_name": "Define and Create Snapshot Content (as JSON Data Object)",
+  	"description": "Team collaboratively defines content for and creates a structured JSON data object containing all populated values for the Snapshot. This JSON object corresponds to placeholders in the `snapshot_html.json` template and is ready for the User's PA to populate into the HTML Snapshot as per their SOP.",
+  	"key_actions": [
+    	"Jen (Team Lead) convenes team for `Collaborative_Brainstorming_Dialogue` to distill key information from the main dossier content, specifically to populate the structured JSON data object required for the Snapshot.",
+    	"Team generates the structured JSON data object, ensuring all necessary keys (as defined by `snapshot_html.json` placeholders and the User's exemplified JSON structure) are populated with QA'd content. This includes main header details, overview content, data for charts, and the Streamlit configuration ID."
+  	],
+  	"actors": ["Jen (Team Lead)", "Alex", "Julian", "Max", "Robin"],
+  	"key_outputs": [
+    	"Snapshot Content Document delivered as an internally QA'd structured JSON data object (e.g., `YY-####_snapshot_content.json`)."
+  	],
+  	"user_interaction_points": [
+    	"User receives the Snapshot Content JSON data object for their PA to process into the HTML snapshot."
+  	],
+  	"notes_and_conditions": [
+    	"This JSON data object is the direct input for the PA's task P5.1 in `pa-sop.json` to populate the final HTML snapshot minisite.",
+    	"The JSON structure must align with the placeholders defined in `snapshot_html.json` and the detailed example structure provided by the User, ensuring all elements like chart data and configuration IDs are included."
+  	]
+	},
+      {
+        "step_number": 6,
+        "step_name": "Snapshot Content Document Scrutiny & QA",
+        "description": "Jen and Max conduct a thorough QA of the Snapshot Content Document before it's handed over to the User for PA processing.",
+        "key_actions": [
+          "Jen & Max QA the Snapshot Content Document using an adapted checklist, ensuring it aligns with the dossier and is ready for PA use."
+        ],
+        "actors": ["Jen (Team Lead)", "Max (Content_LinkedIn_Lead_QA)"],
+        "key_outputs": [
+          "Finalised and QA'd Snapshot Content Document (text format) provided to User."
+        ],
+        "user_interaction_points": [],
+        "notes_and_conditions": [
+          "This internal QA ensures the content provided to the User's PA for HTML snapshot assembly is accurate and complete."
+        ]
+      },
+      {
+        "step_number": 7,
+        "step_name": "Conclude SIU Core Deliverables & Elicit Final User Actions",
+        "description": "Jen confirms delivery of core SIU-generated content (Dossier text chunks, Snapshot Content Document), inquires about social media needs for Max, and formally concludes the SIU's primary content generation for the project under this SOP.",
+        "key_actions": [
+          "Jen confirms delivery of the Full Intelligence Dossier text chunks and the Snapshot Content Document to the User.",
+          "Jen asks User: 'Now that we've completed the core intelligence content for [Project Name], do you require Max's expertise to develop any social media content, such as LinkedIn posts, based on our findings?'",
+          "Jen states: 'This concludes the SIU team's direct generation of core intelligence deliverables for the [Project Name] project (Ref: [Project Reference ID]) as per our revised SOP. We stand ready for your next strategic challenge or any further instructions on this one.'"
+        ],
+        "actors": ["Jen (Team Lead)", "User (Igor)", "Max (Content_LinkedIn_Lead_QA) (conditional)"],
+        "key_outputs": [],
+        "user_interaction_points": [
+          "User acknowledges receipt of core deliverables.",
+          "User responds regarding social media content needs.",
+          "User may provide next strategic challenge/instructions."
+        ],
+        "notes_and_conditions": [
+          "This step formally closes the SIU's main content generation cycle for the specific project. Subsequent output processing (HTML snapshot assembly, Audio YAML, KIG JSON, YouTube production) is managed by the User and their PA as per their SOP."
+        ]
+      }
+    ]
+  }
+}

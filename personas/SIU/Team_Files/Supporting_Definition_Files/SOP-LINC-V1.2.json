@@ -1,0 +1,151 @@
+{
+  "sop_id": "SOP-LINC-V1.2",
+  "version": 1.2,
+  "date": "2025-04-13", // Assuming date from original, adjust if needed
+  "document_purpose": "Defines the standard procedure for proposing, drafting, sanitising, gaining approval for, and preparing text-based LinkedIn content derived from internal intelligence outputs or strategic initiatives. V1.2 replaces specific persona names with generic roles.",
+  "1_Purpose": "To ensure alignment with organisational goals, defined content quality standards, mandatory ethical requirements, critical information security protocols, and incorporates necessary internal reviews and explicit User approval for LinkedIn content.",
+  "2_Scope": "Applies to the creation of all text-based LinkedIn content intended for public dissemination via designated organisational LinkedIn presence(s). Covers the process from content ideation/tasking through to final approved text ready for publication. Assumes adherence to a separate LinkedIn Content Style Guide.",
+  "3_Inputs": [
+    {
+      "input_item": "Content_Request_or_Opportunity",
+      "description": "Trigger to create content (e.g., direction from Management/Requestor, proposal from Marketing/Comms, timely thematic opportunity identified by Content Lead/Team)."
+    },
+    {
+      "input_item": "Source_Material_Reference",
+      "description": "Clear identifier for the specific internal intelligence output (e.g., Report Ref ID, Dossier Section Title/Ref ID, Agreed Thematic Insight Summary) or strategic initiative to be used."
+    },
+    {
+      "input_item": "Strategic_Goal_for_Content",
+      "description": "The primary objective for the specific content piece (e.g., Showcase capability, Highlight specific risk type, Engage target audience, Drive inquiries)."
+    }
+  ],
+  "4_Outputs": [
+    {
+      "output_item": "Approved_LinkedIn_Content_Draft",
+      "description": "Finalised, reviewed, and Approver-confirmed text for the LinkedIn post, including suggested hashtags."
+    },
+    {
+      "output_item": "Process_Log_Entry (Conceptual)",
+      "description": "Record confirming completion of steps, sanitisation checks, review feedback incorporation, and final approval for audit trail."
+    }
+  ],
+  "5_Roles_Responsibilities": [
+    {
+      "role": "Requestor/Approver (e.g., User_Igor, Business Lead)",
+      "responsibility": "Provides strategic direction/content requests; Gives final Go/No-Go approval on drafted content before publication; Reviews proposed exceptions."
+    },
+    {
+      "role": "Content_Lead_Specialist", // Corresponds to Max
+      "responsibility": "Executes this SOP; Proposes content ideas; Accesses Source_Material_Reference; Performs insight extraction & primary sanitisation; Drafts content applying defined style/practices; Manages review workflow; Incorporates feedback; Finalises text."
+    },
+    {
+      "role": "Peer_Reviewer(s) (e.g., Team_Lead_Jen, Subject Matter Expert, Marketing/Comms Manager)",
+      "responsibility": "Provide mandatory peer review focusing on aspects like intelligence integrity, strategic alignment, risk assessment (confidentiality/sensitivity), quality, brand voice consistency, platform suitability, audience engagement potential, and market impact, as relevant to their role."
+    },
+    {
+      "role": "Supporting_SMEs (e.g., Technical_Specialist_Julian, Data_OSINT_Lead_Robin, Stakeholder_Analyst_Alex)",
+      "responsibility": "Provide specific input on data/technical/stakeholder sensitivity only if explicitly requested by Reviewer(s) during the review phase due to flagged concerns."
+    }
+  ],
+  "6_Procedure": [
+    {
+      "step": 6.1,
+      "name": "Initiation_Goal_Confirmation",
+      "actor": "Content_Lead_Specialist",
+      "actions": [
+        "Receive/Identify Content_Request_or_Opportunity.",
+        "Access designated Source_Material_Reference.",
+        "Confirm understanding of Strategic_Goal_for_Content with originator/stakeholders."
+      ]
+    },
+    {
+      "step": 6.2,
+      "name": "Sanitisation_Insight_Extraction",
+      "actor": "Content_Lead_Specialist",
+      "actions": [
+        "Review Source_Material identifying potential insights aligned with Strategic_Goal_for_Content.",
+        "Apply Mandatory Sanitisation Principles (Anonymise/Generalise, Aggregate, Thematic Focus, Publicly Derivable Logic). Prioritise derived content.",
+        "Identify 1-3 core, sanitised insights/themes."
+      ]
+    },
+    {
+      "step": 6.3,
+      "name": "Drafting_Content",
+      "actor": "Content_Lead_Specialist",
+      "actions": [
+        "Draft LinkedIn post text based on sanitised insights.",
+        "Apply agreed Content Style & Best Practices (Voice, Audience, Structure, Value, CTA, Hashtags, Platform)."
+      ]
+    },
+    {
+      "step": 6.4,
+      "name": "Internal_Peer_Review",
+      "actor": "Content_Lead_Specialist (Initiates), Peer_Reviewer(s) (Engage)",
+      "actions": [
+        "Content Lead submits draft and context for mandatory peer review.",
+        "Peer Reviewer(s) assess against defined criteria.",
+        "Reviewer(s) provide specific, actionable feedback or approval. Request SME input if needed."
+      ]
+    },
+    {
+      "step": 6.5,
+      "name": "Iteration_Refinement",
+      "actor": "Content_Lead_Specialist",
+      "actions": [
+        "Incorporate all mandatory feedback.",
+        "Resubmit for confirmation check if major changes were needed."
+      ]
+    },
+    {
+      "step": 6.6,
+      "name": "Final_Approval_Request",
+      "actor": "Content_Lead_Specialist or Peer_Reviewer", // Clarified who might present it
+      "actions": [
+        "Present final proposed content draft to designated Requestor/Approver (User_Igor).",
+        "State basis, sanitisation, peer review completion. Flag any exceptions."
+      ]
+    },
+    {
+      "step": 6.7,
+      "name": "Approver_Decision",
+      "actor": "Requestor/Approver (User_Igor)",
+      "status": "PAUSE_AWAITING_APPROVAL",
+      "actions": [
+        "Provide explicit Go/No-Go approval."
+      ]
+    },
+    {
+      "step": 6.8,
+      "name": "Finalisation_Archival",
+      "actor": "Content_Lead_Specialist",
+      "actions": [
+        "IF Go approved: Log approval, finalise Approved_LinkedIn_Content_Draft. Note visual requirements. Content ready for scheduling/publication.",
+        "IF No-Go: Log decision/reasoning. Archive draft. Await further direction."
+      ]
+    }
+  ],
+  "7_Underlying_Principles": [
+    "Mandatory_Final_Approval: Explicit Approver sign-off required before publishing.",
+    "Rigorous_Sanitisation: Protect confidentiality/sensitivity; focus on derived insights.",
+    "Ethical_Compliance: Adhere strictly to relevant legal/ethical principles.",
+    "Peer_Review: Internal checks required for quality, risk, alignment before Approver review.",
+    "Professional_Standards: Maintain high standards (accuracy, objectivity, clarity, brand voice).",
+    "Traceability: Process steps and approvals conceptually logged."
+  ],
+  "references": [
+    "STYLE-LINC-V1.2.json", // Reference the specific style guide
+    "Strategic_Intelligence_Unit_Team_Context_V1.3_2025-04-26.json" // Reference the main context/protocol
+  ],
+  "document_history": [
+    {
+      "version": 1.2,
+      "date": "2025-04-13",
+      "change": "Original version (from GDoc). Replaced specific persona names with generic roles."
+    },
+    {
+      "version": "1.2-JSON", // Indicate this is the JSON conversion
+      "date": "2025-04-26",
+      "change": "Converted to JSON format for consistency. Added specific references."
+    }
+  ]
+}

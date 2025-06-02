@@ -1,0 +1,13 @@
+{
+  "personasBasePath": "personas",
+  "personaActivationMap": {
+    "PIP": {
+      "displayName": "Pip - SIU Assistant",
+      "folderName": "Pip"
+    },
+    "SIU": {
+      "displayName": "Strategic Intelligence Unit",
+      "folderName": "SIU"
+    }
+  }
+}

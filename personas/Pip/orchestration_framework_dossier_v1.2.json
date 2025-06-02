@@ -1,0 +1,239 @@
+{
+  "framework_id": "SIU_Dossier_AI_Orchestration_Framework_V1.2",
+  "framework_version": "1.2",
+  "creation_date": "2025-05-24",
+  "created_by": "AI Assistant (based on SIU Lead Jen's guidance and Igor's requirements)",
+  "purpose_of_this_framework": "To provide a comprehensive, global template and instructional guide for an AI system. This framework defines global settings, dossier purpose, metadata structure, key variables, a high-level section outline, and overarching AI processing rules. It is designed to enable an AI to effectively utilize individual, detailed dossier section templates (e.g., 'section_1_template.json', 'section_2_template.json') to generate high-quality, consistent, and contextually relevant intelligence products.",
+  "target_ai_system_note": "This document is the master guide. The AI system MUST process this framework first to understand global context and rules. It will then sequentially process individual detailed dossier section template JSON files (e.g., 'section_1_template.json', 'section_2_template.json', etc.) for generating content for each part of the dossier, applying global rules from this framework throughout.",
+
+  "siu_operational_context": {
+    "unit_name": "Strategic Intelligence Unit (SIU)",
+    "unit_objective": "To deliver actionable strategic intelligence, primarily within the UK High-Tech Construction/Engineering sectors, by leveraging OSINT, expert human analysis (simulated by AI personas), and structured reporting methodologies. The SIU aims to provide clients of Igor's service with insights that support their decision-making for project engagement, market strategy, and competitive positioning.",
+    "core_team_roles_summary": {
+      "User_Igor": "Primary stakeholder defining intelligence requirements and approving outputs.",
+      "Persona_Team_Lead_Jen": "Oversees intelligence lifecycle, ensures quality, primary AI persona for interaction.",
+      "Persona_Data_OSINT_Lead_Robin": "Executes OSINT, data verification, initial structuring.",
+      "Persona_Stakeholder_Competitor_Analyst_Alex": "Analyzes stakeholder/competitor landscapes.",
+      "Persona_Technical_Operational_Analyst_Julian": "Assesses technical feasibility, operational risks.",
+      "Persona_Content_QA_Lead_Max": "Ensures final QA against output standards."
+    },
+    "primary_sop_in_use_reference": "SIU_Consolidated_SOP_V1.1.json (External Document)",
+    "key_interaction_protocols_reference": "Strategic_Intelligence_Unit_Team_Context_V1.4_2025-04-28.json (External Document)"
+  },
+
+  "full_intelligence_dossier_definition": {
+    "document_name_format_instruction": "The final document name/title will be '{{project_name_metadata}}'.",
+    "detailed_template_version_reference": "Full_Intelligence_Dossier_v2.0_Standalone_Instructional (as defined in separate section_X_template.json files)",
+    "overall_purpose": "To provide an external organisation (Igor's client) with comprehensive, actionable strategic and operational intelligence on a specific project, company initiative, or defined market landscape. The dossier empowers the recipient to make informed decisions regarding their potential engagement, to better understand associated opportunities and risks, and to formulate effective strategies.",
+    "intended_audience_profile": "Typically senior decision-makers, business development teams, strategy units, bid preparation teams, or commercial managers within companies operating in or targeting the UK High-Tech Construction/Engineering sectors.",
+    "key_characteristics": [
+      "OSINT-Based: All intelligence derived from publicly available sources or through analysis of patterns within such information.",
+      "Objective & Analytical: Presents findings with supporting evidence and clear analytical reasoning.",
+      "Client-Value Focused: Framed to be relevant and valuable to a typical organisation considering engagement.",
+      "Action-Oriented: Aims to provide insights that can directly inform strategic thinking.",
+      "Transparency on Gaps: Clearly identifies Key Intelligence Gaps (KIGs) using the defined global marker.",
+      "Structured & Consistent: Follows a rigorously defined template structure (this framework + section templates)."
+    ]
+  },
+
+  "global_ai_processing_rules_and_hints": {
+    "master_framing_prompt_prefix_for_ai": "You are an AI assistant for the Strategic Intelligence Unit (SIU), tasked with populating a Full Intelligence Dossier. Generate all content from a strictly objective, external perspective, suitable for a formal intelligence briefing to a business client. Explicitly avoid any first-person phrases (e.g., 'we found', 'our SIU team believes', 'our analysis suggests'). Frame all information gaps neutrally using the KIG marker: '[KIG: description_of_gap - Implication: why_it_matters]'. Exclude any discussion of SIU's internal processes, names of research tools used (unless part of the project's own reported tech stack), or internal SIU team assessments about the intelligence gathering process. Adhere meticulously to the structure and instructional guidance provided in the detailed section_X_template.json file you are currently processing, while also applying these global rules. All output must be of high quality and ready for external client review.",
+    "kig_explicit_marker_format": "[KIG: {{description_of_gap}} - Implication: {{implication_of_gap}}]",
+    "default_tone_and_style": "objective_formal_external_analytical",
+    "preferred_units": {"metric": true, "imperial": true, "order_preference": ["metric", "imperial"]},
+    "currency_preference_order": ["GBP", "EUR", "USD"],
+    "source_citation_style": {
+      "style_name": "inline_parenthetical_brief_descriptive",
+      "example_format": "(Source: [Type of Source, e.g., Planning App Doc X], [Publisher/Authority], [Date YYYY-MM-DD])"
+    },
+    "empty_section_handling": {
+      "for_entire_numbered_section": "If an entire numbered section (e.g., Section 5) has no substantive OSINT available after diligent search, the AI should output the section title followed by: 'No significant OSINT identified for this section as of {{dossier_publication_date}}. [KIG: Comprehensive analysis for {{section_title_placeholder}} could not be completed due to lack of public information. - Implication: Understanding of {{key_aspect_covered_by_section_placeholder}} is limited.]'",
+      "for_empty_sub_point": "If a specific sub-point within a section is empty, use the 'kig_explicit_marker_format' within that sub-point's designated output area."
+    },
+    "empty_conditional_block_handling": "If a conditional block or placeholder within a section template (e.g., one dependent on a boolean like 'has_distinct_delivery_partner_3_2') evaluates to no data or its condition is false, the AI MUST omit the entire block, including any associated titles or formatting for that block, to ensure a clean and logical output. Do not leave empty titles or KIG markers for purely optional blocks that have no data to present.",
+    "dynamic_placeholder_population_priority": "AI must populate all `{{handlebar_style_placeholders}}` found in detailed section_X_template.json files. Values should be sourced in this order of priority: 1. Dossier instance metadata (see 'dossier_instance_metadata_schema'). 2. Global variables defined in this framework (see 'key_global_dossier_variables_definitions'). 3. Content generated in preceding, completed sections of the current dossier instance (e.g., `{{project_lead_org_name_from_3_1}}`). 4. Content generated by the AI based on the specific `placeholder_field` instructions within the current section template point, including OSINT research where indicated by `source_hint`."
+  },
+
+  "dossier_instance_metadata_schema": {
+    "project_name_metadata": {
+      "description": "Main document title/header, formatted as 'YY-MM - <Base Project Name> Full Intelligence Dossier'. This full string is the project_name_metadata.",
+      "data_type": "string",
+      "example": "25-05 - Project Atlas Full Intelligence Dossier",
+      "is_required": true,
+      "construction_note_for_ai_or_user": "This field should be populated with the fully constructed title. The 'YY-MM' part is derived from the 'dossier_publication_date' (year and month). The '<Base Project Name>' is the core name of the project/initiative from 'base_project_name_metadata'."
+    },
+    "base_project_name_metadata": {
+      "description": "The core, unformatted name of the project or initiative (e.g., 'Project Atlas'). Used for dynamic section titles if the full formatted 'project_name_metadata' is too long or inappropriate.",
+      "data_type": "string",
+      "example": "Project Atlas",
+      "is_required": true
+    },
+    "company_name_metadata": {"description": "Company name (if 'dossier_primary_focus' is 'Company Strategic Initiative Investigation').", "data_type": "string", "is_optional_if_not_company_initiative": true, "example": "BioNTech SE"},
+    "initiative_name_metadata": {"description": "Initiative name (if 'dossier_primary_focus' is 'Company Strategic Initiative Investigation').", "data_type": "string", "is_optional_if_not_company_initiative": true, "example": "UK R&D Expansion Programme"},
+    "internal_ref_id": {"description": "Internal Reference ID (e.g., YY-XXXX).", "data_type": "string", "example": "25-0123", "is_required": true},
+    "dossier_version": {"description": "Version of this specific dossier instance (e.g., 1.0).", "data_type": "string", "example": "1.0", "is_required": true},
+    "dossier_publication_date": {"description": "Date of Dossier Publication (YYYY-MM-DD). Used to derive 'YY-MM' for the main title.", "data_type": "date", "format": "YYYY-MM-DD", "example": "2025-05-24", "is_required": true},
+    "dossier_prepared_for": {"description": "Intended recipient or client profile. Used by AI for contextual framing.", "data_type": "string", "example": "Confidential Client (Tier 1 Contractor Profile)", "is_optional": true},
+    "dossier_primary_focus": {"description": "Primary subject focus. Guides conditional logic in Section 2 template.", "data_type": "enum", "enum_values": ["Single Project Investigation", "Company Strategic Initiative Investigation"], "example": "Single Project Investigation", "is_required": true},
+    "igors_service_name": {"description": "The designated name of Igor's Strategic Intelligence Unit or service.", "data_type": "string", "example": "Igor's Strategic Intelligence Service", "is_required": true}
+  },
+
+  "dossier_structure_and_section_templates_map": {
+    "table_of_contents_note": "A Table of Contents listing the main numbered sections and their final titles is mandatory for the rendered document. Automated ToC generation is preferred.",
+    "section_files_naming_convention": "section_{{section_number}}_template.json (e.g., section_1_template.json, appendices_template.json)",
+    "sections_outline": [
+      {"section_number": 1, "default_title": "EXECUTIVE SUMMARY", "detailed_template_file": "section_1_template.json", "brief_description": "High-level overview, key findings, risks, strategic assessment, KIGs, recommendations."},
+      {
+        "section_number": 2,
+        "dynamic_title_options_based_on_focus": {
+          "Single Project Investigation": "PROJECT DEEP DIVE: {{base_project_name_metadata}}",
+          "Company Strategic Initiative Investigation": "COMPANY INITIATIVE DEEP DIVE: {{company_name_metadata}} - {{initiative_name_metadata}}"
+        },
+        "detailed_template_file": "section_2_template.json",
+        "brief_description": "Detailed project/initiative information (description, scope, location, programme, budget). Adapts based on 'dossier_primary_focus'."
+      },
+      {
+        "section_number": 3,
+        "dynamic_title_prefix": "PROJECT LEAD & KEY PARTNER ANALYSIS: ",
+        "title_suffix_logic": "If 'dossier_primary_focus' is 'Single Project Investigation', append '{{base_project_name_metadata}}'. Else, append '{{company_name_metadata}} - {{initiative_name_metadata}}'.",
+        "detailed_template_file": "section_3_template.json",
+        "brief_description": "Profiles of Project Lead, Delivery Partner, Key Personnel, DMU, Key Relationships."
+      },
+      {
+        "section_number": 4,
+        "dynamic_title_prefix": "TECHNICAL & OPERATIONAL ASSESSMENT: ",
+        "title_suffix_logic": "If 'dossier_primary_focus' is 'Single Project Investigation', append '{{base_project_name_metadata}}'. Else, append '{{company_name_metadata}} - {{initiative_name_metadata}}'.",
+        "detailed_template_file": "section_4_template.json",
+        "brief_description": "Design Principles, Site Conditions, Buildability, Tech Adoption, ESG/HSQE, Logistics."
+      },
+      {
+        "section_number": 5,
+        "dynamic_title_prefix": "MARKET & COMPETITIVE LANDSCAPE: ",
+        "title_suffix_logic": "If 'dossier_primary_focus' is 'Single Project Investigation', append '{{base_project_name_metadata}}'. Else, append '{{company_name_metadata}} - {{initiative_name_metadata}}'.",
+        "detailed_template_file": "section_5_template.json",
+        "brief_description": "Market Sector Analysis, Competitor Profiles, Subcontractor Landscape, Competitor Strategy, Benchmarking."
+      },
+      {
+        "section_number": 6,
+        "dynamic_title_prefix": "PROCUREMENT STRATEGY & COMMERCIALS: ",
+        "title_suffix_logic": "If 'dossier_primary_focus' is 'Single Project Investigation', append '{{base_project_name_metadata}}'. Else, append '{{company_name_metadata}} - {{initiative_name_metadata}}'.",
+        "detailed_template_file": "section_6_template.json",
+        "brief_description": "Procurement Route, Timeline, Evaluation Criteria, Contract Terms, Financial Health of key entities."
+      },
+      {
+        "section_number": 7,
+        "dynamic_title_prefix": "RISK REGISTER & ANALYSIS: ",
+        "title_suffix_logic": "If 'dossier_primary_focus' is 'Single Project Investigation', append '{{base_project_name_metadata}}'. Else, append '{{company_name_metadata}} - {{initiative_name_metadata}}'.",
+        "detailed_template_file": "section_7_template.json",
+        "brief_description": "Risk Assessment Methodology, Detailed Risk Register relevant to an engager."
+      },
+      {
+        "section_number": 8,
+        "dynamic_title_prefix": "STRATEGIC IMPLICATIONS & ENGAGEMENT OUTLOOK: ",
+        "title_suffix_logic": "If 'dossier_primary_focus' is 'Single Project Investigation', append '{{base_project_name_metadata}}'. Else, append '{{company_name_metadata}} - {{initiative_name_metadata}}'.",
+        "detailed_template_file": "section_8_template.json",
+        "brief_description": "Synthesis of dossier's strategic takeaways: Attractiveness, Ecosystem Strengths/Vulnerabilities, Success Factors, Opportunities/Challenges, Concluding Considerations."
+      },
+      {
+        "section_number": 9,
+        "dynamic_title_prefix": "INTELLIGENCE GAPS & RECOMMENDED ACTIONS: ",
+        "title_suffix_logic": "If 'dossier_primary_focus' is 'Single Project Investigation', append '{{base_project_name_metadata}}'. Else, append '{{company_name_metadata}} - {{initiative_name_metadata}}'.",
+        "detailed_template_file": "section_9_template.json",
+        "brief_description": "Consolidated KIGs, Recommended Actions (SIU & Client), Triggers for Re-evaluation."
+      }
+    ],
+    "appendices_definition": {
+        "detailed_template_file": "appendices_template.json",
+        "note": "Contains supplementary information like Top 5 Sources, Benchmarking Data. Included conditionally based on data availability and relevance, as guided by the 'appendices_template.json' structure."
+    }
+  },
+
+  "key_global_dossier_variables_definitions": [
+    {
+      "variable_name": "{{project_name_metadata}}",
+      "definition": "The FULLY FORMATTED main document title/header: 'YY-MM - <Base Project Name> Full Intelligence Dossier'. Sourced from 'dossier_instance_metadata_schema.project_name_metadata' which is constructed using 'dossier_publication_date' (for YY-MM) and 'base_project_name_metadata'.",
+      "example_usage_in_template": "Main document title/cover page."
+    },
+    {
+      "variable_name": "{{base_project_name_metadata}}",
+      "definition": "The core, unformatted name of the project or initiative (e.g., 'Project Atlas'). Sourced from 'dossier_instance_metadata_schema.base_project_name_metadata'. Used for dynamic section titles where the full formatted title is too long or contextually inappropriate.",
+      "example_usage_in_template": "Dynamic section titles (e.g., Section 2, 3, etc., for 'Single Project Investigation' focus)."
+    },
+    {
+      "variable_name": "{{company_name_metadata}}",
+      "definition": "The name of the primary company when the dossier focus is a 'Company Strategic Initiative Investigation'. Sourced from 'dossier_instance_metadata_schema.company_name_metadata'.",
+      "example_usage_in_template": "Dynamic section titles (e.g., in Section 2 for Company Initiative focus)."
+    },
+    {
+      "variable_name": "{{initiative_name_metadata}}",
+      "definition": "The specific name or focus of the company's strategic initiative. Sourced from 'dossier_instance_metadata_schema.initiative_name_metadata'.",
+      "example_usage_in_template": "Dynamic section titles (e.g., in Section 2 for Company Initiative focus)."
+    },
+    {
+      "variable_name": "{{dossier_publication_date}}",
+      "definition": "The date this specific instance of the dossier is published (YYYY-MM-DD). Sourced from 'dossier_instance_metadata_schema.dossier_publication_date'. Used to denote currency of information and to derive 'YY-MM' for the main title.",
+      "example_usage_in_template": "Risk Assessment Methodology (Sec 7.1), KIG Summary Note (Sec 9.1), Footer Disclaimer, construction of 'project_name_metadata'."
+    },
+    {
+      "variable_name": "{{dossier_prepared_for}}",
+      "definition": "The intended primary recipient profile for this dossier instance. Sourced from 'dossier_instance_metadata_schema.dossier_prepared_for'. Used by AI for contextual framing of client-centric points.",
+      "example_usage_in_template": "Guidance notes for Executive Summary points (e.g., 1.2, 1.3, 1.6)."
+    },
+    {
+      "variable_name": "{{project_lead_org_name_from_3_1}}",
+      "definition": "The name of the Project Lead Organisation as formally identified and profiled in Section 3.1 of the dossier. This variable is populated by the AI after Section 3.1 is drafted. Used for consistent contextual references.",
+      "derivation_logic": "Populated by AI from content generated in Section 3.1 (specifically, from the field 'org_name_3_1' within its 'placeholder_fields').",
+      "example_usage_in_template": "Referenced throughout dossier when referring to the main project entity."
+    },
+    {
+      "variable_name": "{{delivery_partner_name_from_3_2}}",
+      "definition": "The name of the Key Delivery Partner as identified in Section 3.2 (if one exists). Populated by AI after Section 3.2. Used for contextual references.",
+      "derivation_logic": "Populated by AI from content generated in Section 3.2 (specifically, from the field 'delivery_partner_name_3_2' within its 'placeholder_fields', if 'has_distinct_delivery_partner_3_2' is true).",
+      "example_usage_in_template": "Referenced where relevant if a distinct delivery partner exists."
+    },
+    {
+      "variable_name": "{{igors_service_name}}",
+      "definition": "The designated name of Igor's Strategic Intelligence Unit or service. Sourced from 'dossier_instance_metadata_schema.igors_service_name'.",
+      "example_usage_in_template": "Disclaimer in Footer, Recommended Actions in Section 9.2, SIU Operational Context."
+    },
+    {
+      "variable_name": "{{kig_explicit_marker_format}}",
+      "definition": "The standard global format string to be used when explicitly identifying a Key Intelligence Gap. Defined in 'global_ai_processing_rules_and_hints.kig_explicit_marker_format'. The AI will substitute the specific gap and implication into this format.",
+      "value_from_config": "global_ai_processing_rules_and_hints.kig_explicit_marker_format",
+      "example_usage_in_template": "Used throughout all sections where KIGs are identified within narrative text or placeholders."
+    },
+    {
+      "variable_name": "{{section_title_placeholder}}",
+      "definition": "A placeholder used in the 'empty_section_handling' rule to dynamically insert the title of the section that is found to be empty.",
+      "derivation_logic": "Dynamically populated by the AI with the title of the current section being processed if that section is deemed empty.",
+      "example_usage_in_template": "Used internally by AI when applying 'global_ai_processing_rules_and_hints.empty_section_handling.for_entire_numbered_section'."
+    },
+    {
+      "variable_name": "{{key_aspect_covered_by_section_placeholder}}",
+      "definition": "A placeholder used in the 'empty_section_handling' rule to dynamically insert a brief description of the key aspect covered by the section that is found to be empty.",
+      "derivation_logic": "Dynamically populated by the AI with a summary of the empty section's objective or content area.",
+      "example_usage_in_template": "Used internally by AI when applying 'global_ai_processing_rules_and_hints.empty_section_handling.for_entire_numbered_section'."
+    }
+  ],
+
+  "dossier_footer_content_schema": {
+    "disclaimer_template": "This report has been prepared by {{igors_service_name}} based on publicly available information and other sources believed to be reliable as of the date of this report ({{dossier_publication_date}}). No representation or warranty, express or implied, is made as to the accuracy or completeness of this information. This report is for informational purposes only and should not be relied upon as legal, financial, or investment advice without independent verification. Recipients should conduct their own independent due diligence and verification. {{igors_service_name}} shall not be liable for any loss or damage arising from the use of this report.",
+    "contact_information": "igorwarzocha@gmail.com",
+    "dynamic_footer_fields_to_populate": [
+        {"field_name_in_template": "{{igors_service_name}}", "source_metadata_field": "igors_service_name"},
+        {"field_name_in_template": "{{dossier_publication_date}}", "source_metadata_field": "dossier_publication_date"}
+    ]
+  },
+
+  "final_ai_workflow_summary_for_dossier_generation": [
+    "1. **Activate Framework under SOP Guidance:** When directed by Step 4 of `SIU_Consolidated_SOP_V1.1.json` (or equivalent operational directive), the AI team ingests this 'SIU_Dossier_AI_Orchestration_Framework_V1.2' to understand all global rules, context, metadata schema, and the overall dossier structure map for generating the Full Intelligence Dossier.",
+    "2. **Acquire Instance Metadata:** AI receives the specific values for all fields defined in 'dossier_instance_metadata_schema' for the current dossier instance. This includes constructing the 'project_name_metadata' using 'YY-MM' from 'dossier_publication_date' and the 'base_project_name_metadata'.",
+    "3. **Iterate Through Sections:** AI processes sections sequentially as per 'dossier_structure_and_section_templates_map.sections_outline'.",
+    "4. **Load Detailed Section Template:** For each section, AI loads the corresponding 'section_X_template.json' file (e.g., 'section_1_template.json').",
+    "5. **Apply Global and Sectional Instructions:** AI generates content for the current section by: \n    a. Adhering to 'global_ai_processing_rules_and_hints' (especially the 'master_framing_prompt_prefix_for_ai').\n    b. Following the specific instructions within the loaded 'section_X_template.json' (e.g., `ai_generation_goal`, `placeholder_fields`, `content_placeholder_detailed_prompt`).\n    c. Populating all placeholders using the defined priority (instance metadata like 'base_project_name_metadata' for section titles, global vars from this framework, preceding section context, current section generation guided by OSINT hints).",
+    "6. **Manage KIGs:** Consistently use the 'kig_explicit_marker_format' for all identified KIGs, providing both the gap description and its implication.",
+    "7. **Handle Conditional Logic & Dynamic Titles:** Adapt content generation based on 'dossier_primary_focus' metadata as required by the detailed section templates (especially Section 2). Construct dynamic section titles using 'base_project_name_metadata' or 'company_name_metadata'/'initiative_name_metadata' as specified by the 'title_suffix_logic' in 'dossier_structure_and_section_templates_map.sections_outline'.",
+    "8. **Process Appendices and Footer:** After all main sections, generate Appendices (using 'appendices_template.json' and conditional logic for inclusion as defined in that template) and the Footer (using 'dossier_footer_content_schema' from this framework).",
+    "9. **Flag for QA:** Indicate completion and readiness for human QA against 'SIU_Dossier_QA_Checklist_vX.Y' (external document)."
+  ]
+}

@@ -1,0 +1,311 @@
+{
+  // ... (Assuming metadata, ai_processing_hints, output_instructions, Sections 1-4 are as previously defined) ...
+  "sections": [
+    // ... (Sections 1-4 as previously defined) ...
+    {
+      "section_number": 5,
+      "section_title": "MARKET & COMPETITIVE LANDSCAPE: {{#if project_name_metadata}}{{project_name_metadata}}{{else}}{{company_name_metadata}} - {{initiative_name_metadata}}{{/if}}", // Dynamically populated
+      "section_objective": "To provide a comprehensive understanding of the relevant market sector, including key trends, drivers, challenges, and the competitive environment, enabling an informed assessment of the project's context and an engaging organisation's potential positioning.",
+      "note": "This section requires dedicated market and competitor OSINT research. Information should be UK-specific or for another relevant geography as defined by the project scope.",
+      "points": [
+        {
+          "point_id": "5.1",
+          "point_title_final": "Market Sector Analysis: Key Trends & Outlook",
+          "ai_generation_goal": "To provide a strategic overview of the relevant market sector(s), including current drivers, challenges, emerging trends, and the near-term outlook, contextualizing the project/initiative.",
+          "key_intelligence_questions_to_address": [
+            "What is the specific market sector(s) relevant to this project/initiative?",
+            "What are the 2-3 primary factors stimulating growth and demand in this sector?",
+            "What are the 2-3 significant headwinds or challenges facing this sector?",
+            "What are the key current and emerging trends (e.g., technology, design, delivery models, sustainability) within this sector?",
+            "What is the general market size (if available) and the short to medium-term outlook?",
+            "What are the key implications of these market conditions for the Project Lead Organisation and for a potential engaging third party?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Reputable industry reports (e.g., from major consultancies, market research firms, industry bodies), specialist trade press, financial news, government economic data/reports, company reports from major players in the sector."
+          ],
+          "structuring_the_output_content_guide": "Structure with sub-headings: 'Defined Market Sector(s)'; 'Key Market Drivers'; 'Key Market Challenges & Restraints'; 'Current & Emerging Market Trends'; 'Market Size & Outlook'; 'Key Implications of Market Conditions.' Ensure flexibility based on OSINT; focus on insight over quantity.",
+          "handling_kigs_and_confidence_levels": "Clearly cite all sources for market data, trends, and forecasts. State confidence levels for outlooks. If market size data is a KIG, focus on qualitative drivers/trends and mark explicitly.",
+          "value_framing_for_external_client": "Provide an objective assessment of the market that helps any engaging organisation understand the broader forces at play and identify strategic opportunities or threats.",
+          "content_placeholder_detailed_prompt": "Defined Market Sector(s) for this Analysis: {{defined_market_sector_5_1}}\n\nKey Market Drivers (Growth & Demand):\n{{#each market_drivers_5_1}}\n- Driver {{add @index 1}}: {{this.description}} (Source: {{this.source}})\n{{/each}}\n{{#if (eq market_drivers_5_1.length 0)}}[KIG: Specific market drivers for this sector not clearly identified from OSINT. - Implication: Understanding of demand stimulants is limited.]{{/if}}\n\nKey Market Challenges & Restraints:\n{{#each market_challenges_5_1}}\n- Challenge {{add @index 1}}: {{this.description}} (Source: {{this.source}})\n{{/each}}\n{{#if (eq market_challenges_5_1.length 0)}}[KIG: Specific market challenges for this sector not clearly identified from OSINT. - Implication: Understanding of market headwinds is limited.]{{/if}}\n\nCurrent & Emerging Market Trends (Technology, Design, Delivery Models, Sustainability):\n{{#each market_trends_5_1}}\n- Trend {{add @index 1}}: {{this.description}} (Source: {{this.source}})\n{{/each}}\n{{#if (eq market_trends_5_1.length 0)}}[KIG: Specific current/emerging trends for this sector not clearly identified from OSINT. - Implication: Forward-looking market understanding is limited.]{{/if}}\n\nMarket Size & Outlook (Short to Medium Term, e.g., 1-3 years):\n{{market_size_outlook_5_1}}\n\nKey Implications of Market Conditions for Project Lead & Potential Engagers:\n{{market_implications_5_1}}",
+          "placeholder_fields": [
+            {
+              "name": "defined_market_sector_5_1",
+              "description": "Specific market sector(s) relevant to this project/initiative.",
+              "example_value": "UK Data Centre Colocation Market, specifically focusing on hyperscale demand and sustainable facilities.",
+              "source_hint": "Project scope, industry context."
+            },
+            {
+              "name": "market_drivers_5_1",
+              "description": "Array of 2-3 primary market driver objects.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "description": {"type": "string", "example_value": "Exponential growth in enterprise data generation, cloud adoption (IaaS, PaaS, SaaS), and AI/ML workloads."},
+                  "source": {"type": "string", "example_value": "TechGrowth Insights Report 2025"}
+                }
+              },
+              "example_value": [
+                {"description": "Increased demand for data sovereignty and low-latency access driving regional data centre development.", "source": "EuroStat Digital Economy Review 2024"}
+              ],
+              "source_hint": "Industry reports, financial news."
+            },
+            {
+              "name": "market_challenges_5_1",
+              "description": "Array of 2-3 significant market challenge objects.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "description": {"type": "string", "example_value": "Power availability and grid connection lead times in key geographies (e.g., West London, Dublin)."},
+                  "source": {"type": "string", "example_value": "National Grid Future Energy Scenarios 2024"}
+                }
+              },
+              "example_value": [
+                {"description": "Shortage of skilled labour for data centre construction and operation.", "source": "Construction Industry Council Skills Report 2025"},
+                {"description": "Increasing pressure for sustainable operations and transparent ESG reporting.", "source": "Global Data Centre Sustainability Forum 2024"}
+              ],
+              "source_hint": "Industry reports, news, government data."
+            },
+            {
+              "name": "market_trends_5_1",
+              "description": "Array of key current and emerging market trend objects.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "description": {"type": "string", "example_value": "Increasing focus on sustainable data centre design (e.g., liquid cooling, waste heat recovery) and renewable energy procurement."},
+                  "source": {"type": "string", "example_value": "DataCentre Dynamics Trend Report 2025"}
+                }
+              },
+              "example_value": [
+                {"description": "Adoption of modular/prefabricated construction methods to accelerate delivery.", "source": "Industry press"},
+                {"description": "Growing importance of AI-driven DCIM and predictive maintenance.", "source": "Gartner Magic Quadrant for DCIM 2024"}
+              ],
+              "source_hint": "Trade press, market research, analyst reports."
+            },
+            {
+              "name": "market_size_outlook_5_1",
+              "description": "General market size (if available) and short to medium-term outlook. Cite sources & state confidence.",
+              "example_value": "The UK data centre market was valued at £7.2bn in 2024 and is projected to grow at a CAGR of 8.5% to reach £10.8bn by 2028 (Source: MarketScope UK DC Report 2025 – Confidence: Medium). Outlook is strong but contingent on resolving power supply constraints and geopolitical stability. [KIG: Specific market share breakdown by hyperscaler vs. enterprise. - Implication: Nuance of demand drivers less clear.]",
+              "source_hint": "Market research reports, financial analyst statements."
+            },
+            {
+              "name": "market_implications_5_1",
+              "description": "Key implications of these market conditions for the Project Lead and potential engagers.",
+              "example_value": "Strong market demand supports the [Project Lead Organisation]'s expansion plans in this sector, but competition for prime sites with adequate power is intense. This creates opportunities for developers/contractors who can demonstrate speed, secure grid capacity, and deliver highly efficient, sustainable facilities. Engagers must be prepared for inflationary pressures on materials and labour.",
+              "source_hint": "Analyst synthesis of preceding sub-points."
+            }
+          ]
+        },
+        {
+          "point_id": "5.2",
+          "point_title_final": "Key Competitor Profiles (Targeting Project Lead Engagement)",
+          "ai_generation_goal": "To provide targeted profiles of 2-3 primary competitors who have a demonstrable track record or existing relationship with the specific Project Lead Organisation, enabling an understanding of the immediate competitive landscape for engagement.",
+          "key_intelligence_questions_to_address": [
+            "Which 2-3 companies are key competitors for engagement with the specific Project Lead Organisation?",
+            "For each: relevant experience/capabilities concerning this Project Lead or project type?",
+            "Perceived strengths/weaknesses specifically in context of engaging this Project Lead?",
+            "Recent wins/losses involving this Project Lead?",
+            "Potential key personnel for engaging this Project Lead?",
+            "Likely competitive strategy when pursuing work with this Project Lead?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Project award notices, framework supplier lists, company case studies mentioning the Project Lead, press releases on joint projects, LinkedIn analysis of personnel connections, news articles detailing past bids or partnerships with the Project Lead."
+          ],
+          "structuring_the_output_content_guide": "State selection rationale. For each competitor (2-3): 'Competitor Name'; 'Overview & Market Positioning re: Project Lead'; 'Relevant Experience/Capabilities (with/for Project Lead)'; 'Perceived Strengths (re: Project Lead)'; 'Perceived Weaknesses (re: Project Lead - public signals)'; 'Recent Wins/Losses (with Project Lead)'; 'Potential Key Personnel'; 'Likely Competitive Strategy'; 'Key Implications for alternative firm.'",
+          "handling_kigs_and_confidence_levels": "Focus on verifiable interactions with Project Lead. If direct history is KIG, state this and rationale for 'likely' competitors. Weaknesses must be from public signals. Use KIG marker.",
+          "value_framing_for_external_client": "Provides a realistic view of main competition specifically for opportunities with the target Project Lead, enabling focused counter-strategies.",
+          "content_placeholder_detailed_prompt": "Selection Rationale for Competitors: {{competitor_selection_rationale_5_2}}\n\n{{#each competitor_profiles_5_2}}\nCompetitor Profile {{add @index 1}}:\nCompetitor Organisation Name: {{this.name}}\nBrief Overview & Market Positioning relative to {{project_lead_org_name_from_3_1}}: {{this.overview_positioning}}\nRelevant Experience & Capabilities (with/for {{project_lead_org_name_from_3_1}} or highly similar contexts): {{this.experience_capabilities}}\nPerceived Strengths (in context of {{project_lead_org_name_from_3_1}}): {{this.strengths}}\nPerceived Weaknesses/Vulnerabilities (in context of {{project_lead_org_name_from_3_1}} – based on public signals only): {{this.weaknesses}}\nRecent Notable Wins & Losses (specifically involving {{project_lead_org_name_from_3_1}}, if known): {{this.wins_losses}}\nPotential Key Personnel for engaging {{project_lead_org_name_from_3_1}}: {{this.key_personnel}}\nInitial Thoughts on their Likely Competitive Strategy (when targeting {{project_lead_org_name_from_3_1}}): {{this.likely_strategy}}\nKey Implications/Considerations for an alternative firm engaging {{project_lead_org_name_from_3_1}}: {{this.implications_for_alt_firm}}\n\n{{/each}}\n{{#if (eq competitor_profiles_5_2.length 0)}}[KIG: Insufficient OSINT to identify specific key competitors with demonstrable track record targeting {{project_lead_org_name_from_3_1}}. - Implication: Competitive landscape for this specific engagement is currently unclear.]{{/if}}",
+          "placeholder_fields": [
+            {
+              "name": "competitor_selection_rationale_5_2",
+              "description": "Rationale for selecting the profiled competitors.",
+              "example_value": "Competitors selected based on their known past working history, framework co-membership, or direct competitive engagement for similar large-scale data centre projects with {{project_lead_org_name_from_3_1}} in the UK & Ireland.",
+              "source_hint": "Analyst judgment based on research."
+            },
+            {
+              "name": "project_lead_org_name_from_3_1", // AI needs to pull this from context of 3.1
+              "description": "Name of the Project Lead Organisation (from point 3.1).",
+              "example_value": "Global Data Holdings PLC",
+              "source_hint": "From point 3.1 (org_name_3_1)."
+            },
+            {
+              "name": "competitor_profiles_5_2",
+              "description": "Array of 2-3 competitor profile objects.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string", "example_value": "Construct PLC"},
+                  "overview_positioning": {"type": "string", "example_value": "Major Tier 1 UK contractor with extensive data centre new build experience. Often competes directly with firms targeting Global Data Holdings PLC."},
+                  "experience_capabilities": {"type": "string", "example_value": "Delivered three 30MW+ data centres in the UK in last 5 years. Previously lost a bid to Global Data Holdings PLC on Project X (2023) but was on the shortlist. Strong in-house M&E capabilities."},
+                  "strengths": {"type": "string", "example_value": "Strong balance sheet, large resource pool, established supply chain for critical plant."},
+                  "weaknesses": {"type": "string", "example_value": "Perceived as less agile than smaller competitors; some market reports suggest recent margin pressure. (Source: Construction News Analysis 2025)."},
+                  "wins_losses": {"type": "string", "example_value": "Lost 'Project Hydra' bid to Global Data Holdings PLC in 2024. Won 'Project Titan' (similar client type) in 2023. [KIG: Specific reasons for loss on Project Hydra. - Implication: Lessons learned unclear.]"},
+                  "key_personnel": {"type": "string", "example_value": "John Smith (Business Development Director, Data Centres), Sarah Jones (Head of Major Projects)."},
+                  "likely_strategy": {"type": "string", "example_value": "Likely to compete on scale, reliability, and proven delivery track record. May emphasize their end-to-end service capability."},
+                  "implications_for_alt_firm": {"type": "string", "example_value": "Alternative firms need to highlight agility, innovation, or niche specialism to differentiate from Construct PLC's scale-based offering."}
+                }
+              },
+              "source_hint": "Competitor websites, annual reports, press, project databases."
+            }
+          ]
+        },
+        {
+          "point_id": "5.3",
+          "point_title_final": "Specialist Subcontractor Landscape & Key Relationships",
+          "ai_generation_goal": "To identify key specialist subcontractor packages relevant to the project/initiative and assess the landscape, focusing on firms with known relationships with the Project Lead Organisation or Key Delivery Partner, or highlighting where such relationships are not publicly evident.",
+          "key_intelligence_questions_to_address": [
+            "What are 2-4 critical specialist work packages for this project/initiative?",
+            "For each package: Are there specialist subcontractors with known existing relationships or a strong track record with the Project Lead Organisation or Key Delivery Partner for this type of work?",
+            "If no specific relationships are publicly known for a package, what does the general specialist market for that package look like? Does this represent a potential opening?",
+            "What are the overall implications for a third party?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Project team lists from similar past projects by the Project Lead/Delivery Partner, industry directories, case studies, news articles mentioning specialist involvement, framework agreements listing specialist suppliers."
+          ],
+          "structuring_the_output_content_guide": "List 2-4 critical specialist packages. For each: detail known specialist subs with relationships OR state 'No publicly identifiable preferred specialist...' and comment on general market. Conclude with 'Overall Implications for Engagement.' Emphasize relationships over capacity.",
+          "handling_kigs_and_confidence_levels": "Focus on verifiable relationships. Clearly state when lack of known relationships is the key finding. Avoid speculation on capacity unless strong OSINT exists. Use KIG marker.",
+          "value_framing_for_external_client": "Helps clients understand existing specialist supply chain ecosystem, identify partners/competitors at specialist level, and spot opportunities where established relationships are not apparent.",
+          "content_placeholder_detailed_prompt": "Critical Specialist Packages Identified for this Project/Initiative:\n{{#each critical_specialist_packages_5_3}}\n{{add @index 1}}. {{this.package_name}}\n{{/each}}\n\nAnalysis of Specialist Subcontractor Relationships for each Critical Package (in relation to {{project_lead_org_name_from_3_1}}{{#if delivery_partner_name_from_3_2}} / {{delivery_partner_name_from_3_2}}{{/if}}):\n\n{{#each critical_specialist_packages_5_3}}\nPackage: {{this.package_name}}\n- Known Specialist Subcontractors with Existing Relationships/Track Record: {{this.known_subs_relationships}}\n\n{{/each}}\nOverall Implications for Engagement (e.g., for a main contractor building a supply chain, or for a specialist sub looking for an opening):\n{{overall_implications_engagement_5_3}}",
+          "placeholder_fields": [
+            {
+              "name": "project_lead_org_name_from_3_1",
+              "description": "Name of the Project Lead Organisation.",
+              "example_value": "Global Data Holdings PLC",
+              "source_hint": "From point 3.1 (org_name_3_1)."
+            },
+            {
+              "name": "delivery_partner_name_from_3_2", // AI needs to get this from context of 3.2
+              "description": "Name of the Key Delivery Partner (if one exists, from 3.2 context).",
+              "example_value": "ConstructManage Solutions Ltd.",
+              "is_optional": true
+            },
+            {
+              "name": "critical_specialist_packages_5_3",
+              "description": "Array of 2-4 critical specialist package objects.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "package_name": {"type": "string", "example_value": "Advanced Data Centre Cooling Systems (Direct-to-Chip Liquid Cooling)"},
+                  "known_subs_relationships": {"type": "string", "example_value": "CoolSys Ltd. has collaborated with Global Data Holdings PLC on two recent pilot projects for innovative cooling. (Source: Joint Whitepaper 2024). The general market for direct-to-chip cooling is emerging, with a few key global players and specialist UK integrators."}
+                }
+              },
+              "example_value": [
+                {"package_name": "High-Voltage (HV) Electrical Infrastructure & Switchgear", "known_subs_relationships": "[KIG: No publicly identifiable preferred HV specialist for Global Data Holdings PLC for projects of this new scale in the UK. - Implication: Potential opening for HV contractors with hyperscale data centre experience. Market is concentrated among 3-4 national players.]"},
+                {"package_name": "Integrated Security & BMS Systems", "known_subs_relationships": "SecureTech Systems Inc. is listed as a strategic technology partner on Global Data Holdings PLC's website, suggesting a preferred relationship for security systems. BMS relationships are less clear."}
+              ],
+              "source_hint": "Project scope (from Section 2.2), past project teams, industry knowledge."
+            },
+            {
+              "name": "overall_implications_engagement_5_3",
+              "description": "Overall implications for engagement based on specialist subcontractor landscape.",
+              "example_value": "For a main contractor, understanding Global Data Holdings PLC's relationship with CoolSys Ltd. for advanced cooling is vital. For other cooling specialists, demonstrating superior technology or commercial terms will be key. The potential opening for HV specialists could be significant. For BMS, integrating with SecureTech's security platform might be a requirement.",
+              "source_hint": "Analyst synthesis."
+            }
+          ]
+        },
+        {
+          "point_id": "5.4",
+          "point_title_final": "Competitor Strategy & Vulnerability Analysis",
+          "ai_generation_goal": "To analyze the anticipated competitive strategies and potential vulnerabilities of the key competitors (identified in 5.2) relevant to the specific project opportunity or market segment, enabling clients to inform their own competitive positioning.",
+          "key_intelligence_questions_to_address": [
+            "For each key competitor (from 5.2): What is their likely competitive strategy for this specific project or in this market segment? What's the rationale?",
+            "What are their identified potential weaknesses or vulnerabilities (based on public signals) that could be challenged or exploited?",
+            "What is the overall competitive dynamic, and what are the key 'battlegrounds' likely to be?",
+            "What are the key strategic considerations or recommended angles for an engaging third party?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Competitor annual reports (strategy sections), investor briefings, marketing materials, product/service brochures, press coverage of their wins/losses and market activities, case studies, financial performance analysis."
+          ],
+          "structuring_the_output_content_guide": "Builds on 5.2. For each competitor: 'Anticipated Competitive Strategy (Rationale)'; 'Identified Potential Weaknesses/Vulnerabilities (Public signals only, Rationale)'. Conclude with: 'Overall Competitive Dynamic & Key Battlegrounds'; 'Key Strategic Considerations & Recommended Angles for Engaging Third Party.'",
+          "handling_kigs_and_confidence_levels": "Strategies are 'anticipated' or 'likely'. Weaknesses MUST be based on public signals/OSINT. Use KIG marker if competitor strategy for this specific opportunity is unclear.",
+          "value_framing_for_external_client": "Provides actionable intelligence to help clients anticipate competitor moves, identify own differentiators, and refine value proposition.",
+          "content_placeholder_detailed_prompt": "Analysis of Key Competitors (profiled in 5.2):\n\n{{#each competitor_strategy_analysis_5_4}}\nCompetitor Name: {{this.name_from_5_2}}\n- Anticipated Competitive Strategy (for this project/market):\n  {{this.anticipated_strategy}} (Rationale: {{this.strategy_rationale}})\n- Identified Potential Weaknesses/Vulnerabilities (based on public signals only):\n  {{this.identified_weaknesses}} (Rationale: {{this.weaknesses_rationale}})\n\n{{/each}}\n{{#if (eq competitor_strategy_analysis_5_4.length 0)}}[KIG: No key competitors identified in 5.2 for strategy and vulnerability analysis. - Implication: Detailed competitive counter-strategy development is challenging.]{{/if}}\n\nOverall Competitive Dynamic & Key Battlegrounds:\n{{overall_competitive_dynamic_5_4}}\n\nKey Strategic Considerations & Recommended Angles for an Engaging Third Party:\n{{strategic_considerations_angles_5_4}}",
+          "placeholder_fields": [
+            {
+              "name": "competitor_strategy_analysis_5_4",
+              "description": "Array of objects, each analyzing a competitor from 5.2.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "name_from_5_2": {"type": "string", "example_value": "Construct PLC"}, // AI to pull from 5.2
+                  "anticipated_strategy": {"type": "string", "example_value": "Likely to leverage their extensive UK data centre portfolio and Tier 1 status by offering a low-risk, comprehensive solution. May emphasize speed of delivery through established supply chains and potentially offer value engineering based on past projects."},
+                  "strategy_rationale": {"type": "string", "example_value": "Past bids by Construct PLC for similar projects show focus on de-risking for client and leveraging economies of scale. Their marketing emphasizes 'certainty of delivery'."},
+                  "identified_weaknesses": {"type": "string", "example_value": "Recent market commentary suggests a more rigid approach to adopting novel sustainable technologies compared to specialist firms. Their large overheads may make them less competitive on price for highly specialized or smaller elements if unbundled. (Source: 'FutureBuild' Magazine, Jan 2025). [KIG: Specific details on their current R&D investment in sustainable DC tech. - Implication: Their ability to meet cutting-edge ESG demands may be overestimated or underestimated.]"},
+                  "weaknesses_rationale": {"type": "string", "example_value": "Analysis of their recent project awards indicates a focus on traditional, proven technologies. Financial reports (Q4 2024) showed increased G&A costs."}
+                }
+              },
+              "source_hint": "Synthesize from 5.2, competitor reports, market commentary."
+            },
+            {
+              "name": "overall_competitive_dynamic_5_4",
+              "description": "Summary of the overall competitive dynamic and key battlegrounds.",
+              "example_value": "Competition for this project is expected to be intense, focusing on: 1) Demonstrable experience in delivering hyperscale data centres to hypersensitive programmes. 2) Ability to meet stringent sustainability targets (Net Zero Carbon, BREEAM Outstanding). 3) Commercial competitiveness and risk appetite. 4) Strength of relationships with key technology vendors and utility providers.",
+              "source_hint": "Analyst synthesis based on market and competitor findings."
+            },
+            {
+              "name": "strategic_considerations_angles_5_4",
+              "description": "Key strategic considerations or recommended angles for an engaging third party.",
+              "example_value": "An engaging firm should highlight superior capabilities in sustainable design/delivery and advanced cooling technologies if applicable. Emphasize agility and a partnership approach to overcome incumbent advantages. Provide clear evidence of managing complex power and grid connection challenges. Focus on de-risking specific technical challenges identified in Section 4 for the Project Lead.",
+              "source_hint": "Analyst synthesis providing actionable advice."
+            }
+          ]
+        },
+        {
+          "point_id": "5.5",
+          "point_title_final": "Project Benchmarking & Comparables",
+          "ai_generation_goal": "To provide context for the target project/initiative by comparing it against 2-3 similar relevant projects, highlighting outcomes, challenges, key players, and learnings for a potential engager.",
+          "key_intelligence_questions_to_address": [
+            "What are 2-3 genuinely comparable projects? What was the rationale for selection?",
+            "For each comparable: brief description, key parties, reported outcomes (budget, programme, successes), known challenges (and resolutions, if public)?",
+            "What are the key learnings or relevance of these comparables for the target project?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Industry databases of construction projects (e.g., Glenigan, Barbour ABI – if access implied), company websites (case studies), planning portals, industry awards, press releases, archived news."
+          ],
+          "structuring_the_output_content_guide": "Start with 'Selection Rationale for Comparable Projects'. For each comparable (2-3): 'Project Name & Location; Brief Description; Key Parties; Reported Outcomes (Cite Source); Known Challenges (& Resolutions – Cite Source); Key Learnings/Relevance.' Conclude with 'Overall Benchmarking Summary & Strategic Implications.'",
+          "handling_kigs_and_confidence_levels": "Focus on publicly verifiable data. Clearly state if outcome data is 'reported' vs. 'confirmed actuals'. Use KIG marker if key details of comparables are unavailable.",
+          "value_framing_for_external_client": "Helps clients contextualize the target project, understand realistic outcomes, anticipate challenges, and identify common players or successful approaches.",
+          "content_placeholder_detailed_prompt": "Selection Rationale for Comparable Projects: {{comparable_selection_rationale_5_5}}\n\nComparable Project Profiles:\n{{#each comparable_project_profiles_5_5}}\n\n{{this.letter_id}}. Comparable Project {{add @index 1}}:\n   - Project Name & Location: {{this.name_location}}\n   - Brief Description (Scale, Type, Status): {{this.description}}\n   - Key Parties Involved (Client/Dev, MC, Designer): {{this.key_parties}}\n   - Reported Outcomes (Budget/Cost, Programme, Successes – Cite Source): {{this.reported_outcomes}}\n   - Known Challenges Encountered (& Resolutions – Cite Source): {{this.known_challenges}}\n   - Key Learnings/Relevance for the Target Project (from a general engager's viewpoint): {{this.key_learnings_relevance}}\n{{/each}}\n{{#if (eq comparable_project_profiles_5_5.length 0)}}[KIG: Insufficient publicly available data to identify and detail suitable comparable projects. - Implication: Benchmarking against similar undertakings is limited.]{{/if}}\n\nOverall Benchmarking Summary & Strategic Implications:\n{{overall_benchmarking_summary_5_5}}",
+          "placeholder_fields": [
+            {
+              "name": "comparable_selection_rationale_5_5",
+              "description": "Rationale for selecting the comparable projects.",
+              "example_value": "Projects selected are UK-based data centres of similar hyperscale capacity (30MW+ IT load) that reached financial close or became operational in the last 24-36 months, with a focus on those developed by major international operators or involving similar sustainability ambitions.",
+              "source_hint": "Analyst judgment ensuring relevance."
+            },
+            {
+              "name": "comparable_project_profiles_5_5",
+              "description": "Array of 2-3 comparable project profile objects.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "letter_id": {"type": "string", "example_value": "A"}, // For A, B, C lettering
+                  "name_location": {"type": "string", "example_value": "Project 'Phoenix', Slough Trading Estate, UK"},
+                  "description": {"type": "string", "example_value": "40MW hyperscale data centre, new build shell & core, operational Q3 2024."},
+                  "key_parties": {"type": "string", "example_value": "Developer: Global DC REIT Alpha; Main Contractor: BuildFast PLC; Lead Design: TechArch Consultants."},
+                  "reported_outcomes": {"type": "string", "example_value": "Delivered on revised programme after initial 3-month delay due to critical M&E plant supply issues. Reported construction cost: £150M (Source: Industry Press, 'Data Weekly' Jan 2025). Achieved BREEAM 'Excellent'."},
+                  "known_challenges": {"type": "string", "example_value": "Significant challenges reported in securing timely delivery of generators and switchgear due to global semiconductor shortages. Mitigated by early orders and agile re-sequencing of commissioning activities. (Source: Conference Presentation by Developer Alpha, Q4 2024)."},
+                  "key_learnings_relevance": {"type": "string", "example_value": "Highlights critical importance of early supply chain engagement for M&E plant for power-hungry projects. Demonstrates that programme recovery is possible with proactive management despite supply chain shocks. Validates achievability of BREEAM 'Excellent' at this scale."}
+                }
+              },
+              "source_hint": "Project databases, company case studies, press."
+            },
+            {
+              "name": "overall_benchmarking_summary_5_5",
+              "description": "Overall summary of benchmarking and strategic implications.",
+              "example_value": "Analysis of these comparables indicates that securing adequate power and managing the supply chain for critical M&E plant are the most significant risks for large data centre developments in the UK currently. Average construction programmes for 30-40MW facilities range from 18-24 months post-groundworks. Successful projects often involve main contractors with strong existing supply chain relationships and early engagement with utility providers. Sustainability certifications like BREEAM Excellent are becoming standard expectations.",
+              "source_hint": "Analyst synthesis of comparable project data."
+            }
+          ]
+        }
+      ]
+    }
+    // ... (Sections 6-9, appendices, footer would follow) ...
+  ]
+}

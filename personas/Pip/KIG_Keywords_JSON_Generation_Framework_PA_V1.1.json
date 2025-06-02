@@ -1,0 +1,42 @@
+{
+  "pa_framework_id": "KIG_Keywords_JSON_Generation_Framework_PA_V1.1",
+  "framework_description": "This framework defines the structure and detailed content guidelines for the PA (Personal Assistant) to generate the KIG (Key Intelligence Gaps) Keywords JSON file. The PA will populate the dynamic fields within the 'json_template_to_populate' section and the 'trigger_keywords' array based on the specific project's Full Intelligence Dossier.",
+  "target_output_filename_convention": "YY-####.json (PA will instruct User to save with project's internal_ref_id replacing YY-####)",
+  "target_output_upload_path": "https://github.com/IgorWarzocha/construction-intel-chatbot/tree/main/configs (PA will remind User of this path)",
+  "notes_for_pa_on_keyword_generation": [
+    "KIG Identification: Identify KIGs by scanning the Full Intelligence Dossier for explicit markers (e.g., '[KIG: description - Implication: implication]') or dedicated KIG sections.",
+    "Keyword Principles: For each KIG, generate a comprehensive list of user-centric keywords, phrases, and questions. Include synonyms, variations in phrasing, and anticipate how different users might inquire about the specific information gap to 'capture those pesky users'.",
+    "Triggered Topic Guess: The first keyword/phrase in each KIG's inner array should be crafted to be a suitable and concise representation of the KIG, as it will be used by the chatbot to populate the '{triggered_topic_guess}' placeholder in the collaborative message."
+  ],
+  "json_template_to_populate": {
+    "chatbot_title": {
+      "_pa_source_instruction": "From the project's Full Intelligence Dossier, use the 'base_project_name_metadata' (e.g., 'BioNTech UK Investment Initiative').",
+      "_pa_value_format_example": "{{Project Name}} Chatbot"
+    },
+    "report_file_name": {
+      "_pa_source_instruction": "From the project's Full Intelligence Dossier, use the 'internal_ref_id' (e.g., '25-0030').",
+      "_pa_value_format_example": "{{Project_Ref_ID}}.txt"
+    },
+    "collaborative_message_template": {
+      "_pa_source_instruction": "This is a fixed template string. Do not alter.",
+      "value": "The dossier provides some general information, but specifics on '{triggered_topic_guess}' seem to be a key intelligence gap.\n\nPlease rephrase the question.\n\nYou can also upload a file to add context to my data. **Use the 'Add Supplementary Context' file uploader on the left. One file per session limit.**\n\nPlease upload a document that details what your company does or a file detailing information you have uncovered and confirmed yourself. Once uploaded, ask your question again, and I can give you a tailored analysis based on the context you provided.\n\n*(This session is private and your uploaded documents will be cleared when you close the window. We do not collect this data or use it for internal purposes.)*\n\n*(We understand the delicate nature of confidential project intelligence and company data. Please contact igorwarzocha@gmail.com | https://www.linkedin.com/in/igorwarzocha/ to explore a bespoke, secure solution)*"
+    },
+    "trigger_keywords": {
+      "_pa_source_instruction": "Populate this with an array of inner arrays. Each inner array corresponds to a distinct KIG identified from the Dossier. Refer to 'notes_for_pa_on_keyword_generation' above for guidance on keyword creation.",
+      "_pa_value_format_example": "[]"
+    }
+  },
+  "pa_generation_workflow_summary": [
+    "1. Access the Full Intelligence Dossier (.txt) for the specific project.",
+    "2. Extract the 'base_project_name_metadata' and 'internal_ref_id' from the Dossier's metadata section (as defined in 'orchestration_framework_dossier_v1.2.json').",
+    "3. Thoroughly scan the Dossier to identify all Key Intelligence Gaps (KIGs), paying attention to the standard marker: '[KIG: description - Implication: implication]'.",
+    "4. For each KIG, brainstorm and list a comprehensive set of keywords, phrases, and potential user questions, ensuring variety and coverage (as per 'notes_for_pa_on_keyword_generation').",
+    "5. Construct the final JSON output by taking the 'json_template_to_populate' structure above and:",
+    "   a. Replacing the placeholder in 'chatbot_title' with '{{Extracted Project Name}} Chatbot'.",
+    "   b. Replacing the placeholder in 'report_file_name' with '{{Extracted Project Ref ID}}.txt'.",
+    "   c. Using the exact 'value' for 'collaborative_message_template'.",
+    "   d. Populating the 'trigger_keywords' field with the generated array of keyword arrays.",
+    "6. Present the complete, populated JSON content (derived from 'json_template_to_populate') in a clean code block to the User for copy-pasting.",
+    "7. Remind the User to save the file as 'YY-####.json' (using the project's 'internal_ref_id') and upload it to the GitHub configs directory: https://github.com/IgorWarzocha/construction-intel-chatbot/tree/main/configs"
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  // ... (Assuming metadata, ai_processing_hints, output_instructions, Sections 1-9 are as previously defined) ...
+  "sections": [
+    // ... (Sections 1-9 as previously defined) ...
+  ],
+  "appendices": {
+    "appendices_notes": [
+      "Include listed appendices ONLY if relevant data is available and adds significant value to the dossier's core findings.",
+      "Omit any standard appendix if data is unavailable, not applicable, or does not meet quality/relevance criteria. Alternatively, include the appendix title with a note stating '[KIG: Insufficient data available to populate this appendix.]'",
+      "Additional appendices beyond those listed may be created and added as necessary based on specific project content and intelligence findings (e.g., detailed financial tables, specific regulatory text).",
+      "Ensure correct sequential lettering (A, B, C...) for all included appendices in the final rendered document."
+    ],
+    "standard_appendices": [
+      {
+        "appendix_id": "A",
+        "appendix_title_final": "Top 5 Key Information Sources",
+        "ai_generation_goal": "To provide transparency on the 5 most crucial public domain sources that underpinned the core intelligence and assessments within this dossier.",
+        "key_intelligence_questions_to_address": [
+          "What were the 5 most significant and impactful publicly available documents, websites, datasets, or reports used in the compilation of this dossier?"
+        ],
+        "structuring_the_output_content_guide": "Guidance: 'Select the 5 OSINT sources that were most instrumental. This is not an exhaustive bibliography but a curated list.' For each source: 'Source Type; Title/Reference; Source Organisation/Publisher; Date Accessed/Published; Web Link.'",
+        "handling_kigs_and_confidence_levels": "Sources listed must be publicly accessible or clearly described. If fewer than 5 truly *critical* sources, list what's available. If a key piece of intelligence came from non-attributable general market understanding, it's not listed here.",
+        "value_framing_for_external_client": "Enhances credibility and transparency, allowing clients to understand the basis of the intelligence.",
+        "content_placeholder_detailed_prompt": "The following publicly available sources were among the most critical in informing the intelligence and analysis presented in this dossier:\n\n{{#each top_key_sources_appendix_a}}\n{{add @index 1}}. Source Type: {{this.source_type}}\n   Title/Reference: {{this.title_reference}}\n   Source Organisation/Publisher: {{this.source_organisation_publisher}}\n   Date Accessed/Published: {{this.date_accessed_published}}\n   Web Link: {{this.web_link}}\n\n{{/each}}\n{{#if (lt top_key_sources_appendix_a.length 1)}}[KIG: Insufficient distinct key sources identified or suitable for public listing in this appendix. Core intelligence derived from a broad range of OSINT not easily condensed to 5 top items, or key sources are subscription-based/proprietary and cannot be listed here.]{{/if}}",
+        "placeholder_fields": [
+          {
+            "name": "top_key_sources_appendix_a",
+            "description": "Array of up to 5 objects, each detailing a key information source.",
+            "data_type": "array",
+            "max_items": 5,
+            "array_item_schema": {
+              "type": "object",
+              "properties": {
+                "source_type": {"type": "string", "example_value": "Planning Application Document"},
+                "title_reference": {"type": "string", "example_value": "Design & Access Statement - Project Atlas - Planning Ref PA/2025/00123"},
+                "source_organisation_publisher": {"type": "string", "example_value": "Anytown Council Planning Portal"},
+                "date_accessed_published": {"type": "string", "example_value": "Accessed 2025-05-15 / Published 2025-03-10"},
+                "web_link": {"type": "string", "example_value": "https://planning.anytown.gov.uk/applications/PA202500123 (or 'Search Anytown Planning Portal for PA/2025/00123')"}
+              }
+            },
+            "example_value": [
+              {"source_type": "Company Press Release", "title_reference": "{{project_lead_org_name_from_3_1}} Announces £200m Investment in New UK R&D Hub", "source_organisation_publisher": "{{project_lead_org_name_from_3_1}} Newsroom", "date_accessed_published": "Published 2025-04-01", "web_link": "https://www.exampleplead.com/news/investment2025"},
+              {"source_type": "Industry Market Report", "title_reference": "UK Life Sciences Real Estate Outlook 2025", "source_organisation_publisher": "LifeSci Consultants Inc.", "date_accessed_published": "Published 2025-01-30", "web_link": "[Subscription or Purchase Link/Details]"}
+            ],
+            "source_hint": "AI to select the 5 most impactful public OSINT sources used. Requires tracking of source utility during research phase."
+          }
+        ]
+      },
+      {
+        "appendix_id": "B",
+        "appendix_title_final": "Relevant Benchmarking Data",
+        "ai_generation_goal": "To provide specific, comparative data points relevant to the project, market, or commercial terms, offering context and aiding in the assessment of the target opportunity.",
+        "key_intelligence_questions_to_address": [
+          "What specific, quantifiable benchmarking data (e.g., rental rates, lease lengths, construction costs, KPIs for similar operations) has been compiled that provides relevant context?"
+        ],
+        "osint_focus_and_potential_sources": [
+          "Specialist property market reports (e.g., CBRE, JLL, Savills), construction cost databases (e.g., BCIS summaries if public commentary found), company reports detailing performance of comparable assets, industry surveys."
+        ],
+        "structuring_the_output_content_guide": "Guidance: 'Present specific, sourced data points in a clear, structured format (tables, bulleted lists). Data should be directly relevant.' Example structure provided for lab space. Ensure all data is clearly sourced and dated.",
+        "handling_kigs_and_confidence_levels": "Only include data from credible, citable OSINT. State if data is estimated or a broad range. Clearly note date of benchmarking data. If no relevant benchmarking data found, state using KIG marker.",
+        "value_framing_for_external_client": "Provides tangible reference points that help clients contextualize costs, values, or performance metrics.",
+        "content_placeholder_detailed_prompt": "This appendix presents relevant benchmarking data compiled from publicly available sources to provide additional context for the analysis within this dossier. (All data is indicative and subject to market fluctuations).\n\n{{#each benchmarking_categories_appendix_b}}\nCategory: {{this.category_name}}\n{{#each this.benchmark_points}}\n- {{this.point_description}} (Source: {{this.source}}, As of: {{this.date_of_data}})\n{{/each}}\n\n{{/each}}\n{{#if (eq benchmarking_categories_appendix_b.length 0)}}[KIG: Insufficient relevant and publicly citable benchmarking data found for the specific scope of this dossier.]{{/if}}",
+        "placeholder_fields": [
+          {
+            "name": "benchmarking_categories_appendix_b",
+            "description": "Array of benchmarking category objects, each containing multiple benchmark points.",
+            "data_type": "array",
+            "array_item_schema": {
+              "type": "object",
+              "properties": {
+                "category_name": {"type": "string", "example_value": "Indicative Rental Rates - Oxford CL2 Lab Space (Shell & Core + Cat A contribution)"},
+                "benchmark_points": {
+                  "type": "array",
+                  "item_schema": {
+                    "type": "object",
+                    "properties": {
+                      "point_description": {"type": "string", "example_value": "Novo Nordisk (TOSP Iversen Building, 61k sq ft): c. £60.00/sq ft NIA"},
+                      "source": {"type": "string", "example_value": "Property Market Report X"},
+                      "date_of_data": {"type": "string", "example_value": "Q4 2024"}
+                    }
+                  }
+                }
+              }
+            },
+            "example_value": [
+              {
+                "category_name": "Typical Lease Lengths - UK Life Sciences R&D/Lab Facilities",
+                "benchmark_points": [
+                  {"point_description": "Average lease term for new lettings: 10-15 years", "source": "LifeSci Real Estate Survey Y", "date_of_data": "2024 Annual"},
+                  {"point_description": "Common break clauses: Year 5 or Year 10, subject to negotiation", "source": "Market Commentary, Estates Gazette", "date_of_data": "Q1 2025"}
+                ]
+              },
+              {
+                "category_name": "Indicative Construction Costs - New Build Data Centre (Shell & Core, UK Tier III equivalent)",
+                "benchmark_points": [
+                  {"point_description": "Cost per MW (IT Load): £5.0m - £7.0m", "source": "Construction Cost Consultants DataBook Z", "date_of_data": "H1 2025"},
+                  {"point_description": "Cost per sq m (GIA): £3,500 - £5,000", "source": "Turner & Townsend Data Centre Cost Index", "date_of_data": "2024"}
+                ]
+              }
+            ],
+            "source_hint": "AI to compile relevant benchmarking data found during research, structuring it by category."
+          }
+        ]
+      }
+    ]
+  },
+}

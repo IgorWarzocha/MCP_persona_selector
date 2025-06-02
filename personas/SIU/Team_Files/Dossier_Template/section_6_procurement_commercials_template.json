@@ -1,0 +1,359 @@
+{
+  // ... (Assuming metadata, ai_processing_hints, output_instructions, Sections 1-5 are as previously defined) ...
+  "sections": [
+    // ... (Sections 1-5 as previously defined) ...
+    {
+      "section_number": 6,
+      "section_title": "PROCUREMENT STRATEGY & COMMERCIALS: {{#if project_name_metadata}}{{project_name_metadata}}{{else}}{{company_name_metadata}} - {{initiative_name_metadata}}{{/if}}", // Dynamically populated
+      "section_objective": "To detail the anticipated procurement route, timeline, evaluation criteria, contractual terms, and financial health of key project entities, enabling clients to assess commercial viability and tailor their engagement strategy.",
+      "note": "This section requires specific procurement and commercial OSINT. Information can be highly speculative for early-stage projects; this must be clearly stated.",
+      "points": [
+        {
+          "point_id": "6.1",
+          "point_title_final": "Procurement Route Analysis",
+          "ai_generation_goal": "To identify and analyze the confirmed or likely procurement route for the project/initiative, including details of any frameworks, helping clients understand how to access the opportunity.",
+          "key_intelligence_questions_to_address": [
+            "What is the overall procurement approach?",
+            "What is the specific procurement route identified or anticipated? Source and confidence?",
+            "If a framework is involved: details (name, authority, lot, incumbents, call-off)?",
+            "What are the key implications of this route for an engaging third party?",
+            "Are there any known deviations or specific procurement policies of the Project Lead?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Official tender portals (FTS, Contracts Finder, TED), Prior Information Notices (PINs), framework documentation, Project Lead's procurement policy documents (if public), market intelligence from past tenders by the Project Lead."
+          ],
+          "structuring_the_output_content_guide": "Sub-headings: 'Overall Procurement Approach'; 'Specific Procurement Route'; 'If Framework Procurement: Details'; 'Key Implications'; 'Known Deviations/Policies.'",
+          "handling_kigs_and_confidence_levels": "Clearly state if route is 'Confirmed', 'Likely/Inferred' (with rationale), or 'Speculative'. Use KIG marker for private sector projects where info is scarce until formal process starts.",
+          "value_framing_for_external_client": "Provides essential information for clients to determine participation feasibility, nature of competition, and initial engagement steps.",
+          "content_placeholder_detailed_prompt": "Overall Procurement Approach: {{procurement_approach_6_1}} (Source: {{procurement_approach_source_6_1}} – Confidence: {{procurement_approach_confidence_6_1}})\nSpecific Procurement Route Identified/Anticipated: {{specific_route_6_1}} (Source: {{specific_route_source_6_1}} – Confidence: {{specific_route_confidence_6_1}})\n\n{{#if is_framework_procurement_6_1}}\nFramework Procurement Details:\n- Framework Name & Operating Authority: {{framework_name_authority_6_1}}\n- Relevant Lot(s) & Scope/Value Bands: {{framework_lot_scope_value_6_1}}\n- Key Information about the Framework (duration, known awarded suppliers): {{framework_key_info_6_1}}\n- Typical Call-Off Mechanism: {{framework_call_off_mechanism_6_1}}\n{{else}}\nFramework Procurement Details: Not Applicable / [KIG: Whether a framework will be used is currently unknown. - Implication: Route to market less clear for suppliers reliant on framework access.]\n{{/if}}\n\nKey Implications of Procurement Route for Engagement: {{route_implications_engagement_6_1}}\n\nAny Known Deviations or Specific Policies of {{project_lead_org_name_from_3_1}} concerning procurement: {{lead_procurement_deviations_policies_6_1}}",
+          "placeholder_fields": [
+            {
+              "name": "procurement_approach_6_1",
+              "description": "Overall procurement approach (e.g., competitive tender, negotiated, framework).",
+              "example_value": "Public Sector Competitive Tender via Framework.",
+              "source_hint": "PINs, tender portals, client procurement strategy if public."
+            },
+            {
+              "name": "procurement_approach_source_6_1",
+              "description": "Source for overall procurement approach.",
+              "example_value": "Prior Information Notice Ref: 2025/S 000-123456",
+              "source_hint": "Document reference."
+            },
+            {
+              "name": "procurement_approach_confidence_6_1",
+              "description": "Confidence level for overall procurement approach.",
+              "data_type": "enum", "enum_values": ["Confirmed", "Likely", "Inferred", "Speculative"],
+              "example_value": "Confirmed",
+              "source_hint": "Analyst assessment."
+            },
+            {
+              "name": "specific_route_6_1",
+              "description": "Specific procurement route (e.g., Open, Restricted, D&B, Traditional, specific Framework/Lot).",
+              "example_value": "Call-off from Crown Commercial Service (CCS) Construction Works and Associated Services Framework (RM6088), Lot 1.2 (Healthcare Projects £30m-£80m).",
+              "source_hint": "PINs, tender documents."
+            },
+            {
+              "name": "specific_route_source_6_1",
+              "description": "Source for specific procurement route.",
+              "example_value": "PIN Notice 2025/S 000-123456; CCS RM6088 Buyer Guide.",
+              "source_hint": "Document reference."
+            },
+            {
+              "name": "specific_route_confidence_6_1",
+              "description": "Confidence level for specific procurement route.",
+              "data_type": "enum", "enum_values": ["Confirmed", "Likely", "Inferred", "Speculative"],
+              "example_value": "Confirmed",
+              "source_hint": "Analyst assessment."
+            },
+            {
+              "name": "is_framework_procurement_6_1",
+              "description": "Boolean indicating if a framework is involved.",
+              "data_type": "boolean",
+              "example_value": true,
+              "source_hint": "Analysis of specific route."
+            },
+            {
+              "name": "framework_name_authority_6_1",
+              "description": "Framework Name & Operating Authority (if is_framework_procurement_6_1 is true).",
+              "example_value": "Crown Commercial Service (CCS) Construction Works and Associated Services Framework (RM6088).",
+              "is_conditional_on": "is_framework_procurement_6_1",
+              "source_hint": "Framework documentation."
+            },
+            {
+              "name": "framework_lot_scope_value_6_1",
+              "description": "Relevant Lot(s) & Scope/Value Bands.",
+              "example_value": "Lot 1.2 – Healthcare Projects £30m-£80m for NHS Trusts in England.",
+              "is_conditional_on": "is_framework_procurement_6_1",
+              "source_hint": "Framework documentation."
+            },
+            {
+              "name": "framework_key_info_6_1",
+              "description": "Key Information about the Framework (duration, known awarded suppliers).",
+              "example_value": "Framework runs until March 2028. Current awarded suppliers to Lot 1.2 include A, B, C, D. (Note: {{dossier_prepared_for_client_name}} is/is not on this list).",
+              "is_conditional_on": "is_framework_procurement_6_1",
+              "source_hint": "Framework award notices, supplier lists."
+            },
+            {
+              "name": "framework_call_off_mechanism_6_1",
+              "description": "Typical Call-Off Mechanism.",
+              "example_value": "Typically via mini-competition between all capable and interested suppliers on the lot. Direct award possible in exceptional circumstances (unlikely for this scale).",
+              "is_conditional_on": "is_framework_procurement_6_1",
+              "source_hint": "Framework buyer guides."
+            },
+            {
+              "name": "route_implications_engagement_6_1",
+              "description": "Key implications of this procurement route for an engaging third party.",
+              "example_value": "To bid directly as a Principal Contractor, an organisation must be an awarded supplier on CCS RM6088 Lot 1.2. Otherwise, opportunities may exist via subcontracting to an awarded Tier 1, or through forming a consortium with a listed supplier. Early engagement with listed suppliers is advisable for subcontractors.",
+              "source_hint": "Analyst synthesis."
+            },
+            {
+              "name": "project_lead_org_name_from_3_1", // AI needs to pull this from context of 3.1
+              "description": "Name of the Project Lead Organisation (from point 3.1).",
+              "example_value": "NHS Trust Alpha",
+              "source_hint": "From point 3.1 (org_name_3_1)."
+            },
+            {
+              "name": "lead_procurement_deviations_policies_6_1",
+              "description": "Any known deviations or specific procurement policies of the Project Lead.",
+              "example_value": "{{project_lead_org_name_from_3_1}} has a supplementary procurement policy emphasizing Social Value, weighting it at 20% for all tenders >£1M (Source: Trust Procurement Strategy 2024). [KIG: Specific local SME engagement targets for this project. - Implication: Bidders need to proactively address social value but precise targets are unclear.]",
+              "source_hint": "Client's public procurement documents."
+            }
+          ]
+        },
+        {
+          "point_id": "6.2",
+          "point_title_final": "Procurement Timeline & Key Dates",
+          "ai_generation_goal": "To outline the known or anticipated schedule for the procurement process, including all key stages and deadlines, enabling clients to plan their bid activities.",
+          "key_intelligence_questions_to_address": [
+            "What is the overall current stage of the procurement process?",
+            "What are the key dates and milestones (PIN, EOI/PQQ, ITT, award, start)? Confirmed or estimated? Source?",
+            "What are the primary sources for this timeline information?",
+            "What are the key timeline-related risks or considerations for a bidding organisation?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Official tender portals (FTS notices often include indicative timelines), project websites, market engagement documents, procurement plans (if public)."
+          ],
+          "structuring_the_output_content_guide": "Sub-headings: 'Overall Current Procurement Stage'; 'Key Procurement Dates & Milestones (Specify Confirmed/Estimated & Source)'; 'Primary Source(s)'; 'Key Timeline-Related Risks/Considerations.' Provide reasoned estimates if specific dates are KIGs, clearly stating estimation basis.",
+          "handling_kigs_and_confidence_levels": "Crucial to distinguish confirmed dates from estimates. Use KIG marker if timeline is a major gap. User confirmed 'some speculation allowed' if clearly stated for timelines.",
+          "value_framing_for_external_client": "Provides a critical path for clients to plan bid preparation, resource allocation, and internal approvals.",
+          "content_placeholder_detailed_prompt": "Overall Current Procurement Stage: {{current_procurement_stage_6_2}}\n\nKey Procurement Dates & Milestones:\n{{#each procurement_dates_milestones_6_2}}\n- {{this.stage_name}}: {{this.date_description}} ({{this.status}} - Source: {{this.source}})\n{{/each}}\n{{#if (eq procurement_dates_milestones_6_2.length 0)}}[KIG: No specific procurement timeline or key dates publicly available. - Implication: Engagement planning and bid resourcing highly uncertain.]{{/if}}\n\nPrimary Source(s) of Timeline Information: {{timeline_primary_sources_6_2}}\nKey Timeline-Related Risks or Considerations for Engagement: {{timeline_risks_considerations_6_2}}",
+          "placeholder_fields": [
+            {
+              "name": "current_procurement_stage_6_2",
+              "description": "The overall current stage of the procurement process.",
+              "example_value": "Pre-Procurement: Prior Information Notice (PIN) published. Market engagement events anticipated.",
+              "source_hint": "Tender portals, project announcements."
+            },
+            {
+              "name": "procurement_dates_milestones_6_2",
+              "description": "Array of procurement stage objects with dates and sources.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "stage_name": {"type": "string", "example_value": "Prior Information Notice (PIN) / Market Engagement Period"},
+                  "date_description": {"type": "string", "example_value": "2025-01-15 – 2025-02-28"},
+                  "status": {"type": "enum", "enum_values": ["Confirmed", "Estimated", "Anticipated", "Passed"], "example_value": "Confirmed"},
+                  "source": {"type": "string", "example_value": "FTS Notice ABC"}
+                }
+              },
+              "example_value": [
+                {"stage_name": "EOI/PQQ Issue Date", "date_description": "Q2 2025", "status": "Anticipated", "source": "PIN Notice ABC (Indicative)"},
+                {"stage_name": "EOI/PQQ Submission Deadline", "date_description": "Mid-Q2 2025", "status": "Estimated", "source": "Analyst estimate based on typical 4-week response period."},
+                {"stage_name": "ITT/RFP Issue Date (to shortlisted bidders)", "date_description": "Q3 2025", "status": "Anticipated", "source": "PIN Notice ABC (Indicative)"},
+                {"stage_name": "ITT/RFP Submission Deadline", "date_description": "Late Q3 2025", "status": "Estimated", "source": "Analyst estimate based on typical 8-week response period."},
+                {"stage_name": "Anticipated Contract Award Date", "date_description": "Q4 2025", "status": "Estimated", "source": "Analyst estimate."},
+                {"stage_name": "Anticipated Contract Start / Mobilisation Date", "date_description": "Q1 2026", "status": "Estimated", "source": "Analyst estimate."}
+              ],
+              "source_hint": "FTS notices, ITT documents, project plans."
+            },
+            {
+              "name": "timeline_primary_sources_6_2",
+              "description": "Primary source(s) of timeline information.",
+              "example_value": "FTS Notice ABC; Market Engagement Briefing Pack XYZ (if applicable). Most dates beyond PIN are indicative/estimated.",
+              "source_hint": "List key source documents."
+            },
+            {
+              "name": "timeline_risks_considerations_6_2",
+              "description": "Key timeline-related risks or considerations for engagement.",
+              "example_value": "The period between anticipated ITT issue and submission is relatively tight (approx. 8 weeks) for a project of this complexity, requiring intensive bid team focus and early preparation. Any delays in earlier stages (e.g., PQQ evaluation) could compress later stages further. [KIG: Client's internal approval timelines for contract award post-evaluation. - Implication: Potential for 'standstill' period of unknown duration.]",
+              "source_hint": "Analyst synthesis."
+            }
+          ]
+        },
+        {
+          "point_id": "6.3",
+          "point_title_final": "Evaluation Criteria & Weightings Analysis",
+          "ai_generation_goal": "To detail the stated or likely criteria by which bids/proposals will be evaluated, including their relative weightings if known, enabling clients to tailor their submissions effectively.",
+          "key_intelligence_questions_to_address": [
+            "What is the source of information for evaluation criteria? Confirmed or inferred?",
+            "What is the overall evaluation approach (e.g., MEAT, Lowest Price)?",
+            "What are the key evaluation criteria and their stated or likely weightings/importance?",
+            "Are there any known minimum pass/fail criteria or mandatory requirements?",
+            "What are the key strategic implications for an engaging organisation?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "ITT/PQQ documents (primary if available), procurement policy documents of the Project Lead Organisation, standard terms for framework call-offs, analysis of past successful/unsuccessful bids if any info is public (rare)."
+          ],
+          "structuring_the_output_content_guide": "Sub-headings: 'Source of Evaluation Criteria'; 'Overall Evaluation Approach'; 'Key Evaluation Criteria & Weightings (or ranking)'; 'Minimum Pass/Fail Criteria'; 'Key Insights & Strategic Implications.' Acknowledge speculation if specifics are KIGs.",
+          "handling_kigs_and_confidence_levels": "Crucial to state if criteria/weightings are 'Stated' (from official docs), 'Likely/Inferred' (with reasoning), or full KIG. If KIG, describe typical criteria for this project/client type if possible, marking clearly.",
+          "value_framing_for_external_client": "Provides a roadmap for clients on how to structure their bid to maximize scores against what the procurer values most.",
+          "content_placeholder_detailed_prompt": "Source of Evaluation Criteria Information: {{eval_criteria_source_6_3}} (Status: {{eval_criteria_source_status_6_3}})\nOverall Evaluation Approach: {{overall_eval_approach_6_3}}\n\nKey Evaluation Criteria & Stated/Likely Weightings (or ranking of importance if % not available):\n- Technical Merit / Quality of Proposed Solution: {{technical_merit_weighting_6_3}} (Sub-criteria often include: {{technical_subcriteria_6_3}})\n- Commercial Offer / Price: {{commercial_offer_weighting_6_3}} (Sub-criteria often include: {{commercial_subcriteria_6_3}})\n- Social Value / Sustainability / Environmental: {{social_value_weighting_6_3}} (Sub-criteria often include: {{social_value_subcriteria_6_3}})\n- Programme / Delivery Timeline & Methodology: {{programme_weighting_6_3}} (Sub-criteria often include: {{programme_subcriteria_6_3}})\n- Health & Safety Approach: {{hs_approach_weighting_6_3}} (Sub-criteria often include: {{hs_subcriteria_6_3}})\n- Other Specific Criteria (e.g., Innovation, Risk Management, Interview performance): {{other_criteria_weighting_6_3}}\n\nAny Known Minimum Pass/Fail Criteria (e.g., accreditations, financial turnover):\n{{#each pass_fail_criteria_6_3}}\n- {{this.criterion_description}}\n{{/each}}\n{{#if (eq pass_fail_criteria_6_3.length 0)}}[KIG: Specific minimum pass/fail criteria not detailed in available OSINT. Standard criteria (e.g., financial stability, relevant experience) assumed. - Implication: Bidders must ensure broad compliance.]{{/if}}\n\nKey Insights & Strategic Implications for Engagement: {{eval_insights_implications_6_3}}",
+          "placeholder_fields": [
+            {
+              "name": "eval_criteria_source_6_3",
+              "description": "Source of information for evaluation criteria.",
+              "example_value": "ITT Document, Section 3: Evaluation Methodology, dated 2025-04-15 (for a similar past project by this client). For current project: Inferred from PIN and client's standard procurement policy.",
+              "source_hint": "ITT, PQQ, policy documents."
+            },
+            {
+              "name": "eval_criteria_source_status_6_3",
+              "description": "Status of the source information (Confirmed for this project, Inferred etc.).",
+              "data_type": "enum", "enum_values": ["Confirmed", "Likely", "Inferred", "Speculative", "KIG"],
+              "example_value": "Inferred",
+              "source_hint": "Analyst assessment."
+            },
+            {
+              "name": "overall_eval_approach_6_3",
+              "description": "Overall evaluation approach (e.g., MEAT, Lowest Price).",
+              "example_value": "Most Economically Advantageous Tender (MEAT) based on a Quality/Price ratio, likely 60:40 or 70:30. (Inferred from past tenders by this client).",
+              "source_hint": "Tender docs, procurement policy."
+            },
+            {
+              "name": "technical_merit_weighting_6_3", "description": "Weighting for Technical Merit/Quality.", "example_value": "Likely 40-50%", "source_hint": "Infer from MEAT ratio and client priorities."},
+            {"name": "technical_subcriteria_6_3", "description": "Common sub-criteria for technical merit.", "example_value": "Understanding of requirements, proposed solution innovation, team experience, quality management plan.", "source_hint": "Typical tender evaluation frameworks."},
+            {"name": "commercial_offer_weighting_6_3", "description": "Weighting for Commercial Offer/Price.", "example_value": "Likely 30-40%", "source_hint": "Infer from MEAT ratio."},
+            {"name": "commercial_subcriteria_6_3", "description": "Common sub-criteria for commercial offer.", "example_value": "Overall price, whole-life costs, risk pricing, commercial compliance.", "source_hint": "Typical tender evaluation frameworks."},
+            {"name": "social_value_weighting_6_3", "description": "Weighting for Social Value/Sustainability.", "example_value": "Stated as minimum 10% in client's policy, potentially up to 20% for this flagship project.", "source_hint": "Client policy, PPN 06/20."},
+            {"name": "social_value_subcriteria_6_3", "description": "Common sub-criteria for social value.", "example_value": "Local employment, SME engagement, carbon reduction plan, apprenticeships, community initiatives.", "source_hint": "Social Value Act, client priorities."},
+            {"name": "programme_weighting_6_3", "description": "Weighting for Programme/Delivery.", "example_value": "Likely 10-15%", "source_hint": "Client emphasis on timeline."},
+            {"name": "programme_subcriteria_6_3", "description": "Common sub-criteria for programme.", "example_value": "Realism of schedule, resource allocation, risk mitigation for delays, mobilisation plan.", "source_hint": "Typical tender evaluation frameworks."},
+            {"name": "hs_approach_weighting_6_3", "description": "Weighting for H&S Approach.", "example_value": "Likely 5-10%, or a gateway criterion.", "source_hint": "Client H&S record, sector norms."},
+            {"name": "hs_subcriteria_6_3", "description": "Common sub-criteria for H&S.", "example_value": "H&S plan quality, incident record, specific risk mitigations for project, CDM compliance approach.", "source_hint": "Typical tender evaluation frameworks."},
+            {"name": "other_criteria_weighting_6_3", "description": "Weighting for other criteria like Innovation, Risk, Interview.", "example_value": "Interview performance may contribute 5-10% or be used as a final differentiator. Innovation may be embedded within Technical Merit. [KIG: Specific scoring for interviews. - Implication: Preparation for interview needs to be comprehensive.]", "source_hint": "Client specific practices."},
+            {
+              "name": "pass_fail_criteria_6_3",
+              "description": "Array of known minimum pass/fail criteria objects.",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {"criterion_description": {"type": "string", "example_value": "Must hold ISO 9001, ISO 14001, and ISO 45001 accreditation."}}
+              },
+              "example_value": [
+                {"criterion_description": "Minimum of 3 successfully completed projects of similar scale (£50M+) as Principal Contractor in the last 5 years in the relevant sector."},
+                {"criterion_description": "Demonstrable financial standing (e.g., minimum turnover of £Xm, positive net assets)."}
+              ],
+              "source_hint": "PQQ documents, framework requirements."
+            },
+            {
+              "name": "eval_insights_implications_6_3",
+              "description": "Key insights and strategic implications for engagement based on evaluation criteria.",
+              "example_value": "The likely high weighting on Technical Merit and Social Value indicates that a bid focused solely on lowest price is unlikely to succeed. A robust, well-evidenced technical proposal demonstrating innovation and a credible, measurable social value plan are paramount. Bidders must ensure they meet all mandatory pass/fail criteria to avoid early disqualification.",
+              "source_hint": "Analyst synthesis."
+            }
+          ]
+        },
+        {
+          "point_id": "6.4",
+          "point_title_final": "Anticipated Contract Form & Key Commercial Terms",
+          "ai_generation_goal": "To identify the stated or likely standard form of contract and any known or probable key commercial terms, options, or client-specific amendments, highlighting commercial implications for engagers.",
+          "key_intelligence_questions_to_address": [
+            "What is the stated or likely standard form of contract? Source/confidence?",
+            "Is a specific contract option known or likely?",
+            "What are any known or likely key commercial terms, clauses, or risk allocation approaches?",
+            "What are the key commercial implications for an engaging organisation?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "ITT documents (primary if available), framework call-off terms, Project Lead Organisation's standard terms (if discoverable e.g., for universities or public bodies), industry norms for the sector/project type, past contracts awarded by the Project Lead (if any details are public)."
+          ],
+          "structuring_the_output_content_guide": "Sub-headings: 'Stated or Likely Standard Form of Contract'; 'Specific Contract Option'; 'Known or Likely Key Commercial Terms, Clauses & Risk Allocation (General Risk, Payment, Change Management, Liability, Dispute Resolution, Other)'; 'Key Commercial Implications.' Acknowledge KIGs for early-stage projects; use patterns from past practice or sector norms.",
+          "handling_kigs_and_confidence_levels": "Clearly state if contract form/terms are 'Confirmed', 'Likely/Inferred' (with justification), or full KIG. This area frequently has KIGs pre-ITT; if so, describe typical contractual approaches for this type of Project Lead or sector, clearly marked.",
+          "value_framing_for_external_client": "Helps clients anticipate contractual environment, understand rights/obligations, assess commercial risks, and prepare for negotiation.",
+          "content_placeholder_detailed_prompt": "Stated or Likely Standard Form of Contract: {{contract_form_6_4}} (Source: {{contract_form_source_6_4}} – Confidence: {{contract_form_confidence_6_4}})\nSpecific Contract Option (if applicable and known/inferred): {{contract_option_6_4}} (Source: {{contract_option_source_6_4}} – Confidence: {{contract_option_confidence_6_4}})\n\nKnown or Likely Key Commercial Terms, Clauses & Risk Allocation:\n- General Risk Allocation Philosophy (including Z-clauses/amendments): {{risk_allocation_philosophy_6_4}}\n- Payment Mechanisms & Terms: {{payment_mechanisms_terms_6_4}}\n- Change Management & Variation Process: {{change_management_process_6_4}}\n- Liability, Indemnities & Insurance Requirements: {{liability_indemnities_insurance_6_4}}\n- Dispute Resolution Mechanisms: {{dispute_resolution_mechanisms_6_4}}\n- Other Noteworthy Clauses (e.g., IP, data security, defects, LDs): {{other_noteworthy_clauses_6_4}}\n\nKey Commercial Implications & Considerations for Engagement: {{commercial_implications_engagement_6_4}}",
+          "placeholder_fields": [
+            {"name": "contract_form_6_4", "description": "Stated or likely standard form of contract.", "example_value": "NEC4 Engineering and Construction Contract (ECC).", "source_hint": "ITT preamble, framework terms."},
+            {"name": "contract_form_source_6_4", "description": "Source for contract form.", "example_value": "ITT Document Part A (for this project) / Client's Standard Terms for Capital Projects (for past projects).", "source_hint": "Document reference."},
+            {"name": "contract_form_confidence_6_4", "description": "Confidence in contract form.", "data_type": "enum", "enum_values": ["Confirmed", "Likely", "Inferred", "Speculative"], "example_value": "Confirmed", "source_hint": "Analyst assessment."},
+            {"name": "contract_option_6_4", "description": "Specific contract option, if known/inferred.", "example_value": "Option A (Priced Contract with Activity Schedule) for main works. Option C (Target Contract with Activity Schedule) may be considered for highly specialist or innovative packages with uncertain scope. (Inferred based on client's risk appetite for similar complexities).", "source_hint": "ITT, client past practice."},
+            {"name": "contract_option_source_6_4", "description": "Source for contract option.", "example_value": "ITT Document Part B / Inferred from past project structures.", "source_hint": "Document reference."},
+            {"name": "contract_option_confidence_6_4", "description": "Confidence in contract option.", "data_type": "enum", "enum_values": ["Confirmed", "Likely", "Inferred", "Speculative"], "example_value": "Likely", "source_hint": "Analyst assessment."},
+            {"name": "risk_allocation_philosophy_6_4", "description": "General risk allocation, Z-clauses.", "example_value": "Standard NEC4 risk allocation generally applies. However, client-specific Z-clauses typically amend provisions for ground conditions (transferring more risk to contractor beyond a defined baseline), and for changes in law specific to the client's regulated sector. Client usually retains risk for statutory approvals.", "source_hint": "Past contract examples, Z-clause library if known."},
+            {"name": "payment_mechanisms_terms_6_4", "description": "Payment mechanisms and terms.", "example_value": "Monthly applications for payment against completed activities in the Activity Schedule (Option A) or actual costs plus fee (Option C). Stated payment terms: 30 days from valid application. Project Bank Account (PBA) mandated for projects >£10M. Retainage at 3% released on Practical Completion.", "source_hint": "Contract terms, client policy."},
+            {"name": "change_management_process_6_4", "description": "Change management and variation process.", "example_value": "Standard NEC4 Compensation Event process. Contractor required to notify PM of potential CEs within 4 weeks (amended from standard 8 weeks). Strict adherence to defined approval thresholds for CEs.", "source_hint": "Contract terms."},
+            {"name": "liability_indemnities_insurance_6_4", "description": "Liability, indemnities, and insurance.", "example_value": "Contractor's overall liability typically capped at [e.g., 100% of contract sum or a fixed £Ym]. Professional Indemnity (PI) Insurance required: £10m any one claim. Public Liability (PL) Insurance: £20m. Specific indemnities for IP infringement related to contractor's design.", "source_hint": "Contract terms, insurance requirements sections."},
+            {"name": "dispute_resolution_mechanisms_6_4", "description": "Dispute resolution mechanisms.", "example_value": "Tiered approach: Senior Négociations -> Adjudication under the Scheme for Construction Contracts -> Arbitration under [e.g., LCIA Rules] if not resolved. Mediation strongly encouraged before formal proceedings.", "source_hint": "Contract terms."},
+            {"name": "other_noteworthy_clauses_6_4", "description": "Other noteworthy clauses.", "example_value": "Liquidated Damages (LDs) for delay set at [e.g., £X per day/week]. Defects Correction Period: 12 months, extended to 24 months for M&E. Strict data security and confidentiality clauses due to sensitive nature of project. IP for bespoke solutions developed by contractor may be shared or vest with client depending on negotiation.", "source_hint": "Contract terms."},
+            {"name": "commercial_implications_engagement_6_4", "description": "Key commercial implications for an engaging organisation.", "example_value": "The client-specific Z-clauses for ground conditions and changes in law require bidders to include appropriate risk premiums or conduct thorough due diligence. The shortened CE notification period demands diligent contract administration. LDs are significant, emphasizing programme certainty. PBA provides payment security down the supply chain.", "source_hint": "Analyst synthesis."}
+          ]
+        },
+        {
+          "point_id": "6.5",
+          "point_title_final": "Financial Health Assessment of Key Project Entities & Resultant Commercial Implications",
+          "ai_generation_goal": "To assess the financial stability and profile of the Project Lead Organisation and any Key Delivery Partner, using publicly available data, and to outline the key commercial risks or opportunities for an engaging third party arising from this assessment.",
+          "key_intelligence_questions_to_address": [
+            "For Project Lead (and Key Delivery Partner): company type, registration, latest key financials (turnover, profit, net assets, debt)? Source/date?",
+            "Public info on credit standing or recent significant financial events?",
+            "Analyst's brief assessment of financial stability based on OSINT?",
+            "Key commercial risks for an engaging third party from this financial assessment?",
+            "Key commercial opportunities?"
+          ],
+          "osint_focus_and_potential_sources": [
+            "Companies House (UK), published annual reports (for PLCs/large private companies), reputable financial news services (e.g., FT, Reuters, Bloomberg), credit rating agency summaries (if public), stock market data (for PLCs)."
+          ],
+          "structuring_the_output_content_guide": "Focus on Project Lead & Key Delivery Partner. Source from latest public records. State date of financial info. For each entity: 'Overview of Financial Status (Type, Reg, Key Financials, Credit/Events)'; 'Analyst's Brief Assessment'; 'Key Commercial Risks'; 'Key Commercial Opportunities.' Conclude with 'Overall Summary of Commercial Considerations.'",
+          "handling_kigs_and_confidence_levels": "Be explicit about source and date of financial data. If detailed financials are KIG (e.g., for SPVs, some private firms), focus on qualitative indicators or state as major KIG using marker. Analyst's assessment of stability should be clearly labelled and OSINT-based.",
+          "value_framing_for_external_client": "Provides critical insight into financial robustness of key project entities, informing client's assessment of counterparty risk, payment security, and overall project stability.",
+          "content_placeholder_detailed_prompt": "Guidance: This assessment focuses on the Project Lead Organisation ({{project_lead_org_name_from_3_1}}){{#if delivery_partner_name_from_3_2}} and Key Delivery Partner ({{delivery_partner_name_from_3_2}}){{/if}} identified earlier. Information is sourced from latest available public records. Financial data date: {{financial_data_assessment_date_6_5}}.\n\n{{#each financial_health_profiles_6_5}}\nFinancial Health Profile: {{this.organisation_name}}\n- Company Type & Registration Details: {{this.company_type_reg}}\n- Summary of Latest Available Financials (Source: {{this.financials_source}}, YE {{this.financials_year_end}}):\n  - Turnover/Revenue: {{this.turnover_revenue}} (YoY Change: {{this.turnover_yoy_change}})\n  - Pre-Tax Profit/Loss: {{this.pre_tax_profit_loss}} (YoY Change: {{this.profit_yoy_change}})\n  - Net Assets / Shareholders' Funds: {{this.net_assets}} (YoY Change: {{this.net_assets_yoy_change}})\n  - Debt Levels/Gearing (if available/significant): {{this.debt_gearing}}\n- Public Credit Standing/Commentary: {{this.credit_standing_commentary}}\n- Recent Significant Financial Events: {{this.recent_financial_events}}\n- Analyst's Brief Assessment of Financial Stability: {{this.analyst_stability_assessment}}\n- Key Commercial Risks for an Engaging Third Party (arising from this entity's financial assessment): {{this.commercial_risks_for_engager}}\n- Key Commercial Opportunities for an Engaging Third Party (arising from this entity's financial assessment): {{this.commercial_opportunities_for_engager}}\n\n{{/each}}\n{{#if (eq financial_health_profiles_6_5.length 0)}}[KIG: Insufficient public financial data to assess key project entities. - Implication: Counterparty financial risk is a major unknown.]{{/if}}\n\nOverall Summary of Commercial Considerations (incorporating financial health and other factors from this section):\n{{overall_commercial_summary_6_5}}",
+          "placeholder_fields": [
+            {
+              "name": "project_lead_org_name_from_3_1", "description": "Name of Project Lead Org from 3.1.", "example_value": "TechNova Corp PLC", "source_hint": "From 3.1"
+            },
+            {
+              "name": "delivery_partner_name_from_3_2", "description": "Name of Delivery Partner from 3.2 (if exists).", "example_value": "ConstructManage Solutions Ltd.", "is_optional": true, "source_hint": "From 3.2"
+            },
+            {
+              "name": "financial_data_assessment_date_6_5",
+              "description": "Cut-off date for financial data assessed.",
+              "example_value": "2025-05-15",
+              "source_hint": "Date of latest OSINT sweep for financials."
+            },
+            {
+              "name": "financial_health_profiles_6_5",
+              "description": "Array of financial health profile objects for Project Lead and Key Delivery Partner (if applicable).",
+              "data_type": "array",
+              "array_item_schema": {
+                "type": "object",
+                "properties": {
+                  "organisation_name": {"type": "string", "example_value": "TechNova Corp PLC"},
+                  "company_type_reg": {"type": "string", "example_value": "UK Public Limited Company, Reg No. 01234567"},
+                  "financials_source": {"type": "string", "example_value": "Companies House; Annual Report 2024"},
+                  "financials_year_end": {"type": "string", "example_value": "2024-12-31"},
+                  "turnover_revenue": {"type": "string", "example_value": "£550m"},
+                  "turnover_yoy_change": {"type": "string", "example_value": "+8%"},
+                  "pre_tax_profit_loss": {"type": "string", "example_value": "£45m (Profit)"},
+                  "profit_yoy_change": {"type": "string", "example_value": "+12%"},
+                  "net_assets": {"type": "string", "example_value": "£280m"},
+                  "net_assets_yoy_change": {"type": "string", "example_value": "+5%"},
+                  "debt_gearing": {"type": "string", "example_value": "Net Debt £75m; Gearing ratio 27%. (Considered moderate for the sector)."},
+                  "credit_standing_commentary": {"type": "string", "example_value": "No adverse credit events noted in major business databases in last 12 months. Holds a 'Stable' outlook from Ratings Agency X (Source: Agency X Public Statement, Q1 2025)."},
+                  "recent_financial_events": {"type": "string", "example_value": "Successfully raised £100m via a green bond issue in Q4 2024 to fund sustainable R&D initiatives. (Source: Stock Exchange Announcement)."},
+                  "analyst_stability_assessment": {"type": "string", "example_value": "Appears financially robust with good profitability, moderate gearing, and successful recent fundraising. Well-positioned to fund its strategic initiatives including this project."},
+                  "commercial_risks_for_engager": {"type": "string", "example_value": "Low risk of client insolvency or inability to meet payment obligations. Potential for robust negotiation on commercial terms due to strong financial position."},
+                  "commercial_opportunities_for_engager": {"type": "string", "example_value": "Reliable and financially stable client, offering potential for long-term partnership. Capacity for fair contract terms and prompt payment if PBA is used."}
+                }
+              },
+              "source_hint": "AI to create one profile for Project Lead Org, and another for Key Delivery Partner if distinct and public data exists."
+            },
+            {
+              "name": "overall_commercial_summary_6_5",
+              "description": "Overall summary of commercial considerations from this section.",
+              "example_value": "The Project Lead (TechNova Corp PLC) appears financially sound, reducing counterparty risk. The anticipated NEC4 Option A contract form is standard for this type of project, but client Z-clauses on ground conditions and change in law require careful pricing. The procurement timeline is aggressive but evaluation criteria suggest a focus on quality and social value alongside price. Overall, a commercially viable opportunity for well-prepared bidders capable of managing defined risks.",
+              "source_hint": "Analyst synthesis of all points in Section 6."
+            }
+          ]
+        }
+      ]
+    }
+    // ... (Sections 7-9, appendices, footer would follow) ...
+  ]
+}
