@@ -84,8 +84,6 @@ def load_full_persona_data(
         category_description_prefix: str
     ):
         for file_entry in file_entries_list:
-            # The FileEntry schema should ensure base_name is non-empty (min_length=1)
-            # This check is an additional safeguard if schema validation wasn't strict enough or not applied.
             if not file_entry.base_name:
                 error_msg = (f"FileEntry has an empty 'base_name' for {category_description_prefix.lower()} "
                              f"file described as '{file_entry.description}'. This is invalid.")
@@ -98,16 +96,15 @@ def load_full_persona_data(
             try:
                 content = load_file_content_from_entry(persona_folder_path, file_entry)
                 
-                # Construct the filename part for display_path carefully
                 filename_part_for_display = file_entry.base_name
                 if file_entry.extensions_to_try:
-                    # Use the first extension for display purposes.
-                    # load_file_content_from_entry handles trying all extensions.
                     first_ext = file_entry.extensions_to_try[0]
-                    if first_ext: # Ensure the extension string itself is not empty
+                    if first_ext: 
                         filename_part_for_display += first_ext if first_ext.startswith('.') else f".{first_ext}"
                 
-                if not filename_part_for_display: # Should be caught by base_name validation mostly
+                display_path: Path # Declare type for display_path
+
+                if not filename_part_for_display: 
                     path_error_msg = (f"Cannot form a valid display filename for file described as "
                                       f"'{file_entry.description}' (base_name: '{file_entry.base_name}', "
                                       f"first_ext: '{first_ext if file_entry.extensions_to_try and file_entry.extensions_to_try[0] else 'N/A'}').")
@@ -115,12 +112,12 @@ def load_full_persona_data(
                         raise PersonaManagerError(path_error_msg)
                     else:
                         print(f"Warning: {path_error_msg} Using a placeholder display path for this optional file.")
-                        # Create a placeholder path if the real one is problematic, to avoid errors with .with_name('')
                         display_path = file_entry.path_relative_to_persona_folder / f"{file_entry.base_name}_[bad_ext_or_name]"
                 else:
                     try:
-                        display_path = file_entry.path_relative_to_persona_folder.with_name(filename_part_for_display)
-                    except ValueError as ve_path: # Catch error from path_relative_to_persona_folder.with_name(), e.g. if filename_part_for_display is invalid
+                        # MODIFIED LINE: Use path division for robust display_path construction
+                        display_path = file_entry.path_relative_to_persona_folder / filename_part_for_display
+                    except ValueError as ve_path: 
                         path_error_msg = (f"Path construction error for display path of file '{filename_part_for_display}' "
                                           f"(related to '{file_entry.description}'): {ve_path}")
                         if file_entry.is_required_flag:
@@ -140,9 +137,6 @@ def load_full_persona_data(
                         )
                     )
                 elif file_entry.is_required_flag:
-                    # This means load_file_content_from_entry returned None for a file marked as required.
-                    # load_file_content_from_entry should have raised FileHandlerError if it couldn't find a required file.
-                    # This is a safeguard or indicates an unexpected None for a required file.
                     raise PersonaManagerError(
                         f"Required {category_description_prefix.lower()} file '{file_entry.base_name}' for persona "
                         f"'{manifest.persona_id}' was indicated as not found by file_handler, despite being required."
@@ -154,12 +148,11 @@ def load_full_persona_data(
                         f"for persona '{manifest.persona_id}': {e}"
                     )
                 else:
-                    # Log optional file loading failures, but don't stop the process
                     print(f"Warning: Optional {category_description_prefix.lower()} file '{file_entry.base_name}' "
                           f"for persona '{manifest.persona_id}' not loaded: {e}")
-            except PersonaManagerError: # Re-raise if it's one of our specific errors from above
+            except PersonaManagerError: 
                 raise
-            except Exception as e: # Catch any other unexpected errors for this FileEntry
+            except Exception as e: 
                 error_detail = (f"Unexpected error processing file entry (description: '{file_entry.description}', "
                                 f"base_name: '{file_entry.base_name}') for persona '{manifest.persona_id}': {e}")
                 if file_entry.is_required_flag:
@@ -167,40 +160,32 @@ def load_full_persona_data(
                 else:
                     print(f"Warning: {error_detail}")
 
-
-    # Process core definition files
     _process_file_entries(manifest.core_definition_files, "Core Definition")
 
-    # Process supporting definition files (if any)
     if manifest.supporting_definition_files:
         _process_file_entries(manifest.supporting_definition_files, "Supporting Definition")
 
-    # Load Extra_Files content
     extra_files_dict: Dict[Path, str] = {}
     try:
         raw_extra_files = load_extra_files_content(persona_folder_path)
         for rel_path_str, content_str in raw_extra_files.items():
-            extra_files_dict[Path(rel_path_str)] = content_str # Keys are relative to Extra_Files dir
+            extra_files_dict[Path(rel_path_str)] = content_str 
     except FileHandlerError as e:
         print(f"Warning: Error loading some content from '{EXTRA_FILES_SUBDIR_NAME}' for persona '{manifest.persona_id}': {e}")
-    except Exception as e: # Catch any other unexpected errors
+    except Exception as e: 
         print(f"Warning: Unexpected error loading from '{EXTRA_FILES_SUBDIR_NAME}' for persona '{manifest.persona_id}': {e}")
 
-
-    # Load latest chat log
     chat_log: Optional[str] = None
     try:
         chat_log = load_latest_chat_log(persona_folder_path)
     except Exception as e: 
-        # load_latest_chat_log should ideally handle its own IOErrors gracefully and return None.
-        # This catch is for truly unexpected issues from that function.
         print(f"Warning: Unexpected error during chat log loading for persona '{manifest.persona_id}': {e}")
 
     return FullPersonaData(
         keyphrase=keyphrase,
         persona_id=manifest.persona_id,
         version=manifest.version,
-        operational_rules=manifest.core_operational_rules, #
+        operational_rules=manifest.core_operational_rules, 
         manifest_files_content=loaded_manifest_files,
         extra_files_content=extra_files_dict,
         chat_log_content=chat_log

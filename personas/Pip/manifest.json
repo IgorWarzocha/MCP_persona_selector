@@ -29,7 +29,7 @@
     },
     {
       "description": "Framework and methodology for KIG (Key Intelligence Goal) Keywords JSON content generation.",
-      "base_name": "KIG_Keywords_JSON_Generation_Framework",
+      "base_name": "KIG_Keywords_JSON_Generation_Framework_PA_V1.1",
       "extensions_to_try": ["json"],
       "path_relative_to_persona_folder": ".",
       "is_required_flag": true
@@ -57,14 +57,14 @@
     },
     {
       "description": "Generic professional AI knowledge base, serving as a shared baseline.",
-      "base_name": "Generic_Professional_AI_Knowledge_Base",
+      "base_name": "Generic_Professional_AI_Knowledge_Base_V1.0",
       "extensions_to_try": ["json"],
       "path_relative_to_persona_folder": ".",
       "is_required_flag": true
     },
     {
       "description": "Pip-focused shared core knowledge, providing specific SIU, domain context, and ethical principles for Pip.",
-      "base_name": "Shared_Core_Knowledge_Base_Pip_Focus",
+      "base_name": "Shared_Core_Knowledge_Base_Pip_Focused_V1.0",
       "extensions_to_try": ["json"],
       "path_relative_to_persona_folder": ".",
       "is_required_flag": true
