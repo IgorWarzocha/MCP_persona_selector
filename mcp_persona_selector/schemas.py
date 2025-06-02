@@ -1,22 +1,25 @@
 # mcp_persona_selector/schemas.py
 from typing import List, Dict, Optional
 from pathlib import Path
-from pydantic import BaseModel, FilePath, DirectoryPath, field_validator, ValidationInfo
+# Add Field to pydantic imports if it's not already there
+from pydantic import BaseModel, FilePath, DirectoryPath, field_validator, ValidationInfo, Field # Added Field
 
 class FileEntry(BaseModel):
     description: str
-    base_name: str
+    base_name: str = Field(..., min_length=1) # Ensures base_name is not empty
     extensions_to_try: List[str]
-    path_relative_to_persona_folder: Path  # Path relative to its persona's folder
+    path_relative_to_persona_folder: Path
     is_required_flag: bool
 
-class PersonaManifest(BaseModel):
-    persona_id: str  # Based on 'ID' from your outline's manifest metadata
-    version: str     # Based on 'version' from your outline's manifest metadata
-    # Core operational rules - a list of strings as per outline
-    core_operational_rules: List[str] 
-    core_definition_files: List[FileEntry] #
-    supporting_definition_files: Optional[List[FileEntry]] = None #
+# ... rest of schemas.py remains the same (PersonaManifest, PersonaActivationDetail, AppConfig) ...
+# Ensure PersonaManifest uses this updated FileEntry
+class PersonaManifest(BaseModel): # Make sure this uses the updated FileEntry
+    persona_id: str 
+    version: str    
+    core_operational_rules: List[str]
+    core_definition_files: List[FileEntry] # Will use the validated FileEntry
+    supporting_definition_files: Optional[List[FileEntry]] = None # Will use the validated FileEntry
+# ...
 
 class PersonaActivationDetail(BaseModel):
     displayName: str  # As per personaActivationMap in your outline

@@ -19,20 +19,23 @@ CHAT_LOG_DATE_PATTERN = re.compile(
     rf"^{CHAT_LOG_PREFIX}(\d{{4}}-\d{{2}}-\d{{2}})\.(json|txt)$", 
     re.IGNORECASE
 )
+# In mcp_persona_selector/file_handler.py
+
+# ... (keep existing imports: Path, Optional, List, FileEntry, FileHandlerError) ...
+# ... (keep other functions like load_extra_files_content, load_latest_chat_log as they are) ...
 
 def load_file_content_from_entry(
-    persona_folder_path: Path, 
+    persona_folder_path: Path,
     file_entry: FileEntry
 ) -> Optional[str]:
     """
-    Loads the content of a single file specified by a FileEntry object,
-    relative to the persona_folder_path.
-
-    It tries to find the file using the base_name and the list of extensions_to_try
-    from the FileEntry.
+    Loads the content of a single file specified by a FileEntry object.
+    The path to the file is constructed by joining persona_folder_path,
+    file_entry.path_relative_to_persona_folder, and then appending
+    file_entry.base_name with one of the extensions_to_try.
 
     Args:
-        persona_folder_path: The absolute path to the persona's folder.
+        persona_folder_path: The absolute path to the persona's main folder.
         file_entry: The FileEntry object describing the file to load.
 
     Returns:
@@ -43,47 +46,46 @@ def load_file_content_from_entry(
         FileHandlerError: If the file is not found and is_required_flag is True,
                           or if there's an error reading the file.
     """
-    # path_relative_to_persona_folder in FileEntry could be just a filename or include subdirs
-    # Example: file_entry.path_relative_to_persona_folder might be "definitions/core.txt"
-    # So, base_path should be persona_folder_path / file_entry.path_relative_to_persona_folder.parent
-    # and the actual filename to try is file_entry.base_name with extensions.
-    # However, the current FileEntry schema implies path_relative_to_persona_folder IS the path including the base_name without ext.
-    # Let's stick to the previous interpretation that base_path is the full path stem.
+    # Determine the actual directory where the file should be found
+    # file_entry.path_relative_to_persona_folder is the subdirectory string (e.g., ".", "definitions")
+    actual_file_directory = (persona_folder_path / file_entry.path_relative_to_persona_folder).resolve()
 
-    base_file_path_stem = persona_folder_path / file_entry.path_relative_to_persona_folder
-    
     file_found_path: Optional[Path] = None
-    
-    # Ensure the directory for the relative path exists, if path_relative_to_persona_folder includes directories
-    target_dir = base_file_path_stem.parent
-    if not target_dir.exists() or not target_dir.is_dir():
+
+    if not actual_file_directory.exists() or not actual_file_directory.is_dir():
         if file_entry.is_required_flag:
             raise FileHandlerError(
-                f"Base directory '{target_dir.resolve()}' for file stem '{file_entry.base_name}'"
-                f" (from relative path '{file_entry.path_relative_to_persona_folder}')"
-                f" in persona folder '{persona_folder_path.resolve()}' does not exist."
+                f"Target directory '{actual_file_directory}' for file '{file_entry.base_name}' "
+                f"(relative path: '{file_entry.path_relative_to_persona_folder}') "
+                f"in persona folder '{persona_folder_path.resolve()}' does not exist or is not a directory."
             )
-        return None # Optional file, directory not found
+        # If optional and directory doesn't exist, the file cannot be found.
+        print(f"Warning: Target directory '{actual_file_directory}' for optional file '{file_entry.base_name}' not found. Skipping.")
+        return None
 
     for ext_to_try in file_entry.extensions_to_try:
-        # Construct file name with extension
-        current_ext = ext_to_try if ext_to_try.startswith('.') else f".{ext_to_try}"
-        # Use the base_name from FileEntry for the filename part
-        potential_file_path = target_dir / f"{file_entry.base_name}{current_ext}"
+        # Ensure extension starts with a dot if it's not empty
+        current_ext = ext_to_try
+        if current_ext and not current_ext.startswith('.'):
+            current_ext = f".{current_ext}"
         
+        potential_file_path = actual_file_directory / f"{file_entry.base_name}{current_ext}"
+
         if potential_file_path.exists() and potential_file_path.is_file():
             file_found_path = potential_file_path
-            break
-            
+            break # File found with an extension
+
     if not file_found_path:
+        # If still not found after trying all extensions
         if file_entry.is_required_flag:
+            tried_extensions_str = ', '.join(file_entry.extensions_to_try)
             raise FileHandlerError(
-                f"Required file '{file_entry.base_name}' (tried extensions: {', '.join(file_entry.extensions_to_try)}) "
-                f"not found in directory '{target_dir.resolve()}' "
-                f"for persona folder '{persona_folder_path.resolve()}'."
+                f"Required file '{file_entry.base_name}' (tried extensions: [{tried_extensions_str}]) "
+                f"not found in directory '{actual_file_directory}'."
             )
         return None # Optional file not found
 
+    # If file_found_path is set, proceed to read
     try:
         with open(file_found_path, 'r', encoding='utf-8') as f:
             content = f.read()

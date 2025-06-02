@@ -1,3 +1,5 @@
 fastapi
 uvicorn[standard]
 pydantic
+anthropic # Include if you explicitly need the Anthropic Python SDK for other tasks
+mcp[cli]
