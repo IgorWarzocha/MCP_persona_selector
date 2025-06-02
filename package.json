@@ -1,6 +1,6 @@
 {
   "name": "@igorwarzocha/mcp_persona_selector", // Or your desired npm package name
-  "version": "0.1.0", // Starting version for your project
+  "version": "0.2.2", // Starting version for your project
   "description": "MCP server for terminal operations, file editing, and dynamic persona management for Claude.",
   "license": "MIT",
   "author": "Igor Warzocha", // Your name/handle
