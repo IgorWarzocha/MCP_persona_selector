@@ -7,25 +7,24 @@ import { ServerResult } from '../types.js'; // Adjusted path
 interface PersonaFileEntry {
   description: string;
   base_name: string;
-  extensions: string[]; // Kept for compatibility with original prompt, though path is primary
-  path: string; // Relative path from the persona's specific root directory (e.g., "Team_Files/Jen_Persona.json")
-  version_policy?: string; // Optional, for compatibility
-  date_policy?: string; // Optional, for compatibility
+  extensions: string[];
+  path: string; // Relative path from the persona's specific root directory
+  version_policy?: string;
+  date_policy?: string;
   required: boolean;
-  content?: string; // To store loaded content after reading
+  content?: string;
 }
 
-// Interface for the persona manifest structure (reworked from SIU_Initialization_Prompt_JSON_V1.5.json)
+// Interface for the persona manifest structure
 interface PersonaManifest {
   prompt_metadata: {
     prompt_id: string;
     version: string;
-    description?: string; // A brief description of the persona/team
+    description?: string;
   };
-  core_definition_files: PersonaFileEntry[]; // Combined core and supporting files here
-  supporting_definition_files?: PersonaFileEntry[]; // Or keep separate if preferred
-  core_operational_rules: any[]; // Keep as is from original prompt
-  // Add other relevant fields from your SIU_Initialization_Prompt if needed
+  core_definition_files: PersonaFileEntry[];
+  supporting_definition_files?: PersonaFileEntry[];
+  core_operational_rules: any[];
 }
 
 interface LoadedFileReport extends Partial<PersonaFileEntry> {
@@ -45,12 +44,6 @@ interface ChatLogFile {
     path: string;
 }
 
-/**
- * Loads persona context based on a keyphrase.
- * This is the core function called by persona activation handlers.
- * @param personaKeyphrase The unique keyphrase for the persona (e.g., "SIU123").
- * @returns A Promise resolving to a ServerResult containing the persona payload.
- */
 export async function internalLoadAndPreparePersonaContext(personaKeyphrase: string): Promise<ServerResult> {
   const config = await configManager.getConfig();
   const personasBasePath = config.personasBasePath;
@@ -65,23 +58,26 @@ export async function internalLoadAndPreparePersonaContext(personaKeyphrase: str
 
   const personaConfig = personaActivationMap[personaKeyphrase];
   const personaRootDir = path.join(personasBasePath, personaConfig.folderName);
-  // Assuming manifest is named after the folderName or a standard name like 'manifest.json'
-  // For this example, let's assume '[folderName]_manifest.json' or 'manifest.json'
-  // We will try '[folderName]_manifest.json' first, then 'manifest.json'
   let manifestPath = path.join(personaRootDir, `${personaConfig.folderName}_manifest.json`);
   let manifest: PersonaManifest;
 
   try {
     const manifestContent = await fs.readFile(manifestPath, 'utf-8');
     manifest = JSON.parse(manifestContent);
-  } catch (e) {
-    // Try 'manifest.json' as a fallback
-    manifestPath = path.join(personaRootDir, `manifest.json`);
+  } catch (e) { // First catch block for primary manifest
+    manifestPath = path.join(personaRootDir, `manifest.json`); // Fallback manifest name
     try {
         const manifestContent = await fs.readFile(manifestPath, 'utf-8');
         manifest = JSON.parse(manifestContent);
-    } catch (e2) {
-        return { content: [{ type: "text", text: `Error: Could not load or parse manifest for persona '${personaConfig.displayName}' (Keyphrase: ${personaKeyphrase}). Tried ${path.join(personaRootDir, `${personaConfig.folderName}_manifest.json`)} and ${manifestPath}. Details: ${e2.message}` }], isError: true };
+    } catch (e2) { // This is where e2 was 'unknown'
+      let detailMessage = "Unknown error during manifest loading.";
+      if (e2 instanceof Error) {
+        detailMessage = e2.message;
+      } else if (typeof e2 === 'string') {
+        detailMessage = e2;
+      }
+      // Original line causing error: src/tools/persona_manager.ts:84:280
+      return { content: [{ type: "text", text: `Error: Could not load or parse manifest for persona '${personaConfig.displayName}' (Keyphrase: ${personaKeyphrase}). Tried ${path.join(personaRootDir, `${personaConfig.folderName}_manifest.json`)} and ${manifestPath}. Details: ${detailMessage}` }], isError: true };
     }
   }
 
@@ -101,13 +97,19 @@ export async function internalLoadAndPreparePersonaContext(personaKeyphrase: str
     try {
       const content = await fs.readFile(filePath, 'utf-8');
       loadedFilesReport.push({ ...fileEntry, content, status: "loaded", actualPathAttempted: filePath });
-    } catch (e) {
+    } catch (e) { // This is where e was 'unknown'
+      let fileLoadErrorMessage = "Unknown error loading file.";
+      if (e instanceof Error) {
+        fileLoadErrorMessage = e.message;
+      } else if (typeof e === 'string') {
+        fileLoadErrorMessage = e;
+      }
       loadedFilesReport.push({ ...fileEntry, status: fileEntry.required ? 'missing_required' : 'missing_optional', actualPathAttempted: filePath });
-      console.warn(`Could not load file for persona '${personaConfig.displayName}': ${filePath}. Error: ${e.message}`);
+      // Original line causing error: src/tools/persona_manager.ts:106:107
+      console.warn(`Could not load file for persona '${personaConfig.displayName}': ${filePath}. Error: ${fileLoadErrorMessage}`);
     }
   }
 
-  // Load additional knowledge files
   const extraFilesDir = path.join(personaRootDir, "Extra_Files");
   const additionalKnowledge: AdditionalKnowledgeFile[] = [];
   try {
@@ -117,15 +119,21 @@ export async function internalLoadAndPreparePersonaContext(personaKeyphrase: str
       const content = await fs.readFile(filePath, 'utf-8');
       additionalKnowledge.push({ fileName, content, path: filePath });
     }
-  } catch (e) {
-    console.warn(`Could not read Extra_Files for persona ${personaConfig.displayName}: ${e.message}`);
+  } catch (e) { // This is where e was 'unknown'
+    let extraFilesErrorMessage = "Unknown error reading Extra_Files.";
+    if (e instanceof Error) {
+      extraFilesErrorMessage = e.message;
+    } else if (typeof e === 'string') {
+      extraFilesErrorMessage = e;
+    }
+    // Original line causing error: src/tools/persona_manager.ts:121:90
+    console.warn(`Could not read Extra_Files for persona ${personaConfig.displayName}: ${extraFilesErrorMessage}`);
   }
 
-  // Load latest chat log
   let chatLogData: ChatLogFile | null = null;
   try {
     const personaRootContents = await fs.readdir(personaRootDir);
-    const chatLogRegex = /^ChatLog_(\d{4}-\d{2}-\d{2}).*(\.json|\.txt)$/i; // Flexible extensions
+    const chatLogRegex = /^ChatLog_(\d{4}-\d{2}-\d{2}).*(\.json|\.txt)$/i;
     let latestLogFile: string | null = null;
     let latestDate: Date | null = null;
 
@@ -135,7 +143,7 @@ export async function internalLoadAndPreparePersonaContext(personaKeyphrase: str
         const dateStr = match[1];
         try {
             const fileDate = new Date(dateStr);
-            if (!isNaN(fileDate.getTime())) { // Check if date is valid
+            if (!isNaN(fileDate.getTime())) {
                 if (!latestDate || fileDate.getTime() > latestDate.getTime()) {
                     latestDate = fileDate;
                     latestLogFile = fileName;
@@ -151,10 +159,17 @@ export async function internalLoadAndPreparePersonaContext(personaKeyphrase: str
       const content = await fs.readFile(logPath, 'utf-8');
       chatLogData = { fileName: latestLogFile, content, path: logPath };
     }
-  } catch (e) {
-    console.warn(`Could not load chat log for persona ${personaConfig.displayName}: ${e.message}`);
+  } catch (e) { // This is where e was 'unknown'
+    let chatLogErrorMessage = "Unknown error loading chat log.";
+    if (e instanceof Error) {
+      chatLogErrorMessage = e.message;
+    } else if (typeof e === 'string') {
+      chatLogErrorMessage = e;
+    }
+    // Original line causing error: src/tools/persona_manager.ts:155:87
+    console.warn(`Could not load chat log for persona ${personaConfig.displayName}: ${chatLogErrorMessage}`);
   }
-
+  
   const criticalFilesMissing = loadedFilesReport.some(f => f.status === 'missing_required');
   const optionalFilesMissing = loadedFilesReport.some(f => f.status === 'missing_optional');
   let overallStatus = "success";
@@ -164,51 +179,31 @@ export async function internalLoadAndPreparePersonaContext(personaKeyphrase: str
     overallStatus = "partial_optional_missing";
   }
 
-  // Consolidate definition file content for the system prompt
-  // This is a simplified example; you might want more sophisticated concatenation
   let definitionPromptSummary = `Persona Activated: ${personaConfig.displayName}\n\n`;
   loadedFilesReport.forEach(file => {
       if (file.status === 'loaded' && file.content) {
-          definitionPromptSummary += `--- <span class="math-inline">\{file\.description\} \(</span>{file.base_name}) ---\n${file.content}\n\n`;
+          definitionPromptSummary += `--- ${file.description} (${file.base_name}) ---\n${file.content}\n\n`;
       }
   });
   if (chatLogData) {
-    definitionPromptSummary += `--- Chat Log (<span class="math-inline">\{chatLogData\.fileName\}\) \-\-\-\\n</span>{chatLogData.content}\n\n`;
+    definitionPromptSummary += `--- Chat Log (${chatLogData.fileName}) ---\n${chatLogData.content}\n\n`;
   }
   additionalKnowledge.forEach(kb => {
-    definitionPromptSummary += `--- Additional Knowledge (<span class="math-inline">\{kb\.fileName\}\) \-\-\-\\n</span>{kb.content}\n\n`;
+    definitionPromptSummary += `--- Additional Knowledge (${kb.fileName}) ---\n${kb.content}\n\n`;
   });
   definitionPromptSummary += "--- Core Operational Rules ---\n" + JSON.stringify(manifest.core_operational_rules, null, 2);
 
-
-  const personaPayload = {
-    activated_persona_keyphrase: personaKeyphrase,
-    persona_display_name: personaConfig.displayName,
-    status: overallStatus,
-    loaded_files_report: loadedFilesReport.map(f => ({description: f.description, base_name: f.base_name, path: f.path, status: f.status, required: f.required, actualPathAttempted: f.actualPathAttempted})),
-    additional_knowledge_loaded: additionalKnowledge.map(f => ({fileName: f.fileName, path: f.path})),
-    chat_log_loaded: chatLogData ? {fileName: chatLogData.fileName, path: chatLogData.path} : null,
-    // Full content for Claude to process:
-    full_context_for_claude: {
-        persona_definitions: loadedFilesReport.filter(f => f.status === 'loaded').map(f => ({description: f.description, base_name: f.base_name, content: f.content})),
-        additional_knowledge: additionalKnowledge,
-        chat_log: chatLogData,
-        core_operational_rules: manifest.core_operational_rules
-    },
-    // A more concise summary prompt string that Claude can use directly
-    system_prompt_string_for_claude: definitionPromptSummary 
-  };
+  // This payload is primarily for structured return if needed, or debugging.
+  // The main context for Claude is definitionPromptSummary.
+  // const personaPayloadForStructuredReturn = { 
+  //   activated_persona_keyphrase: personaKeyphrase,
+  //   // ... (other fields as previously defined)
+  // };
 
   return {
     content: [{ 
         type: "text", 
-        // Return the full context string for Claude to adopt the persona.
-        // Claude will receive this entire string as the tool's output.
         text: definitionPromptSummary 
-    }
-    // Optionally, also include the structured JSON payload for more complex processing by Claude if it supports it,
-    // or for your own debugging when Claude shows the tool output.
-    // , { type: "json_object", text: JSON.stringify(personaPayload, null, 2) } // Or just 'data: personaPayload' if your MCP SDK supports it
-    ]
+    }]
   };
 }
